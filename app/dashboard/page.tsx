@@ -26,17 +26,12 @@ export default function DashboardPage() {
 
   if (!user) return null;
 
-  if (user.role === 'admin' || user.role === 'super-admin') {
-    // Admins might have their own dashboard or share instructor view for now
-    // Redirecting to admin specific route usually handled in layout, but here we can show instructor view or a specific admin summary
+  if (user.role === 'super-admin') {
     router.push('/admin');
     return null;
   }
 
-  if (user.role === 'instructor') {
-    return <InstructorDashboard />;
-  }
-
+  // No instructor role — everyone else sees learner dashboard
   return <LearnerDashboard />;
 }
 

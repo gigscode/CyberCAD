@@ -329,7 +329,7 @@ class APIClient {
   async getLearnerProgress(learnerId: string): Promise<LearnerProgress[]> {
     const { data, error } = await this.db
       .from('learner_progress')
-      .select('*, cohortId:cohorts(id,name), courseId:courses(id,name)')
+      .select('*, courseId:courses(id,name)')
       .eq('learner_id', learnerId);
     if (error) throw new Error(error.message);
     return normaliseAll(data ?? []) as unknown as LearnerProgress[];
