@@ -7,6 +7,8 @@ import { createClient } from '@/lib/supabase/client';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { TRACKS } from '@/lib/quiz-engine';
 import {
   ArrowRight, ShieldCheck, Target,
@@ -40,10 +42,19 @@ const TRACK_PALETTE: Record<string, { gradient: string; lightBg: string; border:
   'foundations':       { gradient: 'from-slate-600 to-slate-800',       lightBg: 'bg-slate-50',   border: 'border-slate-200',   badge: 'bg-slate-100 text-slate-700',  price: 'text-slate-700',   iconBg: 'bg-slate-100'   },
 };
 
+type TierLabel = 'Starter' | 'Pro' | 'Elite';
+const TIER_MAP: Record<TierLabel, { dot: string; chip: string; ring: string; featured: boolean }> = {
+  Starter: { dot: 'bg-slate-400',  chip: 'bg-slate-50 text-slate-600 border-slate-200',                            ring: '',                          featured: false },
+  Pro:     { dot: 'bg-indigo-500', chip: 'bg-indigo-50 text-indigo-700 border-indigo-200',                          ring: '',                          featured: false },
+  Elite:   { dot: 'bg-amber-500',  chip: 'bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 border-amber-200', ring: 'ring-1 ring-amber-200/80', featured: true  },
+};
+const getTier = (priceKobo: number): TierLabel =>
+  priceKobo <= 4_000_000 ? 'Starter' : priceKobo <= 8_000_000 ? 'Pro' : 'Elite';
+
 const TESTIMONIALS = [
-  { name: 'Adaeze Okonkwo', role: 'SOC Analyst, Stanbic IBTC', location: 'Lagos', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Adaeze', quote: 'I was a bank teller with zero IT background. Six months after completing the SOC Analyst track, I landed a role at a top bank. Secquiz taught me real skills, not just theory.', accent: 'bg-indigo-600' },
-  { name: 'Emeka Nwosu', role: 'Penetration Tester, Freelance', location: 'Abuja', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Emeka', quote: 'The Ethical Hacking track is the real deal. The pentest report I submitted as my capstone project got me my first paying client before I even finished the course.', accent: 'bg-rose-500' },
-  { name: 'Fatima Bello', role: 'GRC Analyst, MTN Nigeria', location: 'Kano', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima', quote: 'Coming from a compliance background, the GRC track was perfectly aligned to my experience. I got a 40% salary increase after completing it.', accent: 'bg-emerald-500' },
+  { name: 'Adaeze Okonkwo', role: 'SOC Analyst, Stanbic IBTC', location: 'Lagos', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Adaeze', quote: 'I was a bank teller with zero IT background. Six months after completing the SOC Analyst track, I landed a role at a top bank. Secquiz taught me real skills, not just theory.', accent: 'from-indigo-500 to-cyan-500' },
+  { name: 'Emeka Nwosu', role: 'Penetration Tester, Freelance', location: 'Abuja', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Emeka', quote: 'The Ethical Hacking track is the real deal. The pentest report I submitted as my capstone project got me my first paying client before I even finished the course.', accent: 'from-rose-500 to-orange-500' },
+  { name: 'Fatima Bello', role: 'GRC Analyst, MTN Nigeria', location: 'Kano', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima', quote: 'Coming from a compliance background, the GRC track was perfectly aligned to my experience. I got a 40% salary increase after completing it.', accent: 'from-emerald-500 to-teal-500' },
 ];
 
 const HOW_IT_WORKS = [
@@ -76,11 +87,11 @@ export default function Home() {
   const whatsappUrl = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '2348000000000'}?text=${encodeURIComponent('Hi, I have a question about Secquiz. Can you help?')}`;
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-sans">
+    <div className="min-h-screen bg-white text-slate-900 font-sans overflow-x-clip">
 
       {/* ── Navbar ───────────────────────────────────────────────── */}
-      <nav className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-xl border-b border-slate-100 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 h-18 md:h-20 flex items-center justify-between py-4">
+      <nav className="sticky top-0 z-50 w-full bg-white/85 backdrop-blur-xl border-b border-slate-200/60 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 md:h-20 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-200">
               <ShieldCheck className="w-5 h-5 text-white" />
@@ -100,20 +111,24 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-3">
             <Link href="/login">
-              <Button variant="outline" className="rounded-full px-5 h-10 border-slate-200 text-slate-700 font-semibold hover:border-indigo-300 hover:text-indigo-600 transition-colors">
+              <Button variant="outline" className="rounded-full px-5 h-10 border-slate-200 text-slate-700 font-semibold hover:border-indigo-300 hover:text-indigo-600 hover:bg-white transition-colors">
                 Login
               </Button>
             </Link>
             <Link href="/quiz">
-              <Button className="rounded-full px-5 h-10 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-semibold shadow-md shadow-indigo-200">
+              <Button className="rounded-full px-5 h-10 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-semibold shadow-md shadow-indigo-200/70">
                 Start Free Quiz
               </Button>
             </Link>
           </div>
 
-          <button onClick={() => setIsMenuOpen(!isMenuOpen)}
+          <button
+            type="button"
+            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMenuOpen}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="lg:hidden w-10 h-10 flex items-center justify-center hover:bg-slate-100 rounded-xl border border-slate-200 transition-colors">
             {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -146,31 +161,30 @@ export default function Home() {
 
       <main>
         {/* ── Hero ─────────────────────────────────────────────────── */}
-        <section id="home" className="relative overflow-hidden pt-16 pb-28 lg:pt-24 lg:pb-36 bg-white">
-          {/* Soft background blobs */}
-          <div className="absolute inset-0 -z-10 overflow-hidden">
-            <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-indigo-100 rounded-full blur-[100px] translate-x-1/3 -translate-y-1/4 opacity-60" />
-            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-violet-100 rounded-full blur-[80px] -translate-x-1/4 translate-y-1/4 opacity-50" />
-            <div className="absolute top-1/2 left-1/3 w-[300px] h-[300px] bg-cyan-100 rounded-full blur-[60px] opacity-40" />
+        <section id="home" className="relative overflow-hidden pt-14 pb-24 sm:pt-16 sm:pb-28 lg:pt-24 lg:pb-36 bg-white">
+          {/* Ambient backdrop — contained inside the section */}
+          <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+            <div className="absolute -top-32 -right-24 w-[32rem] h-[32rem] bg-indigo-100/50 rounded-full blur-[120px]" />
+            <div className="absolute -bottom-32 -left-24 w-[28rem] h-[28rem] bg-violet-100/50 rounded-full blur-[120px]" />
+            <div className="absolute top-1/2 left-1/3 w-[18rem] h-[18rem] bg-cyan-100/40 rounded-full blur-[80px]" />
           </div>
 
-          <div className="max-w-7xl mx-auto px-4 md:px-8 grid lg:grid-cols-2 gap-14 items-center">
-            <div className="space-y-8">
-              <div className="inline-flex items-center gap-2.5 bg-gradient-to-r from-indigo-50 to-violet-50 border border-indigo-100 rounded-full px-4 py-2">
+          <div className="relative max-w-7xl mx-auto px-4 md:px-8 grid lg:grid-cols-2 gap-12 lg:gap-14 items-center">
+            <div className="space-y-7 lg:space-y-8 max-w-2xl">
+              <div className="inline-flex items-center gap-2.5 bg-white/70 backdrop-blur-sm border border-indigo-100 rounded-full px-4 py-2 shadow-sm">
                 <Sparkles className="w-3.5 h-3.5 text-indigo-500" />
-                <span className="text-xs font-bold text-indigo-700 uppercase tracking-widest">Nigeria's #1 Cybersecurity Academy</span>
+                <span className="text-[11px] sm:text-xs font-bold text-indigo-700 uppercase tracking-widest">Nigeria's #1 Cybersecurity Academy</span>
               </div>
 
-              <h1 className="text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08] text-slate-900">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08] text-slate-900 text-balance">
                 Break into{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">
                   Cybersecurity
-                </span>
-                <br />without quitting
-                <br />your day job.
+                </span>{' '}
+                without quitting your day job.
               </h1>
 
-              <p className="text-lg text-slate-500 max-w-lg leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-500 max-w-xl leading-relaxed">
                 Self-paced, Nigerian-context cybersecurity training. Pay once, learn forever.
                 Graduate with a real portfolio project that proves you can do the job.
               </p>
@@ -195,14 +209,14 @@ export default function Home() {
                 2-minute quiz — no signup required to see your result
               </p>
 
-              <div className="flex flex-wrap gap-3 pt-2">
+              <div className="flex flex-wrap gap-2.5 pt-2">
                 {[
                   { icon: <ShieldCheck className="w-4 h-4 text-indigo-500" />, text: 'Nigerian-context curriculum' },
                   { icon: <Zap className="w-4 h-4 text-amber-500" />, text: 'Instant access on payment' },
                   { icon: <MessageSquare className="w-4 h-4 text-green-500" />, text: 'WhatsApp mentorship' },
                 ].map(b => (
                   <div key={b.text}
-                    className="flex items-center gap-2 px-4 py-2 bg-white border border-slate-100 rounded-full shadow-sm text-sm font-medium text-slate-600">
+                    className="flex items-center gap-2 px-3.5 py-2 bg-white/80 backdrop-blur-sm border border-slate-200/70 rounded-full shadow-sm text-xs sm:text-sm font-medium text-slate-600">
                     {b.icon} {b.text}
                   </div>
                 ))}
@@ -254,71 +268,110 @@ export default function Home() {
 
         {/* ── Stats strip ──────────────────────────────────────────── */}
         <div className="bg-gradient-to-r from-indigo-600 to-violet-600 text-white">
-          <div className="max-w-7xl mx-auto px-4 py-5 flex flex-wrap justify-between items-center gap-4 text-sm md:text-base font-semibold">
+          <div className="max-w-7xl mx-auto px-4 md:px-8 py-5 flex flex-wrap justify-center md:justify-between items-center gap-x-6 gap-y-3 text-sm md:text-base font-semibold">
             {[
               { icon: '🎯', text: '6 Cybersecurity Tracks' },
               { icon: '⚡', text: 'Self-Paced Learning' },
               { icon: '🏆', text: 'Portfolio Projects' },
               { icon: '💬', text: 'WhatsApp Mentorship' },
               { icon: '🔒', text: 'Paystack Payments' },
-            ].map((item, i) => (
-              <span key={item.text} className="flex items-center gap-2">
-                {i > 0 && <span className="text-indigo-300 hidden sm:inline">·</span>}
-                <span>{item.icon}</span>{item.text}
+            ].map(item => (
+              <span key={item.text} className="inline-flex items-center gap-2 whitespace-nowrap">
+                <span aria-hidden>{item.icon}</span>{item.text}
               </span>
             ))}
           </div>
         </div>
 
         {/* ── Tracks section ───────────────────────────────────────── */}
-        <section id="tracks" className="py-24 bg-slate-50">
-          <div className="max-w-7xl mx-auto px-4 md:px-8 space-y-14">
+        <section id="tracks" className="relative py-20 lg:py-28 bg-slate-50 overflow-hidden">
+          {/* Ambient background ornaments */}
+          <div aria-hidden className="pointer-events-none absolute inset-0 -z-0">
+            <div className="absolute top-24 -left-24 w-[28rem] h-[28rem] bg-indigo-100/40 rounded-full blur-[120px]" />
+            <div className="absolute bottom-24 -right-24 w-[28rem] h-[28rem] bg-violet-100/40 rounded-full blur-[120px]" />
+          </div>
+
+          <div className="relative max-w-7xl mx-auto px-4 md:px-8 space-y-14">
             <div className="text-center space-y-4">
               <span className="inline-flex items-center gap-2 text-indigo-600 text-xs font-bold tracking-widest uppercase">
                 <span className="w-2 h-2 bg-indigo-600 rounded-full" /> Cybersecurity Tracks
               </span>
-              <h2 className="text-4xl lg:text-5xl font-bold text-slate-900">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight text-balance">
                 Six paths. One goal:{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600 italic font-serif font-normal">
                   getting you hired.
                 </span>
               </h2>
-              <p className="text-slate-500 max-w-2xl mx-auto text-lg">
+              <p className="text-slate-500 max-w-2xl mx-auto text-base sm:text-lg">
                 Every track ends with a capstone project — a real deliverable you can show any employer in Nigeria.
               </p>
+
+              <div className="flex flex-wrap items-center justify-center gap-2 pt-4">
+                {(['Starter', 'Pro', 'Elite'] as TierLabel[]).map(label => (
+                  <span key={label}
+                    className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-600 px-3 py-1 rounded-full bg-white/80 backdrop-blur-sm border border-slate-200/80 shadow-sm">
+                    <span className={cn('w-1.5 h-1.5 rounded-full', TIER_MAP[label].dot)} />
+                    {label}
+                  </span>
+                ))}
+              </div>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7">
               {FEATURED_TRACKS.map(track => {
                 const p = TRACK_PALETTE[track.key];
+                const tierLabel = getTier(track.priceKobo);
+                const tier = TIER_MAP[tierLabel];
+
                 return (
-                  <Link key={track.key} href={`/quiz/result?track=${track.key}`}>
-                    <div className={cn(
-                      'group relative h-full rounded-[28px] overflow-hidden cursor-pointer border bg-white hover:shadow-2xl hover:-translate-y-1 transition-all duration-300',
-                      p.border
+                  <Link
+                    key={track.key}
+                    href={`/quiz/result?track=${track.key}`}
+                    aria-label={`Explore the ${track.title} track`}
+                    className="group block rounded-[28px] focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-50"
+                  >
+                    <Card className={cn(
+                      'relative h-full overflow-hidden rounded-[28px] border border-slate-200/70 bg-white/80 backdrop-blur-xl',
+                      'shadow-[0_1px_2px_rgba(15,23,42,0.04),0_8px_24px_-12px_rgba(15,23,42,0.08)]',
+                      'transition-all duration-500 ease-out',
+                      'group-hover:-translate-y-1.5 group-hover:shadow-[0_24px_56px_-20px_rgba(79,70,229,0.28)]',
+                      tier.ring,
                     )}>
-                      {/* Gradient top bar */}
-                      <div className={cn('h-1.5 w-full bg-gradient-to-r', p.gradient)} />
+                      {tier.featured && (
+                        <div className="absolute top-4 right-4 z-20">
+                          <Badge className="border-transparent bg-gradient-to-r from-amber-400 to-orange-500 text-white shadow-md shadow-amber-200/60 uppercase tracking-widest text-[10px] px-2.5 py-1 gap-1">
+                            <Sparkles className="w-3 h-3" /> Premium
+                          </Badge>
+                        </div>
+                      )}
 
-                      {/* Hover tint */}
-                      <div className={cn('absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300', p.lightBg)} style={{ opacity: 0 }}
-                        onMouseEnter={e => (e.currentTarget.style.opacity = '0.4')}
-                        onMouseLeave={e => (e.currentTarget.style.opacity = '0')}
-                      />
+                      <div className={cn('h-1.5 w-full bg-gradient-to-r transition-[height] duration-300 group-hover:h-2', p.gradient)} />
 
-                      <div className="p-6 space-y-5">
-                        <div className="flex items-start justify-between">
-                          <div className={cn('w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shadow-sm transition-transform duration-300 group-hover:scale-110', p.iconBg)}>
-                            {track.icon}
-                          </div>
-                          <div className={cn('text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full', p.badge)}>
-                            {track.duration}
-                          </div>
+                      <div className={cn(
+                        'pointer-events-none absolute inset-x-0 top-1.5 bottom-0 opacity-0 transition-opacity duration-500 group-hover:opacity-60',
+                        p.lightBg,
+                      )} />
+
+                      <div className="relative z-10 p-6 space-y-5">
+                        <div className="flex items-center justify-between">
+                          <Badge variant="outline" className={cn('rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest gap-1.5', tier.chip)}>
+                            <span className={cn('w-1.5 h-1.5 rounded-full', tier.dot)} />
+                            {tierLabel}
+                          </Badge>
+                          <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-slate-500">
+                            <Clock className="w-3 h-3" /> {track.duration}
+                          </span>
+                        </div>
+
+                        <div className={cn(
+                          'w-14 h-14 rounded-2xl flex items-center justify-center text-3xl border border-white/70 shadow-sm transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3',
+                          p.iconBg,
+                        )}>
+                          <span aria-hidden>{track.icon}</span>
                         </div>
 
                         <div className="space-y-2">
-                          <h3 className="font-bold text-slate-900 text-lg leading-tight group-hover:text-transparent group-hover:bg-clip-text transition-all duration-300"
-                            style={{ backgroundImage: `linear-gradient(to right, var(--tw-gradient-stops))` }}>
+                          <h3 className="font-bold text-slate-900 text-[1.15rem] leading-snug tracking-tight">
                             {track.title}
                           </h3>
                           <p className="text-sm text-slate-500 font-medium leading-relaxed">{track.tagline}</p>
@@ -326,28 +379,34 @@ export default function Home() {
 
                         <div className="flex flex-wrap gap-1.5">
                           {track.roles.slice(0, 2).map(role => (
-                            <span key={role} className="text-[10px] font-semibold bg-slate-50 border border-slate-100 text-slate-500 px-2.5 py-1 rounded-full">
+                            <span key={role} className="text-[10px] font-semibold bg-white/70 backdrop-blur-sm border border-slate-200/70 text-slate-600 px-2.5 py-1 rounded-full">
                               {role}
                             </span>
                           ))}
+                          {track.roles.length > 2 && (
+                            <span className="text-[10px] font-semibold text-slate-400 px-1 py-1">
+                              +{track.roles.length - 2} more
+                            </span>
+                          )}
                         </div>
 
-                        <div className="pt-3 border-t border-slate-50 flex items-center justify-between">
+                        <div className="pt-4 border-t border-slate-100 flex items-end justify-between gap-3">
                           <div>
-                            <p className="text-[10px] text-slate-400 font-medium uppercase tracking-wider mb-0.5">One-time</p>
-                            <span className={cn('text-xl font-black', p.price)}>
+                            <p className="text-[10px] text-slate-400 font-semibold uppercase tracking-widest mb-0.5">One-time</p>
+                            <span className={cn('text-2xl font-black tracking-tight', p.price)}>
                               ₦{(track.priceKobo / 100).toLocaleString('en-NG')}
                             </span>
                           </div>
                           <div className={cn(
-                            'w-9 h-9 rounded-xl flex items-center justify-center bg-gradient-to-r transition-all duration-300 translate-x-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-0',
-                            p.gradient
+                            'h-10 px-3 rounded-xl inline-flex items-center gap-1.5 bg-gradient-to-r text-white text-xs font-bold shadow-md',
+                            'opacity-0 translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0',
+                            p.gradient,
                           )}>
-                            <ArrowRight className="w-4 h-4 text-white" />
+                            Explore <ArrowRight className="w-4 h-4" />
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </Card>
                   </Link>
                 );
               })}
@@ -366,35 +425,42 @@ export default function Home() {
         </section>
 
         {/* ── How it works ─────────────────────────────────────────── */}
-        <section id="how-it-works" className="py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-4 md:px-8 space-y-16">
+        <section id="how-it-works" className="relative py-20 lg:py-28 bg-white overflow-hidden">
+          <div aria-hidden className="pointer-events-none absolute inset-0 -z-0">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[36rem] h-[36rem] bg-indigo-50/60 rounded-full blur-[120px]" />
+          </div>
+
+          <div className="relative max-w-7xl mx-auto px-4 md:px-8 space-y-12 lg:space-y-16">
             <div className="text-center space-y-4">
               <span className="inline-flex items-center gap-2 text-indigo-600 text-xs font-bold tracking-widest uppercase">
                 <span className="w-2 h-2 bg-indigo-600 rounded-full" /> How It Works
               </span>
-              <h2 className="text-4xl lg:text-5xl font-bold text-slate-900">
-                From zero to job-ready
-                <br />
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight text-balance">
+                From zero to job-ready{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600 italic font-serif font-normal">
                   in four steps.
                 </span>
               </h2>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {HOW_IT_WORKS.map((step, idx) => (
                 <div key={step.step}
-                  className="group relative rounded-[28px] p-6 bg-white border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 space-y-5">
+                  className={cn(
+                    'group relative rounded-[28px] p-6 bg-white/80 backdrop-blur-xl border border-slate-200/70 space-y-5',
+                    'shadow-[0_1px_2px_rgba(15,23,42,0.04),0_8px_24px_-12px_rgba(15,23,42,0.08)]',
+                    'transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_48px_-20px_rgba(79,70,229,0.22)]',
+                  )}>
                   {idx < HOW_IT_WORKS.length - 1 && (
-                    <div className="hidden lg:block absolute top-14 -right-3 w-6 h-px bg-gradient-to-r from-slate-200 to-transparent z-10" />
+                    <div aria-hidden className="hidden lg:block absolute top-14 -right-3 w-6 h-px bg-gradient-to-r from-slate-200 to-transparent" />
                   )}
                   <div className="flex items-center justify-between">
-                    <div className={cn('w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br shadow-lg', step.gradient)}>
+                    <div className={cn('w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br shadow-lg transition-transform duration-500 group-hover:scale-110', step.gradient)}>
                       <step.icon className="w-6 h-6 text-white" />
                     </div>
                     <span className="text-5xl font-black text-slate-100 group-hover:text-slate-200 transition-colors">{step.step}</span>
                   </div>
-                  <h3 className="font-bold text-slate-900 text-lg leading-tight">{step.title}</h3>
+                  <h3 className="font-bold text-slate-900 text-lg leading-tight tracking-tight">{step.title}</h3>
                   <p className="text-sm text-slate-500 leading-relaxed">{step.desc}</p>
                 </div>
               ))}
@@ -403,13 +469,18 @@ export default function Home() {
         </section>
 
         {/* ── Testimonials ─────────────────────────────────────────── */}
-        <section id="testimonials" className="py-24 bg-slate-50">
-          <div className="max-w-7xl mx-auto px-4 md:px-8 space-y-14">
+        <section id="testimonials" className="relative py-20 lg:py-28 bg-slate-50 overflow-hidden">
+          <div aria-hidden className="pointer-events-none absolute inset-0 -z-0">
+            <div className="absolute top-24 -right-24 w-[28rem] h-[28rem] bg-rose-100/30 rounded-full blur-[120px]" />
+            <div className="absolute bottom-24 -left-24 w-[28rem] h-[28rem] bg-indigo-100/40 rounded-full blur-[120px]" />
+          </div>
+
+          <div className="relative max-w-7xl mx-auto px-4 md:px-8 space-y-12 lg:space-y-14">
             <div className="text-center space-y-4">
               <span className="inline-flex items-center gap-2 text-indigo-600 text-xs font-bold tracking-widest uppercase">
                 <span className="w-2 h-2 bg-indigo-600 rounded-full" /> Testimonials
               </span>
-              <h2 className="text-4xl lg:text-5xl font-bold text-slate-900">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight text-balance">
                 Real Nigerians.{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600 italic font-serif font-normal">
                   Real results.
@@ -417,23 +488,27 @@ export default function Home() {
               </h2>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {TESTIMONIALS.map((t, i) => (
-                <div key={i} className="group relative rounded-[28px] p-8 bg-white border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
-                  <div className={cn('absolute top-0 left-0 right-0 h-1.5', t.accent)} />
-                  <div className="space-y-6">
-                    <Quote className="w-8 h-8 text-slate-100" />
-                    <p className="text-slate-600 leading-relaxed italic">"{t.quote}"</p>
-                    <div className="flex gap-1">
+                <div key={i} className={cn(
+                  'group relative rounded-[28px] p-8 bg-white/80 backdrop-blur-xl border border-slate-200/70 overflow-hidden',
+                  'shadow-[0_1px_2px_rgba(15,23,42,0.04),0_8px_24px_-12px_rgba(15,23,42,0.08)]',
+                  'transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_48px_-20px_rgba(79,70,229,0.22)]',
+                )}>
+                  <div className={cn('absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r transition-[height] duration-300 group-hover:h-2', t.accent)} />
+                  <div className="space-y-5">
+                    <Quote className="w-9 h-9 text-slate-200" aria-hidden />
+                    <p className="text-slate-700 leading-relaxed italic text-[15px]">&ldquo;{t.quote}&rdquo;</p>
+                    <div className="flex gap-1" aria-label="5 out of 5 stars">
                       {[...Array(5)].map((_, j) => (
                         <Star key={j} className="w-4 h-4 text-amber-400 fill-amber-400" />
                       ))}
                     </div>
-                    <div className="flex items-center gap-3 pt-2 border-t border-slate-100">
-                      <img src={t.avatar} alt={t.name} className="w-11 h-11 rounded-full bg-slate-100" />
-                      <div>
-                        <p className="font-bold text-slate-900 text-sm">{t.name}</p>
-                        <p className="text-xs text-indigo-600 font-semibold">{t.role}</p>
+                    <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
+                      <img src={t.avatar} alt={t.name} className="w-11 h-11 rounded-full bg-slate-100 ring-2 ring-white shadow-sm" />
+                      <div className="min-w-0">
+                        <p className="font-bold text-slate-900 text-sm truncate">{t.name}</p>
+                        <p className="text-xs text-indigo-600 font-semibold truncate">{t.role}</p>
                         <p className="text-xs text-slate-400">{t.location}</p>
                       </div>
                     </div>
@@ -445,9 +520,9 @@ export default function Home() {
         </section>
 
         {/* ── About ────────────────────────────────────────────────── */}
-        <section id="about" className="py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-4 md:px-8 grid lg:grid-cols-2 gap-16 items-center">
-            <div className="relative h-[440px]">
+        <section id="about" className="py-20 lg:py-28 bg-white">
+          <div className="max-w-7xl mx-auto px-4 md:px-8 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="relative h-[340px] sm:h-[400px] lg:h-[440px]">
               <div className="absolute left-0 top-0 w-2/3 h-2/3 rounded-3xl overflow-hidden shadow-2xl z-10 ring-1 ring-slate-200">
                 <Image src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop"
                   alt="Learners studying" fill className="object-cover" />
@@ -456,41 +531,40 @@ export default function Home() {
                 <Image src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=800&auto=format&fit=crop"
                   alt="Professional working" fill className="object-cover" />
               </div>
-              <div className="absolute bottom-8 left-8 z-30 p-4 rounded-2xl bg-white shadow-xl border border-slate-100">
+              <div className="absolute bottom-4 left-4 sm:bottom-8 sm:left-8 z-30 p-3 sm:p-4 rounded-2xl bg-white/90 backdrop-blur-xl shadow-xl border border-slate-200/70">
                 <div className="flex items-center gap-2 mb-1">
                   <Lock className="w-3.5 h-3.5 text-emerald-600" />
-                  <span className="text-xs text-emerald-700 font-bold uppercase tracking-widest">NDPR · CBN Compliant</span>
+                  <span className="text-[10px] sm:text-xs text-emerald-700 font-bold uppercase tracking-widest">NDPR · CBN Compliant</span>
                 </div>
                 <p className="text-xs text-slate-500 font-medium">Curriculum aligned to<br />Nigerian regulations</p>
               </div>
             </div>
 
-            <div className="space-y-8">
+            <div className="space-y-7 lg:space-y-8">
               <div className="space-y-4">
                 <span className="inline-flex items-center gap-2 text-indigo-600 text-xs font-bold tracking-widest uppercase">
                   <span className="w-2 h-2 bg-indigo-600 rounded-full" /> About Secquiz
                 </span>
-                <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 leading-tight">
-                  Built for Nigeria.
-                  <br />
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight leading-tight text-balance">
+                  Built for Nigeria.{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600 italic font-serif font-normal">
                     By Nigerians.
                   </span>
                 </h2>
               </div>
-              <p className="text-slate-500 leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-500 leading-relaxed">
                 Secquiz was built because we were tired of seeing talented Nigerians pay USD prices for
                 international courses that had nothing to do with our market, our regulations (NDPR, CBN),
                 or our employers. Every track is designed with the Nigerian job market in mind.
               </p>
-              <div className="grid sm:grid-cols-2 gap-5">
+              <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
                 {[
-                  { emoji: '🎯', title: 'Our Mission', desc: 'Make world-class cybersecurity education affordable and accessible to every Nigerian who wants it.', bg: 'bg-indigo-50 border-indigo-100' },
-                  { emoji: '👁️', title: 'Our Vision', desc: 'A Nigeria where every cybersecurity role is filled by a Nigerian professional trained for that exact job.', bg: 'bg-violet-50 border-violet-100' },
+                  { emoji: '🎯', title: 'Our Mission', desc: 'Make world-class cybersecurity education affordable and accessible to every Nigerian who wants it.', bg: 'bg-indigo-50/80 border-indigo-100' },
+                  { emoji: '👁️', title: 'Our Vision', desc: 'A Nigeria where every cybersecurity role is filled by a Nigerian professional trained for that exact job.', bg: 'bg-violet-50/80 border-violet-100' },
                 ].map(item => (
-                  <div key={item.title} className={cn('rounded-2xl p-5 border space-y-3', item.bg)}>
+                  <div key={item.title} className={cn('rounded-2xl p-5 border backdrop-blur-sm space-y-3', item.bg)}>
                     <div className="flex items-center gap-3">
-                      <span className="text-2xl">{item.emoji}</span>
+                      <span className="text-2xl" aria-hidden>{item.emoji}</span>
                       <h3 className="font-bold text-slate-900">{item.title}</h3>
                     </div>
                     <p className="text-sm text-slate-500 leading-relaxed">{item.desc}</p>
@@ -507,29 +581,29 @@ export default function Home() {
         </section>
 
         {/* ── CTA Banner ───────────────────────────────────────────── */}
-        <section className="py-20 bg-gradient-to-br from-indigo-600 via-violet-600 to-purple-700 relative overflow-hidden">
-          <div className="absolute inset-0 opacity-10"
+        <section className="relative py-20 lg:py-24 bg-gradient-to-br from-indigo-600 via-violet-600 to-purple-700 overflow-hidden">
+          <div aria-hidden className="absolute inset-0 opacity-10"
             style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
-          <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
-          <div className="max-w-4xl mx-auto px-4 text-center space-y-8 relative z-10">
-            <h2 className="text-4xl lg:text-5xl font-bold text-white leading-tight">
-              Your cybersecurity career
-              <br />starts with 5 questions.
+          <div aria-hidden className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
+          <div aria-hidden className="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
+          <div className="relative z-10 max-w-4xl mx-auto px-4 md:px-8 text-center space-y-8">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight text-balance">
+              Your cybersecurity career starts with 5 questions.
             </h2>
-            <p className="text-indigo-100 text-lg max-w-xl mx-auto">
+            <p className="text-indigo-100 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
               Take the free quiz, get matched to your track, and pay once for lifetime access.
               No deadlines. No group pressure. Just progress.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link href="/quiz">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+              <Link href="/quiz" className="w-full sm:w-auto">
                 <Button size="lg"
-                  className="rounded-full px-10 h-14 bg-white text-indigo-600 hover:bg-indigo-50 font-bold text-base gap-2 shadow-2xl active:scale-95 transition-all">
+                  className="w-full sm:w-auto rounded-full px-10 h-14 bg-white text-indigo-600 hover:bg-indigo-50 font-bold text-base gap-2 shadow-2xl active:scale-95 transition-all">
                   Take the Free Quiz <ArrowRight className="w-5 h-5" />
                 </Button>
               </Link>
-              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
                 <Button size="lg" variant="ghost"
-                  className="rounded-full px-8 h-14 border border-white/40 text-white hover:bg-white/15 font-semibold gap-2">
+                  className="w-full sm:w-auto rounded-full px-8 h-14 border border-white/40 text-white hover:bg-white/15 hover:text-white font-semibold gap-2">
                   <MessageSquare className="w-5 h-5" /> Chat on WhatsApp
                 </Button>
               </a>
@@ -538,15 +612,15 @@ export default function Home() {
         </section>
 
         {/* ── Contact ──────────────────────────────────────────────── */}
-        <section id="contact" className="py-20 bg-white">
+        <section id="contact" className="py-20 lg:py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 md:px-8 text-center space-y-4">
-            <h2 className="text-3xl font-bold text-slate-900">Have questions?</h2>
-            <p className="text-slate-500 max-w-md mx-auto">
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">Have questions?</h2>
+            <p className="text-slate-500 max-w-md mx-auto text-base sm:text-lg">
               We're a WhatsApp message away. Our team typically responds within a few hours.
             </p>
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-block pt-2">
               <Button size="lg"
-                className="mt-4 rounded-full px-8 h-12 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold gap-2 shadow-lg shadow-emerald-200 active:scale-95 transition-all">
+                className="rounded-full px-8 h-12 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold gap-2 shadow-lg shadow-emerald-200 active:scale-95 transition-all">
                 <MessageSquare className="w-5 h-5" /> Chat on WhatsApp
               </Button>
             </a>
@@ -555,29 +629,29 @@ export default function Home() {
       </main>
 
       {/* ── Footer ───────────────────────────────────────────────── */}
-      <footer className="bg-slate-900 text-white py-12 px-4">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-8">
-          <div className="space-y-3 text-center md:text-left">
+      <footer className="bg-slate-900 text-white py-12 md:py-14 px-4 md:px-8">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-start md:justify-between gap-10">
+          <div className="space-y-3 text-center md:text-left max-w-sm md:max-w-xs mx-auto md:mx-0">
             <div className="flex items-center gap-2.5 justify-center md:justify-start">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-md shadow-indigo-500/30">
                 <ShieldCheck className="w-4 h-4 text-white" />
               </div>
-              <span className="text-lg font-bold">Sec<span className="text-indigo-400">quiz</span></span>
+              <span className="text-lg font-bold tracking-tight">Sec<span className="text-indigo-400">quiz</span></span>
             </div>
-            <p className="text-slate-400 text-sm max-w-xs">
+            <p className="text-slate-400 text-sm leading-relaxed">
               Nigeria's cybersecurity learning academy. Self-paced, affordable, portfolio-driven.
             </p>
           </div>
-          <div className="flex flex-wrap justify-center md:justify-end gap-6 text-sm text-slate-400 font-medium">
+          <nav aria-label="Footer" className="flex flex-wrap justify-center md:justify-end items-center gap-x-6 gap-y-3 text-sm text-slate-400 font-medium">
             {NAV_LINKS.map(l => (
               <a key={l.href} href={l.href} className="hover:text-white transition-colors">{l.label}</a>
             ))}
             <Link href="/quiz" className="text-indigo-400 hover:text-indigo-300 font-semibold">Find Your Track</Link>
             <Link href="/login" className="hover:text-white transition-colors">Login</Link>
             <Link href="/register" className="hover:text-white transition-colors">Register</Link>
-          </div>
+          </nav>
         </div>
-        <div className="max-w-7xl mx-auto mt-10 pt-6 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+        <div className="max-w-7xl mx-auto mt-10 pt-6 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-slate-500 text-center md:text-left">
           <p>© {new Date().getFullYear()} Secquiz. All rights reserved.</p>
           <p>Built for Nigeria 🇳🇬 · Powered by Supabase · Payments by Paystack · Deployed on Vercel</p>
         </div>
