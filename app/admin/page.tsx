@@ -71,7 +71,7 @@ export default function AdminDashboardPage() {
         supabase.from('mentorship_requests').select('*', { count: 'exact', head: true }),
         supabase
           .from('enrolments')
-          .select('*, profiles!enrolments_user_id_fkey(first_name, last_name, email), courses(name)')
+          .select('*, profiles(first_name, last_name, email), courses(name)')
           .order('enrolled_at', { ascending: false })
           .limit(5),
       ]);
@@ -80,7 +80,7 @@ export default function AdminDashboardPage() {
 
       const recentPaymentsRes = await supabase
         .from('payments')
-        .select('*, profiles!payments_user_id_fkey(first_name, last_name), payment_plans(name)')
+        .select('*, profiles(first_name, last_name), payment_plans(name)')
         .order('created_at', { ascending: false })
         .limit(5);
 
