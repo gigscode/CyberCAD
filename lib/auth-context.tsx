@@ -149,7 +149,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       password: string,
       role = 'learner'
     ) => {
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -157,6 +157,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         },
       });
       if (error) throw new Error(error.message);
+      // If email confirmation is required, data.session will be null.
+      // Throw a specific message so the UI can handle it gracefully.
+      if (!data.session && data.user) {
+        throw new Error('CHECK_EMAIL');
+      }
     },
     [supabase]
   );

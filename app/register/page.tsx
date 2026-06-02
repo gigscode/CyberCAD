@@ -45,10 +45,17 @@ export default function RegisterPage() {
     setIsLoading(true);
     try {
       await register(firstName, lastName, email, password, role);
-      toast.success('Registration complete! Welcome to DexterHub.');
+      toast.success('Account created! Welcome to Secquiz.');
       router.push('/dashboard');
     } catch (error: any) {
-      toast.error(error.message || 'Onboarding failed');
+      if (error.message === 'CHECK_EMAIL') {
+        toast.success('Account created! Check your email to confirm before logging in.', {
+          duration: 6000,
+        });
+        router.push('/login');
+      } else {
+        toast.error(error.message || 'Registration failed. Please try again.');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -68,8 +75,8 @@ export default function RegisterPage() {
           {/* <div className="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-indigo-100 mx-auto mb-6">
             <Layers className="w-7 h-7" />
           </div> */}
-          <h1 className="text-4xl font-semibold tracking-tight text-slate-900">Join DexterHub</h1>
-          <p className="text-slate-500 text-sm font-medium tracking-wide uppercase">Create your account</p>
+          <h1 className="text-4xl font-semibold tracking-tight text-slate-900">Join Secquiz</h1>
+          <p className="text-slate-500 text-sm font-medium tracking-wide uppercase">Create your free account</p>
         </div>
 
         {/* Register Card */}
