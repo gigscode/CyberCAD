@@ -13,10 +13,9 @@ import type { User as SupabaseUser, Session } from '@supabase/supabase-js';
 export interface User {
   id: string;
   email: string;
-  role: 'learner' | 'instructor' | 'admin' | 'super-admin';
+  role: 'learner' | 'super-admin';
   firstName?: string;
   lastName?: string;
-  activeCohortId?: string;
   avatar?: string;
   bio?: string;
   title?: string;
@@ -54,19 +53,21 @@ function supabaseUserToAppUser(
   profileData?: Partial<User>
 ): User {
   const meta = supabaseUser.user_metadata ?? {};
+  // Profiles table is the authoritative source for role.
+  // user_metadata is the fallback only.
+  const role = (profileData?.role ?? meta.role ?? 'learner') as User['role'];
   return {
     id: supabaseUser.id,
     email: supabaseUser.email ?? '',
-    role: (meta.role ?? profileData?.role ?? 'learner') as User['role'],
-    firstName: meta.firstName ?? profileData?.firstName ?? '',
-    lastName: meta.lastName ?? profileData?.lastName ?? '',
-    activeCohortId: meta.activeCohortId ?? profileData?.activeCohortId,
-    avatar: meta.avatar ?? profileData?.avatar,
-    bio: meta.bio ?? profileData?.bio,
-    title: meta.title ?? profileData?.title,
-    phoneNumber: meta.phoneNumber ?? profileData?.phoneNumber,
-    location: meta.location ?? profileData?.location,
-    socialLinks: meta.socialLinks ?? profileData?.socialLinks,
+    role,
+    firstName: profileData?.firstName ?? meta.firstName ?? '',
+    lastName: profileData?.lastName ?? meta.lastName ?? '',
+    avatar: profileData?.avatar ?? meta.avatar,
+    bio: profileData?.bio ?? meta.bio,
+    title: profileData?.title ?? meta.title,
+    phoneNumber: profileData?.phoneNumber ?? meta.phoneNumber,
+    location: profileData?.location ?? meta.location,
+    socialLinks: profileData?.socialLinks ?? meta.socialLinks,
   };
 }
 
@@ -81,13 +82,36 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const loadProfile = useCallback(
     async (supabaseUser: SupabaseUser): Promise<User> => {
       try {
-        const { data: profile } = await supabase
+        const { data: profile, error } = await supabase
           .from('profiles')
-          .select('*')
+          .select('id, role, first_name, last_name, avatar, bio, title, phone_number, location, social_links')
           .eq('id', supabaseUser.id)
           .single();
-        return supabaseUserToAppUser(supabaseUser, profile ?? undefined);
-      } catch {
+
+        if (error) {
+          // RLS or network error — fall back to metadata
+          console.warn('[auth] profiles fetch failed, using metadata fallback:', error.message);
+          return supabaseUserToAppUser(supabaseUser);
+        }
+
+        if (!profile) {
+          console.warn('[auth] no profile row found for user:', supabaseUser.id);
+          return supabaseUserToAppUser(supabaseUser);
+        }
+
+        return supabaseUserToAppUser(supabaseUser, {
+          role: profile.role as User['role'],
+          firstName: profile.first_name ?? undefined,
+          lastName: profile.last_name ?? undefined,
+          avatar: profile.avatar ?? undefined,
+          bio: profile.bio ?? undefined,
+          title: profile.title ?? undefined,
+          phoneNumber: profile.phone_number ?? undefined,
+          location: profile.location ?? undefined,
+          socialLinks: profile.social_links ?? undefined,
+        });
+      } catch (e) {
+        console.warn('[auth] unexpected error loading profile:', e);
         return supabaseUserToAppUser(supabaseUser);
       }
     },
@@ -103,7 +127,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [supabase, loadProfile]);
 
   useEffect(() => {
-    // Get initial session
     supabase.auth.getSession().then(async ({ data: { session } }) => {
       setSession(session);
       if (session?.user) {
@@ -113,7 +136,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       setIsLoading(false);
     });
 
-    // Listen for auth state changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         setSession(session);
@@ -132,10 +154,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const login = useCallback(
     async (email: string, password: string) => {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) throw new Error(error.message);
     },
     [supabase]
@@ -157,8 +176,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         },
       });
       if (error) throw new Error(error.message);
-      // If email confirmation is required, data.session will be null.
-      // Throw a specific message so the UI can handle it gracefully.
+      // Email confirmation required — session will be null
       if (!data.session && data.user) {
         throw new Error('CHECK_EMAIL');
       }

@@ -1,50 +1,39 @@
 'use client';
 
-import React from "react"
-
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth-context';
 import { ModernSidebar } from '@/components/modern-sidebar';
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const { isAuthenticated, isLoading, user } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      router.push('/login');
+    if (!isLoading) {
+      if (!isAuthenticated) {
+        router.push('/login');
+      } else if (user?.role === 'super-admin') {
+        // Super-admins should be at /admin, not /dashboard
+        router.push('/admin');
+      }
     }
-  }, [isAuthenticated, isLoading, router]);
+  }, [isAuthenticated, isLoading, user, router]);
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-background">
-        <div className="space-y-4 text-center">
-          <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="text-muted-foreground">Loading...</p>
-        </div>
+      <div className="flex items-center justify-center min-h-screen bg-white">
+        <div className="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
 
-  if (!isAuthenticated) {
-    return null;
-  }
-
-  // Redirect instructors/admins to their respective dashboards
-  const role = user?.role === 'admin' || user?.role === 'super-admin' ? 'admin' : 
-               user?.role === 'instructor' ? 'instructor' : 'learner';
-
+  if (!isAuthenticated) return null;
 
   return (
-    <div className="min-h-screen bg-background">
-      <ModernSidebar role={role} />
-      <main className="ml-0 lg:ml-80 min-h-screen">
+    <div className="min-h-screen bg-neutral-50/50">
+      <ModernSidebar role="learner" />
+      <main className="ml-0 lg:ml-[280px] min-h-screen">
         {children}
       </main>
     </div>
