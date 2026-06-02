@@ -24,7 +24,7 @@ export default function PaymentsPage() {
     try {
       const { data, error } = await supabase
         .from('payments')
-        .select('*, profiles(first_name, last_name, email), payment_plans(name), courses(name)')
+        .select('*, profiles!payments_user_id_fkey(first_name, last_name, email), payment_plans(name), courses(name)')
         .order('created_at', { ascending: false });
       if (error) throw error;
       setPayments(data ?? []);
