@@ -18,13 +18,13 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  const { login, isAuthenticated } = useAuth();
+  const { login, isAuthenticated, user } = useAuth();
 
   useEffect(() => {
-    if (isAuthenticated) {
-      router.push('/dashboard');
+    if (isAuthenticated && user) {
+      router.replace(user.role === 'super-admin' ? '/admin' : '/dashboard');
     }
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, user, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,7 +38,8 @@ export default function LoginPage() {
     try {
       await login(email, password);
       toast.success('Welcome back!');
-      router.push('/dashboard');
+      // Role-based redirect handled in each layout; use replace to avoid back-nav loops
+      router.replace('/dashboard');
     } catch (error: any) {
       toast.error(error.message || 'Authentication failed');
     } finally {
@@ -61,7 +62,7 @@ export default function LoginPage() {
             <Layers className="w-7 h-7" />
           </div> */}
           <h1 className="text-4xl font-semibold tracking-tight text-slate-900">
-            Dexter<span className="text-indigo-600">Hub</span>
+            Sec<span className="text-indigo-600">Quiz</span>
           </h1>
           <p className="text-slate-500 text-sm font-medium tracking-wide uppercase">Welcome back</p>
         </div>
@@ -143,7 +144,7 @@ export default function LoginPage() {
 
             {/* Sign up link */}
             <div className="mt-8 text-center text-sm">
-              <span className="text-slate-500 font-medium">New to DexterHub? </span>
+              <span className="text-slate-500 font-medium">New to SecQuiz? </span>
               <Link href="/register" className="text-indigo-600 font-bold hover:text-indigo-700 transition-colors">
                 Create Account
               </Link>

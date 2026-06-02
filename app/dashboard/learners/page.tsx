@@ -94,7 +94,7 @@ export default function LearnersPage() {
   };
 
   useEffect(() => {
-    if (user?.role === 'instructor' || user?.role === 'admin' || user?.role === 'super-admin') {
+    if (user?.role === 'super-admin') {
       fetchLearners();
     }
   }, [user]);

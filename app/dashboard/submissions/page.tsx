@@ -45,7 +45,7 @@ export default function SubmissionsPage() {
     const [isGrading, setIsGrading] = useState(false);
 
     useEffect(() => {
-        if (user?.role !== 'instructor' && user?.role !== 'admin') {
+        if (user?.role !== 'super-admin') {
             router.push('/dashboard');
             return;
         }

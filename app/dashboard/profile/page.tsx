@@ -122,8 +122,7 @@ export default function ProfilePage() {
     const addTag = (field: 'learningGoals' | 'interests' | 'expertise' | 'achievements' | 'responsibilities', value: string) => {
         if (!value.trim()) return;
         
-        const detailsKey = user?.role === 'learner' ? 'learnerDetails' : 
-                         user?.role === 'instructor' ? 'instructorDetails' : 'adminDetails';
+        const detailsKey = user?.role === 'learner' ? 'learnerDetails' : 'adminDetails';
         
         const currentDetails = (formData as any)[detailsKey] || {};
         const currentTags = currentDetails[field] || [];
@@ -140,8 +139,7 @@ export default function ProfilePage() {
     };
 
     const removeTag = (field: string, value: string) => {
-        const detailsKey = user?.role === 'learner' ? 'learnerDetails' : 
-                         user?.role === 'instructor' ? 'instructorDetails' : 'adminDetails';
+        const detailsKey = user?.role === 'learner' ? 'learnerDetails' : 'adminDetails';
         
         const currentDetails = (formData as any)[detailsKey] || {};
         const currentTags = currentDetails[field] || [];
@@ -300,7 +298,7 @@ export default function ProfilePage() {
                                         </div>
                                     )}
 
-                                    {user.role === 'instructor' && (
+                                    {user.role === 'super-admin' && (
                                         <div className="space-y-6">
                                             <div className="space-y-3">
                                                 <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Expertise</p>

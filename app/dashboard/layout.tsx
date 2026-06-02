@@ -6,16 +6,20 @@ import { useAuth } from '@/lib/auth-context';
 import { ModernSidebar } from '@/components/modern-sidebar';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const { isAuthenticated, isLoading, user } = useAuth();
+  const { isAuthenticated, isLoading, user, refreshUser } = useAuth();
   const router = useRouter();
+
+  // Force a fresh profile fetch so role changes in DB are picked up immediately
+  useEffect(() => {
+    refreshUser();
+  }, []);
 
   useEffect(() => {
     if (!isLoading) {
       if (!isAuthenticated) {
-        router.push('/login');
+        router.replace('/login');
       } else if (user?.role === 'super-admin') {
-        // Super-admins should be at /admin, not /dashboard
-        router.push('/admin');
+        router.replace('/admin');
       }
     }
   }, [isAuthenticated, isLoading, user, router]);

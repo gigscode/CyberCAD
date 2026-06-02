@@ -329,10 +329,15 @@ class APIClient {
   async getLearnerProgress(learnerId: string): Promise<LearnerProgress[]> {
     const { data, error } = await this.db
       .from('learner_progress')
-      .select('*, courseId:courses(id,name)')
+      .select('*, course_id, courses(id,name)')
       .eq('learner_id', learnerId);
     if (error) throw new Error(error.message);
-    return normaliseAll(data ?? []) as unknown as LearnerProgress[];
+    // Map course_id join to expected courseId field
+    const rows = (data ?? []).map((r: any) => ({
+      ...r,
+      courseId: r.courses ?? null,
+    }));
+    return normaliseAll(rows) as unknown as LearnerProgress[];
   }
 
   async getLearnerTasks(learnerId: string): Promise<any[]> {
@@ -375,18 +380,13 @@ class APIClient {
   // ── Events ──────────────────────────────────────────────────────────────────
 
   async getEvents(): Promise<Event[]> {
-    const { data, error } = await this.db.from('events').select('*');
-    if (error) throw new Error(error.message);
-    return normaliseAll(data ?? []) as unknown as Event[];
+    // 'events' table does not exist in this schema — return empty array gracefully
+    return [];
   }
 
   async getCohortEvents(cohortId: string): Promise<Event[]> {
-    const { data, error } = await this.db
-      .from('events')
-      .select('*')
-      .eq('cohort_id', cohortId);
-    if (error) throw new Error(error.message);
-    return normaliseAll(data ?? []) as unknown as Event[];
+    // 'events' table does not exist in this schema — return empty array gracefully
+    return [];
   }
 
   // ── Cohort Learners ─────────────────────────────────────────────────────────

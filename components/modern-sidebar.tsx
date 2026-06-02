@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/lib/auth-context';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
@@ -144,10 +144,16 @@ function SidebarContent({
 
 export function ModernSidebar({ role = 'learner' }: ModernSidebarProps) {
   const pathname = usePathname();
+  const router = useRouter();
   const { user, logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
-  const props = { user, logout, pathname };
+  const handleLogout = async () => {
+    await logout();
+    router.replace('/login');
+  };
+
+  const props = { user, logout: handleLogout, pathname };
 
   return (
     <>

@@ -25,7 +25,7 @@ export default function DashboardPage() {
 
   if (!user) return null;
 
-  if (user.role === 'super-admin' || user.role === 'admin') {
+  if (user.role === 'super-admin') {
     router.push('/admin');
     return null;
   }
