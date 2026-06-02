@@ -99,7 +99,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           return supabaseUserToAppUser(supabaseUser);
         }
 
-        return supabaseUserToAppUser(supabaseUser, {
+        const appUser = supabaseUserToAppUser(supabaseUser, {
           role: profile.role as User['role'],
           firstName: profile.first_name ?? undefined,
           lastName: profile.last_name ?? undefined,
@@ -110,6 +110,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           location: profile.location ?? undefined,
           socialLinks: profile.social_links ?? undefined,
         });
+
+        // Keep auth metadata in sync with profiles table role
+        // so role is always correct even after manual DB updates
+        const metaRole = supabaseUser.user_metadata?.role;
+        if (metaRole !== profile.role) {
+          await supabase.auth.updateUser({
+            data: { role: profile.role },
+          });
+        }
+
+        return appUser;
       } catch (e) {
         console.warn('[auth] unexpected error loading profile:', e);
         return supabaseUserToAppUser(supabaseUser);
