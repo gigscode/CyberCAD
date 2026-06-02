@@ -106,7 +106,7 @@ export default function AdminCoursesPage() {
           <p className="text-slate-500 mt-1 text-sm">Manage the full course catalogue.</p>
         </div>
         <Button
-          onClick={() => router.push('/instructor/courses/new')}
+          onClick={() => router.push('/admin/courses/new')}
           className="bg-indigo-600 hover:bg-indigo-700 text-white h-11 rounded-xl px-6 font-semibold text-sm shadow-lg shadow-indigo-100"
         >
           <Plus className="w-4 h-4 mr-2" /> New Course
@@ -135,7 +135,7 @@ export default function AdminCoursesPage() {
         <div className="py-20 text-center space-y-3">
           <BookOpen className="w-12 h-12 text-slate-200 mx-auto" />
           <p className="text-slate-400 text-sm">No courses found</p>
-          <Button onClick={() => router.push('/instructor/courses/new')} variant="outline" className="rounded-xl font-semibold">
+          <Button onClick={() => router.push('/admin/courses/new')} variant="outline" className="rounded-xl font-semibold">
             Create your first course
           </Button>
         </div>
@@ -163,7 +163,7 @@ export default function AdminCoursesPage() {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="rounded-xl border-slate-100 shadow-lg p-1 w-44">
-                      <DropdownMenuItem onClick={() => router.push(`/instructor/courses/edit/${c.id}`)}
+                      <DropdownMenuItem onClick={() => router.push(`/admin/courses/edit/${c.id}`)}
                         className="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 cursor-pointer hover:bg-slate-50 gap-2">
                         <Edit3 className="w-4 h-4 opacity-50" /> Edit Content
                       </DropdownMenuItem>
