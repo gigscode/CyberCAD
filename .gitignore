@@ -1,0 +1,59 @@
+# ─── Dependencies ────────────────────────────────────────────
+/node_modules
+/.pnp
+.pnp.js
+
+# ─── Next.js build output ────────────────────────────────────
+/.next/
+/out/
+/build
+
+# ─── Environment variables (NEVER commit these) ──────────────
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+.env*.local
+
+# ─── Vercel ──────────────────────────────────────────────────
+.vercel
+
+# ─── Supabase local dev ──────────────────────────────────────
+/supabase/.temp/
+/supabase/.branches/
+
+# ─── Debug logs ──────────────────────────────────────────────
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+*.log
+
+# ─── TypeScript ──────────────────────────────────────────────
+*.tsbuildinfo
+next-env.d.ts
+
+# ─── OS files ────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── Editor / IDE ────────────────────────────────────────────
+.vscode/settings.json
+.vscode/launch.json
+.idea/
+*.swp
+*.swo
+
+# ─── Test / scratch files ────────────────────────────────────
+test-cloudinary.js
+test-image.js
+nul
+
+# ─── Misc ────────────────────────────────────────────────────
+*.pem
+/backend/.env
