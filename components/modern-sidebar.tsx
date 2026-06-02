@@ -22,7 +22,9 @@ import {
     Library,
     User,
     GraduationCap,
-    Shield
+    Shield,
+    CreditCard,
+    MessageSquare
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -46,34 +48,20 @@ function SidebarContent({ role, user, logout, pathname, onLinkClick }: {
         { href: '/dashboard/profile', label: 'Profile', icon: User },
     ];
 
-    const instructorLinks = [
-        { href: '/dashboard', label: 'Dashboard', icon: Grid },
-        { href: '/dashboard/courses', label: 'Courses', icon: Library },
-        { href: '/dashboard/cohorts', label: 'Cohorts', icon: BookOpen },
-        { href: '/dashboard/learners', label: 'Students', icon: Users },
-        { href: '/dashboard/submissions', label: 'Submissions', icon: CheckSquare },
-        { href: '/dashboard/applications', label: 'Applications', icon: FileText },
-        { href: '/dashboard/profile', label: 'Profile', icon: User },
-    ];
-
     const adminLinks = [
         { href: '/admin', label: 'Dashboard', icon: Grid },
         { href: '/admin/courses', label: 'Course Manager', icon: Library },
-        { href: '/admin/cohorts', label: 'Cohorts', icon: BookOpen },
         { href: '/admin/learners', label: 'Learners', icon: Users },
-        { href: '/admin/instructors', label: 'Instructors', icon: GraduationCap },
-        { href: '/admin/users', label: 'User Directory', icon: Shield },
-        { href: '/admin/applications', label: 'Applications', icon: FileText },
-        { href: '/admin/recommendations', label: 'Reviews', icon: Sparkles },
-        { href: '/dashboard/submissions', label: 'Submissions', icon: CheckSquare },
+        { href: '/admin/submissions', label: 'Submissions', icon: CheckSquare },
+        { href: '/admin/payments', label: 'Payments', icon: CreditCard },
+        { href: '/admin/mentorship', label: 'Mentorship Logs', icon: MessageSquare },
+        { href: '/admin/audit-logs', label: 'Audit Logs', icon: FileText },
         { href: '/admin/profile', label: 'Profile', icon: User },
     ];
 
     const links = ['admin', 'super-admin'].includes(user?.role || '') 
         ? adminLinks 
-        : user?.role === 'instructor' 
-            ? instructorLinks 
-            : learnerLinks;
+        : learnerLinks;
 
     return (
         <div className="flex flex-col h-full">

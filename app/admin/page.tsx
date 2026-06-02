@@ -1,7 +1,7 @@
 'use client';
+import { useAuth } from '@/lib/auth-context';
 
 import { useEffect, useState } from 'react';
-import { useAuth } from '@/lib/auth-context';
 import { createClient } from '@/lib/supabase/client';
 import { StatCard } from '@/components/stat-card';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -27,7 +27,7 @@ interface DashboardStats {
 }
 
 export default function AdminDashboardPage() {
-  const { user } = useAuth();
+  const { user, isLoading: authLoading } = useAuth();
   const router = useRouter();
   const supabase = createClient();
   const [stats, setStats] = useState<DashboardStats>({
@@ -39,11 +39,20 @@ export default function AdminDashboardPage() {
     recentPayments: [],
     recentEnrolments: [],
   });
-  const [isLoading, setIsLoading] = useState(true);
+  const [dataLoading, setDataLoading] = useState(true);
+
+  // Guard: only super‑admin can view this page
+  useEffect(() => {
+    if (!authLoading && (!user || user.role !== 'super-admin')) {
+      router.replace('/');
+    }
+  }, [authLoading, user, router]);
 
   useEffect(() => {
-    loadDashboard();
-  }, []);
+    if (user?.role === 'super-admin') {
+      loadDashboard();
+    }
+  }, [user]);
 
   const loadDashboard = async () => {
     try {
@@ -88,14 +97,14 @@ export default function AdminDashboardPage() {
       console.error('Dashboard load error:', error);
       toast.error('Failed to load dashboard data');
     } finally {
-      setIsLoading(false);
+      setDataLoading(false);
     }
   };
 
   const formatNaira = (kobo: number) =>
     `₦${(kobo / 100).toLocaleString('en-NG', { minimumFractionDigits: 0 })}`;
 
-  if (isLoading) {
+  if (dataLoading) {
     return (
       <div className="max-w-7xl mx-auto p-4 md:p-8 space-y-8">
         <div className="h-10 bg-slate-200 animate-pulse rounded-lg w-1/3" />

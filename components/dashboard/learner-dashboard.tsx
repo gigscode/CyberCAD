@@ -2,32 +2,26 @@
 
 import { useEffect, useState } from 'react';
 import { useAuth } from '@/lib/auth-context';
-import { api, Cohort, LearnerProgress, Event } from '@/lib/api';
+import { api, LearnerProgress, Event } from '@/lib/api';
 import { StatCard } from '@/components/stat-card';
 import { CourseCard } from '@/components/course-card';
-import { TaskCard } from '@/components/task-card';
 import { TopHeader } from '@/components/top-header';
 import { CalendarWidget } from '@/components/calendar-widget';
 import { UpcomingEvents } from '@/components/upcoming-events';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { BookOpen, GraduationCap, Award, Users, TrendingUp, AlertCircle, FileText, Calendar, Sparkles } from 'lucide-react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import { BookOpen, GraduationCap, Award, TrendingUp, AlertCircle, FileText, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-
-import { JoinCohortView } from '@/components/cohort-updates/join-cohort-view';
 import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 
 export function LearnerDashboard() {
-    const { user, refreshUser } = useAuth();
+    const { user } = useAuth();
     const router = useRouter();
-    const [cohort, setCohort] = useState<Cohort | null>(null);
     const [progress, setProgress] = useState<LearnerProgress | null>(null);
     const [tasks, setTasks] = useState<any[]>([]);
     const [events, setEvents] = useState<Event[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [needsCohort, setNeedsCohort] = useState(false);
+    const [hasEnrollment, setHasEnrollment] = useState(false);
 
     const loadData = async () => {
         try {
@@ -36,17 +30,17 @@ export function LearnerDashboard() {
                 const [progressData, tasksData, eventsData] = await Promise.all([
                     api.getLearnerProgress(user.id),
                     api.getLearnerTasks(user.id),
-                    api.getEvents() // Get global events or filter by cohort below
+                    api.getEvents()
                 ]);
 
                 setTasks(tasksData);
+                setEvents(eventsData);
 
-                // Filter for active progress
-                // Filter for active progress - prioritize records with an assigned courseId
+                // Find active progress — prioritize records with an assigned courseId
                 let activeProgress = progressData.find(p =>
                     (p.status === 'on-track' || p.status === 'at-risk' || p.status === 'under-review') && p.courseId
                 );
-                
+
                 if (!activeProgress) {
                     activeProgress = progressData.find(p =>
                         p.status === 'on-track' || p.status === 'at-risk' || p.status === 'under-review'
@@ -55,23 +49,9 @@ export function LearnerDashboard() {
 
                 if (activeProgress) {
                     setProgress(activeProgress);
-                    if (activeProgress.cohortId) {
-                        const cohortIdString = typeof activeProgress.cohortId === 'string' 
-                            ? activeProgress.cohortId 
-                            : activeProgress.cohortId._id;
-
-                        if (cohortIdString) {
-                            const cohortData = await api.getCohort(cohortIdString);
-                            setCohort(cohortData);
-
-                            // Filter events for this specific cohort
-                            const cohortEvents = eventsData.filter(e => e.cohortId === cohortIdString);
-                            setEvents(cohortEvents);
-                        }
-                    }
-                    setNeedsCohort(false);
+                    setHasEnrollment(true);
                 } else {
-                    setNeedsCohort(true);
+                    setHasEnrollment(false);
                 }
             }
         } catch (error) {
@@ -83,7 +63,7 @@ export function LearnerDashboard() {
 
     useEffect(() => {
         loadData();
-    }, [user?.id, user?.activeCohortId]);
+    }, [user?.id]);
 
     if (isLoading) {
         return (
@@ -101,14 +81,34 @@ export function LearnerDashboard() {
         );
     }
 
-    if (needsCohort) {
+    // Welcome state — no active enrollment yet
+    if (!hasEnrollment) {
         return (
-            <JoinCohortView
-                onJoinSuccess={async () => {
-                    await refreshUser();
-                    await loadData();
-                }}
-            />
+            <div className="min-h-screen bg-neutral-50/50 pb-20">
+                <TopHeader user={user ? { name: `${user.firstName} ${user.lastName}`, email: user.email } : undefined} />
+                <div className="max-w-7xl mx-auto p-4 md:p-8 flex items-center justify-center min-h-[70vh]">
+                    <div className="text-center space-y-8 max-w-lg">
+                        <div className="w-20 h-20 bg-indigo-100 rounded-3xl flex items-center justify-center mx-auto">
+                            <Sparkles className="w-10 h-10 text-indigo-600" />
+                        </div>
+                        <div className="space-y-3">
+                            <h1 className="text-3xl md:text-4xl font-medium tracking-tight text-slate-900">
+                                Welcome, {user?.firstName}! 👋
+                            </h1>
+                            <p className="text-lg text-slate-500 leading-relaxed font-medium">
+                                You're all set to begin your cybersecurity training journey. Browse our courses and start learning at your own pace.
+                            </p>
+                        </div>
+                        <Button
+                            onClick={() => router.push('/dashboard/courses')}
+                            className="h-14 px-10 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-base shadow-xl shadow-indigo-200 active:scale-95 transition-all"
+                        >
+                            <BookOpen className="w-5 h-5 mr-2" />
+                            Browse Courses
+                        </Button>
+                    </div>
+                </div>
+            </div>
         );
     }
 
@@ -121,15 +121,13 @@ export function LearnerDashboard() {
                 <div className="relative overflow-hidden rounded-[32px] bg-indigo-600 p-8 md:p-14 text-white shadow-2xl shadow-indigo-200">
                     <div className="relative z-10 max-w-2xl space-y-6">
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-xs font-medium uppercase tracking-wider">
-                            {/* <Sparkles className="w-3 h-3" /> */}
                              Learning Session Active
                         </div>
                         <h1 className="text-4xl md:text-5xl font-medium tracking-tight">
                             Welcome back, {user?.firstName}! 👋
                         </h1>
                         <p className="text-lg md:text-xl text-indigo-50/90 leading-relaxed font-medium">
-                            You're currently in the <span className="text-white font-medium underline underline-offset-4 decoration-indigo-300">{cohort?.name}</span> cohort.
-                            {tasks.length > 0 ? ` You have ${tasks.length} assignments awaiting your focus today.` : " You're all caught up on your assignments!"}
+                            {tasks.length > 0 ? `You have ${tasks.length} assignments awaiting your focus today.` : "You're all caught up on your assignments!"}
                         </p>
 
                         {progress?.status === 'at-risk' && (
@@ -161,8 +159,8 @@ export function LearnerDashboard() {
                     <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 md:gap-6 gap-4">
                         <StatCard
                             icon={BookOpen}
-                            label="Active Modules"
-                            value={cohort?.courseIds?.length || 0}
+                            label="Active Courses"
+                            value={progress?.courseId ? 1 : 0}
                             iconColor="text-violet-600"
                             iconBgColor="bg-violet-50"
                         />
@@ -181,7 +179,7 @@ export function LearnerDashboard() {
                             iconBgColor="bg-amber-50"
                         />
                         <StatCard
-                            icon={Users}
+                            icon={TrendingUp}
                             label="Performance Status"
                             value={progress?.status || 'On Track'}
                             iconColor="text-blue-600"
@@ -197,7 +195,7 @@ export function LearnerDashboard() {
                         <div className="space-y-6">
                             <div className="flex items-center justify-between lg:pr-4">
                                 <h2 className="text-md md:text-xl font-medium tracking-tight text-slate-900 flex items-center gap-3">
-                                    Assigned Curriculum
+                                    My Curriculum
                                 </h2>
                                 <Button variant="ghost" onClick={() => router.push('/dashboard/courses')} className="text-indigo-600 font-medium hover:bg-indigo-50 rounded-xl">Explore All</Button>
                             </div>
@@ -215,7 +213,7 @@ export function LearnerDashboard() {
                                             icon={(progress.courseId as any).icon || "📚"}
                                             progress={progress.currentScore || 0}
                                             duration={`${(progress.courseId as any).duration || 0}h Total`}
-                                            instructor="DexterHub Faculty"
+                                            instructor="CyberCAD Faculty"
                                             color={(progress.courseId as any).color || "lavender"}
                                         />
                                     </div>
@@ -225,9 +223,12 @@ export function LearnerDashboard() {
                                             <BookOpen className="w-8 h-8 text-slate-300" />
                                         </div>
                                         <div className="max-w-xs mx-auto">
-                                            <p className="font-medium text-slate-900">Waitlist Active</p>
-                                            <p className="text-slate-500 mt-1 text-sm leading-relaxed">Your curriculum is being finalized by the instructors. Check back soon.</p>
+                                            <p className="font-medium text-slate-900">No Active Course</p>
+                                            <p className="text-slate-500 mt-1 text-sm leading-relaxed">Browse available courses and enroll to start learning.</p>
                                         </div>
+                                        <Button onClick={() => router.push('/dashboard/courses')} variant="outline" className="rounded-xl">
+                                            Browse Courses
+                                        </Button>
                                     </div>
                                 )}
                             </div>
@@ -284,7 +285,6 @@ export function LearnerDashboard() {
                                 ) : (
                                     <div className="rounded-[32px] border border-dashed border-slate-200 p-14 text-center bg-emerald-50/30 space-y-3">
                                         <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mx-auto text-emerald-600">
-                                            {/* <Sparkles className="w-6 h-6" /> */}
                                         </div>
                                         <div>
                                             <p className="font-medium text-emerald-900">Schedule Clear</p>
@@ -303,7 +303,7 @@ export function LearnerDashboard() {
                                 <h3 className="md:text-xl text-lg font-medium text-slate-900">
                                     Academic Log
                                 </h3>
-                                <p className="text-sm text-slate-500">Track your attendance and deadlines</p>
+                                <p className="text-sm text-slate-500">Track your progress and deadlines</p>
                             </div>
 
                             <div className="bg-slate-50/50 rounded-2xl p-2 border border-slate-100/50">
@@ -318,7 +318,7 @@ export function LearnerDashboard() {
                             <div className="pt-4 border-t border-slate-100">
                                 <UpcomingEvents
                                     events={events.map(e => ({
-                                        id: e._id,
+                                        id: e._id || '',
                                         title: e.title,
                                         subtitle: e.description || 'LMS Event',
                                         date: new Date(e.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }),

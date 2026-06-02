@@ -1,7 +1,6 @@
 'use client';
 
 import { useAuth } from '@/lib/auth-context';
-import { InstructorDashboard } from '@/components/dashboard/instructor-dashboard';
 import { LearnerDashboard } from '@/components/dashboard/learner-dashboard';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
@@ -26,7 +25,7 @@ export default function DashboardPage() {
 
   if (!user) return null;
 
-  if (user.role === 'super-admin') {
+  if (user.role === 'super-admin' || user.role === 'admin') {
     router.push('/admin');
     return null;
   }
