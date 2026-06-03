@@ -631,9 +631,14 @@ class APIClient {
   // ── Modules ─────────────────────────────────────────────────────────────────
 
   async createModule(moduleData: any): Promise<any> {
+    // Map camelCase fields to snake_case DB columns
+    const { courseId, sortOrder, ...rest } = moduleData;
+    const row: any = { ...rest };
+    if (courseId !== undefined) row.course_id = courseId;
+    if (sortOrder !== undefined) row.sort_order = sortOrder;
     const { data, error } = await this.db
       .from('modules')
-      .insert(moduleData)
+      .insert(row)
       .select()
       .single();
     if (error) throw new Error(error.message);
@@ -641,9 +646,13 @@ class APIClient {
   }
 
   async updateModule(id: string, moduleData: any): Promise<any> {
+    const { courseId, sortOrder, ...rest } = moduleData;
+    const row: any = { ...rest };
+    if (courseId !== undefined) row.course_id = courseId;
+    if (sortOrder !== undefined) row.sort_order = sortOrder;
     const { data, error } = await this.db
       .from('modules')
-      .update(moduleData)
+      .update(row)
       .eq('id', id)
       .select()
       .single();
@@ -660,9 +669,15 @@ class APIClient {
   // ── Lessons ─────────────────────────────────────────────────────────────────
 
   async createLesson(lessonData: any): Promise<any> {
+    // Map camelCase fields to snake_case DB columns
+    const { moduleId, videoUrl, sortOrder, ...rest } = lessonData;
+    const row: any = { ...rest };
+    if (moduleId !== undefined) row.module_id = moduleId;
+    if (videoUrl !== undefined) row.video_url = videoUrl;
+    if (sortOrder !== undefined) row.sort_order = sortOrder;
     const { data, error } = await this.db
       .from('lessons')
-      .insert(lessonData)
+      .insert(row)
       .select()
       .single();
     if (error) throw new Error(error.message);
@@ -670,9 +685,14 @@ class APIClient {
   }
 
   async updateLesson(id: string, lessonData: any): Promise<any> {
+    const { moduleId, videoUrl, sortOrder, ...rest } = lessonData;
+    const row: any = { ...rest };
+    if (moduleId !== undefined) row.module_id = moduleId;
+    if (videoUrl !== undefined) row.video_url = videoUrl;
+    if (sortOrder !== undefined) row.sort_order = sortOrder;
     const { data, error } = await this.db
       .from('lessons')
-      .update(lessonData)
+      .update(row)
       .eq('id', id)
       .select()
       .single();
