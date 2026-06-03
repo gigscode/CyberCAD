@@ -9,8 +9,14 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from 'sonner';
-import { Loader2, User, Mail, Lock, ArrowRight, Layers, CheckCircle2, ShieldCheck, Eye, EyeOff } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { Loader2, User, Mail, Lock, ArrowRight, CheckCircle2, ShieldCheck, Eye, EyeOff, Menu, X } from 'lucide-react';
+
+const NAV_LINKS = [
+  { label: 'Tracks', href: '/#tracks' },
+  { label: 'How It Works', href: '/#how-it-works' },
+  { label: 'Testimonials', href: '/#testimonials' },
+  { label: 'Contact', href: '/#contact' },
+];
 
 export default function RegisterPage() {
   const [firstName, setFirstName] = useState('');
@@ -20,6 +26,7 @@ export default function RegisterPage() {
   const [role, setRole] = useState('learner');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
   const { register, isAuthenticated } = useAuth();
 
@@ -62,22 +69,86 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-white relative overflow-hidden px-4 py-20 selection:bg-indigo-100 selection:text-indigo-900">
+    <div className="min-h-screen flex flex-col bg-white relative overflow-hidden selection:bg-indigo-100 selection:text-indigo-900">
       {/* Soft Background Decor */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute top-[-5%] right-[-5%] w-[40%] h-[40%] rounded-full bg-indigo-500/5 blur-[120px]" />
         <div className="absolute bottom-[-5%] left-[-5%] w-[40%] h-[40%] rounded-full bg-emerald-500/5 blur-[120px]" />
       </div>
 
-      <div className="w-full max-w-lg relative z-10 space-y-10">
-        {/* Logo/Header */}
-        <div className="text-center space-y-3">
-          {/* <div className="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-indigo-100 mx-auto mb-6">
-            <Layers className="w-7 h-7" />
-          </div> */}
-          <h1 className="text-4xl font-semibold tracking-tight text-slate-900">Join Secquiz</h1>
-          <p className="text-slate-500 text-sm font-medium tracking-wide uppercase">Create your free account</p>
+      {/* ── Navbar ── */}
+      <nav className="sticky top-0 z-50 w-full bg-white/85 backdrop-blur-xl border-b border-slate-200/60 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 md:h-20 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-200">
+              <ShieldCheck className="w-5 h-5 text-white" />
+            </div>
+            <span className="text-xl font-bold tracking-tight text-slate-900">
+              Sec<span className="text-indigo-600">quiz</span>
+            </span>
+          </Link>
+
+          <div className="hidden lg:flex items-center gap-7 font-medium text-[15px] text-slate-500">
+            {NAV_LINKS.map(l => (
+              <Link key={l.href} href={l.href} className="hover:text-slate-900 transition-colors">{l.label}</Link>
+            ))}
+            <Link href="/quiz" className="flex items-center gap-1.5 text-emerald-600 font-semibold hover:text-emerald-700 transition-colors">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              Find Your Track
+            </Link>
+          </div>
+
+          <div className="hidden lg:flex items-center gap-3">
+            <Link href="/login">
+              <Button variant="outline" className="rounded-full px-5 h-10 border-slate-200 text-slate-700 font-semibold hover:border-indigo-300 hover:text-indigo-600 hover:bg-white transition-colors">
+                Login
+              </Button>
+            </Link>
+            <Link href="/quiz">
+              <Button className="rounded-full px-5 h-10 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-semibold shadow-md shadow-indigo-200/70">
+                Start Free Quiz
+              </Button>
+            </Link>
+          </div>
+
+          <button
+            type="button"
+            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMenuOpen}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="lg:hidden w-10 h-10 flex items-center justify-center hover:bg-slate-100 rounded-xl border border-slate-200 transition-colors">
+            {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </div>
+
+        {isMenuOpen && (
+          <div className="lg:hidden absolute top-full left-0 w-full bg-white border-b border-slate-100 shadow-xl z-50">
+            <div className="flex flex-col p-6 gap-1">
+              {NAV_LINKS.map(l => (
+                <Link key={l.href} href={l.href}
+                  className="py-3 px-3 font-medium text-slate-600 rounded-xl hover:bg-slate-50 hover:text-slate-900 transition-colors border-b border-slate-50"
+                  onClick={() => setIsMenuOpen(false)}>{l.label}</Link>
+              ))}
+              <Link href="/quiz" className="py-3 px-3 font-semibold text-emerald-600 flex items-center gap-2 rounded-xl hover:bg-emerald-50"
+                onClick={() => setIsMenuOpen(false)}>
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> Find Your Track
+              </Link>
+              <div className="flex gap-3 pt-4">
+                <Link href="/login" className="flex-1" onClick={() => setIsMenuOpen(false)}>
+                  <Button variant="outline" className="w-full rounded-full h-12">Login</Button>
+                </Link>
+                <Link href="/quiz" className="flex-1" onClick={() => setIsMenuOpen(false)}>
+                  <Button className="w-full rounded-full h-12 bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-bold">Start Quiz</Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
+      </nav>
+
+      {/* ── Page content ── */}
+      <div className="flex-1 flex flex-col items-center justify-center px-4 py-16 relative z-10">
+        <div className="w-full max-w-lg space-y-10">
 
         {/* Register Card */}
         <Card className="bg-white border-slate-100 shadow-2xl rounded-[32px] overflow-hidden p-2">
@@ -250,6 +321,7 @@ export default function RegisterPage() {
             </div>
           </CardContent>
         </Card>
+        </div>
       </div>
     </div>
   );
