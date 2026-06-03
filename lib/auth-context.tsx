@@ -138,12 +138,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [supabase, loadProfile]);
 
   useEffect(() => {
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
-      setSession(session);
-      if (session?.user) {
-        const appUser = await loadProfile(session.user);
+    // Safety timeout — ensure loading never hangs indefinitely
+    const timeout = setTimeout(() => setIsLoading(false), 8000);
+
+    // Use getUser() instead of getSession() — getSession() can hang in
+    // production on Vercel due to cookie/SameSite differences.
+    // getUser() makes a direct network call to Supabase and always resolves.
+    supabase.auth.getUser().then(async ({ data: { user: supabaseUser } }) => {
+      clearTimeout(timeout);
+      if (supabaseUser) {
+        // Also grab the session for the session state
+        const { data: { session } } = await supabase.auth.getSession();
+        setSession(session);
+        const appUser = await loadProfile(supabaseUser);
         setUser(appUser);
       }
+      setIsLoading(false);
+    }).catch(() => {
+      clearTimeout(timeout);
       setIsLoading(false);
     });
 
@@ -160,7 +172,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       }
     );
 
-    return () => subscription.unsubscribe();
+    return () => {
+      clearTimeout(timeout);
+      subscription.unsubscribe();
+    };
   }, [supabase, loadProfile]);
 
   const login = useCallback(

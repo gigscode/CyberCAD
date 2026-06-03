@@ -6,13 +6,8 @@ import { useAuth } from '@/lib/auth-context';
 import { ModernSidebar } from '@/components/modern-sidebar';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const { isAuthenticated, isLoading, user, refreshUser } = useAuth();
+  const { isAuthenticated, isLoading, user } = useAuth();
   const router = useRouter();
-
-  // Force a fresh profile fetch so role changes in DB are picked up immediately
-  useEffect(() => {
-    refreshUser();
-  }, []);
 
   useEffect(() => {
     if (!isLoading) {
