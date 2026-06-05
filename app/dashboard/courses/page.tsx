@@ -121,7 +121,7 @@ export default function CoursesPage() {
         {course.learnerStatus === 'enrolled' ? (
           <Badge className="bg-emerald-100 text-emerald-700 border-emerald-200 shadow-sm font-bold px-3">Enrolled</Badge>
         ) : course.learnerStatus === 'completed' ? (
-          <Badge className="bg-indigo-100 text-indigo-700 border-indigo-200 shadow-sm font-bold px-3">Completed</Badge>
+          <Badge className="bg-orange-100 text-orange-700 border-orange-200 shadow-sm font-bold px-3">Completed</Badge>
         ) : (
           <Badge className="bg-slate-100 text-slate-700 border-slate-200 shadow-sm flex items-center gap-1 font-bold px-3"><Lock className="w-3 h-3" />Locked</Badge>
         )}
@@ -138,7 +138,7 @@ export default function CoursesPage() {
             <h3 className="text-sm font-semibold text-slate-800">{course.name}</h3>
             <Button
               size="sm"
-              className="w-full bg-indigo-600 hover:bg-indigo-700 text-[11px] h-8 rounded-xl"
+              className="w-full bg-orange-600 hover:bg-orange-700 text-[11px] h-8 rounded-xl"
               onClick={(e) => { e.stopPropagation(); setLockedCourse(course); }}
             >
               <CreditCard className="w-3 h-3 mr-1" />
@@ -236,7 +236,7 @@ export default function CoursesPage() {
       {lockedCourse && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
           <div className="bg-white rounded-3xl shadow-2xl max-w-md w-full mx-4 overflow-hidden">
-            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-6 text-white relative">
+            <div className="bg-gradient-to-r from-orange-600 to-purple-600 p-6 text-white relative">
               <button onClick={() => setLockedCourse(null)} className="absolute top-4 right-4 hover:bg-white/20 rounded-lg p-1 transition-colors">
                 <X className="w-5 h-5" />
               </button>
@@ -253,19 +253,19 @@ export default function CoursesPage() {
                 Get instant access to this course with a single payment. Learn at your own pace — no deadlines, no expiry.
               </p>
 
-              <div className="bg-indigo-50 rounded-2xl p-4 space-y-3 border border-indigo-100/50">
+              <div className="bg-orange-50 rounded-2xl p-4 space-y-3 border border-orange-100/50">
                 <h4 className="font-semibold text-slate-900 text-sm">What you get:</h4>
                 <ul className="text-sm text-slate-600 space-y-2">
                   <li className="flex items-center gap-2">
-                    <BookOpen className="w-4 h-4 text-indigo-600 shrink-0" />
+                    <BookOpen className="w-4 h-4 text-orange-600 shrink-0" />
                     Lifetime access to all course modules
                   </li>
                   <li className="flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-indigo-600 shrink-0" />
+                    <Clock className="w-4 h-4 text-orange-600 shrink-0" />
                     Self-paced learning — go at your speed
                   </li>
                   <li className="flex items-center gap-2">
-                    <CreditCard className="w-4 h-4 text-indigo-600 shrink-0" />
+                    <CreditCard className="w-4 h-4 text-orange-600 shrink-0" />
                     One-time payment via Paystack
                   </li>
                 </ul>
@@ -276,7 +276,7 @@ export default function CoursesPage() {
                   Maybe Later
                 </Button>
                 <Button
-                  className="flex-1 bg-indigo-600 hover:bg-indigo-700 rounded-xl h-12 font-medium shadow-lg shadow-indigo-200 active:scale-95 transition-all"
+                  className="flex-1 bg-orange-600 hover:bg-orange-700 rounded-xl h-12 font-medium shadow-lg shadow-orange-200 active:scale-95 transition-all"
                   onClick={() => {
                     setLockedCourse(null);
                     router.push(`/dashboard/courses/${lockedCourse.id}/enroll`);

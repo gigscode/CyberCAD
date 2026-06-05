@@ -15,9 +15,9 @@ import {
 
 const RESULT_PALETTE: Record<TrackKey, { hero: string; heroBg: string; accent: string; accentBorder: string; badge: string; cta: string; iconBg: string; price: string }> = {
   'ethical-hacking':   { hero: 'from-rose-500 to-orange-500',      heroBg: 'bg-rose-50',    accent: 'text-rose-700',   accentBorder: 'border-rose-200 bg-rose-50',   badge: 'bg-rose-100 text-rose-700 border-rose-200',    cta: 'from-rose-500 to-orange-500',      iconBg: 'bg-rose-100',    price: 'text-rose-600'    },
-  'soc-blue-team':     { hero: 'from-indigo-500 to-cyan-500',       heroBg: 'bg-indigo-50',  accent: 'text-indigo-700', accentBorder: 'border-indigo-200 bg-indigo-50', badge: 'bg-indigo-100 text-indigo-700 border-indigo-200',  cta: 'from-indigo-500 to-cyan-500',      iconBg: 'bg-indigo-100',  price: 'text-indigo-600'  },
+  'soc-blue-team':     { hero: 'from-orange-500 to-cyan-500',       heroBg: 'bg-orange-50',  accent: 'text-orange-700', accentBorder: 'border-orange-200 bg-orange-50', badge: 'bg-orange-100 text-orange-700 border-orange-200',  cta: 'from-orange-500 to-cyan-500',      iconBg: 'bg-orange-100',  price: 'text-orange-600'  },
   'grc':               { hero: 'from-emerald-500 to-teal-500',      heroBg: 'bg-emerald-50', accent: 'text-emerald-700',accentBorder: 'border-emerald-200 bg-emerald-50',badge: 'bg-emerald-100 text-emerald-700 border-emerald-200',cta: 'from-emerald-500 to-teal-500',     iconBg: 'bg-emerald-100', price: 'text-emerald-600' },
-  'digital-forensics': { hero: 'from-violet-500 to-fuchsia-500',   heroBg: 'bg-violet-50',  accent: 'text-violet-700', accentBorder: 'border-violet-200 bg-violet-50', badge: 'bg-violet-100 text-violet-700 border-violet-200',  cta: 'from-violet-500 to-fuchsia-500',   iconBg: 'bg-violet-100',  price: 'text-violet-600'  },
+  'digital-forensics': { hero: 'from-red-600 to-fuchsia-500',   heroBg: 'bg-red-50',  accent: 'text-red-800', accentBorder: 'border-red-200 bg-red-50', badge: 'bg-red-100 text-red-800 border-red-200',  cta: 'from-red-600 to-fuchsia-500',   iconBg: 'bg-red-100',  price: 'text-red-700'  },
   'cloud-security':    { hero: 'from-cyan-500 to-blue-500',         heroBg: 'bg-cyan-50',    accent: 'text-cyan-700',   accentBorder: 'border-cyan-200 bg-cyan-50',     badge: 'bg-cyan-100 text-cyan-700 border-cyan-200',      cta: 'from-cyan-500 to-blue-500',        iconBg: 'bg-cyan-100',    price: 'text-cyan-600'    },
   'foundations':       { hero: 'from-slate-600 to-slate-800',       heroBg: 'bg-slate-50',   accent: 'text-slate-700',  accentBorder: 'border-slate-200 bg-slate-50',   badge: 'bg-slate-100 text-slate-700 border-slate-200',    cta: 'from-slate-600 to-slate-800',      iconBg: 'bg-slate-100',   price: 'text-slate-700'   },
 };
@@ -80,10 +80,10 @@ function ResultContent() {
       {/* Nav */}
       <nav className="h-16 border-b border-slate-100 flex items-center justify-between px-6 md:px-10 bg-white/95 backdrop-blur-xl sticky top-0 z-50 shadow-sm">
         <Link href="/" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-md shadow-indigo-200">
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-orange-500 to-red-700 flex items-center justify-center shadow-md shadow-orange-200">
             <ShieldCheck className="w-4 h-4 text-white" />
           </div>
-          <span className="font-bold text-slate-900 text-lg">Sec<span className="text-indigo-600">quiz</span></span>
+          <span className="font-bold text-slate-900 text-lg">Sec<span className="text-orange-600">quiz</span></span>
         </Link>
         <button
           onClick={() => router.push('/quiz')}
@@ -239,7 +239,7 @@ function ResultContent() {
                     {t.icon}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-slate-900 text-sm group-hover:text-indigo-600 transition-colors">{t.title}</p>
+                    <p className="font-semibold text-slate-900 text-sm group-hover:text-orange-600 transition-colors">{t.title}</p>
                     <p className="text-xs text-slate-400 mt-0.5 font-medium">{t.duration} · <span className={p.price}>₦{(t.priceKobo / 100).toLocaleString('en-NG')}</span></p>
                   </div>
                   <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-slate-500 group-hover:translate-x-0.5 transition-all" />
@@ -249,7 +249,7 @@ function ResultContent() {
           </div>
           <p className="text-center text-sm text-slate-400 pt-2">
             Not sure yet?{' '}
-            <Link href="/quiz" className="text-indigo-600 font-semibold hover:text-indigo-700">Retake the quiz</Link>
+            <Link href="/quiz" className="text-orange-600 font-semibold hover:text-orange-700">Retake the quiz</Link>
             {' '}or{' '}
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-emerald-600 font-semibold hover:text-emerald-700">chat with us on WhatsApp</a>
           </p>
@@ -269,7 +269,7 @@ export default function ResultPage() {
   return (
     <Suspense fallback={
       <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="w-10 h-10 border-2 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+        <div className="w-10 h-10 border-2 border-orange-600 border-t-transparent rounded-full animate-spin" />
       </div>
     }>
       <ResultContent />

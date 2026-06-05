@@ -35,7 +35,7 @@ export function TaskCard({
     onAction,
 }: TaskCardProps) {
     return (
-        <div className="group flex items-center gap-4 p-4 bg-white rounded-2xl border border-slate-100 hover:shadow-xl hover:border-indigo-100 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer">
+        <div className="group flex items-center gap-4 p-4 bg-white rounded-2xl border border-slate-100 hover:shadow-xl hover:border-orange-100 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer">
             <div className={cn(
                 "w-12 h-12 md:w-14 md:h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm border transition-transform group-hover:rotate-3",
                 color && colorClasses[color as keyof typeof colorClasses]
@@ -59,7 +59,7 @@ export function TaskCard({
                         </span>
                     )}
                 </div>
-                <h4 className="font-semibold text-slate-900 truncate group-hover:text-indigo-600 transition-colors uppercase tracking-tight">{title}</h4>
+                <h4 className="font-semibold text-slate-900 truncate group-hover:text-orange-600 transition-colors uppercase tracking-tight">{title}</h4>
                 <p className="text-xs md:text-sm text-slate-500 font-medium">
                     {subject} • {instructor}
                 </p>
@@ -74,7 +74,7 @@ export function TaskCard({
                                 onAction();
                             }}
                             size="sm"
-                            className="bg-indigo-600 hover:bg-indigo-700 h-9 px-4 rounded-xl font-bold hidden sm:flex"
+                            className="bg-orange-600 hover:bg-orange-700 h-9 px-4 rounded-xl font-bold hidden sm:flex"
                         >
                             Open Task
                         </Button>
@@ -91,7 +91,7 @@ export function TaskCard({
                     )
                 ) : null}
 
-                <div className="p-2 rounded-xl text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 transition-all">
+                <div className="p-2 rounded-xl text-slate-400 hover:text-orange-600 hover:bg-orange-50 transition-all">
                     <MoreVertical className="w-5 h-5" />
                 </div>
             </div>

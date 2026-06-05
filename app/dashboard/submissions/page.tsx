@@ -155,7 +155,7 @@ export default function SubmissionsPage() {
             <div className="min-h-screen bg-neutral-50/50">
                 <TopHeader user={user ? { name: `${user.firstName} ${user.lastName}`, email: user.email } : undefined} />
                 <div className="flex h-[calc(100vh-80px)] items-center justify-center">
-                    <Loader2 className="w-8 h-8 animate-spin text-indigo-600" />
+                    <Loader2 className="w-8 h-8 animate-spin text-orange-600" />
                 </div>
             </div>
         );
@@ -190,10 +190,10 @@ export default function SubmissionsPage() {
                             <div className="flex justify-between items-start mb-4">
                                 <div className={cn(
                                     "p-3 rounded-2xl transition-colors",
-                                    stat.color === 'indigo' ? 'bg-indigo-50 text-indigo-600' :
+                                    stat.color === 'indigo' ? 'bg-orange-50 text-orange-600' :
                                     stat.color === 'amber' ? 'bg-amber-50 text-amber-600' :
                                     stat.color === 'emerald' ? 'bg-emerald-50 text-emerald-600' :
-                                    'bg-violet-50 text-violet-600'
+                                    'bg-red-50 text-red-700'
                                 )}>
                                     <stat.icon className="w-6 h-6" />
                                 </div>
@@ -268,7 +268,7 @@ export default function SubmissionsPage() {
                         </div>
                     </div>
                     <div className="h-10 w-px bg-slate-100 hidden md:block" />
-                    <div className="px-4 text-xs font-bold text-indigo-600">
+                    <div className="px-4 text-xs font-bold text-orange-600">
                         {filteredSubmissions.length} Results
                     </div>
                 </div>
@@ -308,7 +308,7 @@ export default function SubmissionsPage() {
                                         <TableRow key={submission._id} className="group hover:bg-slate-50/50 transition-colors border-slate-50">
                                             <TableCell className="px-8 py-5">
                                                 <div className="flex items-center gap-4">
-                                                    <div className="w-10 h-10 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600 font-bold text-sm">
+                                                    <div className="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-600 font-bold text-sm">
                                                         {submission.learnerId?.firstName?.[0]}{submission.learnerId?.lastName?.[0]}
                                                     </div>
                                                     <div className="space-y-0.5">
@@ -333,11 +333,11 @@ export default function SubmissionsPage() {
                                             <TableCell className="px-6 py-5 text-center">
                                                 <div className="flex justify-center">
                                                     {getAssignmentType(submission) === 'Quiz' ? (
-                                                        <div className="w-9 h-9 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600" title="Quiz Assessment">
+                                                        <div className="w-9 h-9 bg-orange-50 rounded-xl flex items-center justify-center text-orange-600" title="Quiz Assessment">
                                                             <FileText className="w-4 h-4" />
                                                         </div>
                                                     ) : (
-                                                        <div className="w-9 h-9 bg-violet-50 rounded-xl flex items-center justify-center text-violet-600" title="Manual Submission">
+                                                        <div className="w-9 h-9 bg-red-50 rounded-xl flex items-center justify-center text-red-700" title="Manual Submission">
                                                             <Video className="w-4 h-4" />
                                                         </div>
                                                     )}
@@ -384,7 +384,7 @@ export default function SubmissionsPage() {
                                                             setGrade('');
                                                             setFeedback('');
                                                         }}
-                                                        className="bg-indigo-600 hover:bg-indigo-700 rounded-xl font-bold text-xs px-5 h-9 shadow-lg shadow-indigo-100 transition-all active:scale-95"
+                                                        className="bg-orange-600 hover:bg-orange-700 rounded-xl font-bold text-xs px-5 h-9 shadow-lg shadow-orange-100 transition-all active:scale-95"
                                                     >
                                                         Review & Grade
                                                     </Button>
@@ -423,7 +423,7 @@ export default function SubmissionsPage() {
                         <DialogHeader>
                             <DialogTitle className="text-2xl font-semibold text-slate-900 tracking-tight">Academic Review</DialogTitle>
                             <DialogDescription className="text-slate-500 font-medium text-sm">
-                                Reviewing submission for <span className="text-indigo-600 font-bold">{gradingSubmission?.learnerId?.firstName} {gradingSubmission?.learnerId?.lastName}</span>
+                                Reviewing submission for <span className="text-orange-600 font-bold">{gradingSubmission?.learnerId?.firstName} {gradingSubmission?.learnerId?.lastName}</span>
                             </DialogDescription>
                         </DialogHeader>
 
@@ -474,7 +474,7 @@ export default function SubmissionsPage() {
                                         value={grade}
                                         onChange={(e) => setGrade(e.target.value)}
                                         placeholder="0.0"
-                                        className="h-14 rounded-2xl border-slate-100 bg-slate-50 focus:ring-indigo-500 font-black text-xl text-slate-900 px-6 text-center w-full"
+                                        className="h-14 rounded-2xl border-slate-100 bg-slate-50 focus:ring-orange-500 font-black text-xl text-slate-900 px-6 text-center w-full"
                                     />
                                 </div>
 
@@ -486,7 +486,7 @@ export default function SubmissionsPage() {
                                         onChange={(e) => setFeedback(e.target.value)}
                                         placeholder="Provide constructive feedback..."
                                         rows={4}
-                                        className="rounded-2xl border-slate-100 bg-slate-50 focus:ring-indigo-500 font-medium text-slate-700 p-4 resize-none min-h-[120px]"
+                                        className="rounded-2xl border-slate-100 bg-slate-50 focus:ring-orange-500 font-medium text-slate-700 p-4 resize-none min-h-[120px]"
                                     />
                                 </div>
                             </div>
@@ -505,7 +505,7 @@ export default function SubmissionsPage() {
                         <Button
                             onClick={handleGrade}
                             disabled={isGrading}
-                            className="flex-[2] h-14 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-black tracking-widest shadow-xl shadow-indigo-100 transition-all active:scale-95"
+                            className="flex-[2] h-14 rounded-2xl bg-orange-600 hover:bg-orange-700 text-white font-black tracking-widest shadow-xl shadow-orange-100 transition-all active:scale-95"
                         >
                             {isGrading ? (
                                 <>

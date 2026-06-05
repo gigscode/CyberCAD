@@ -417,14 +417,14 @@ export default function CourseDetailPage() {
                                 </div>
                             ) : (
                                 <div className="w-full aspect-[21/9] flex flex-col items-center justify-center text-white p-12 bg-gradient-to-br from-slate-900 to-indigo-950">
-                                    <FileText className="w-12 h-12 mb-4 opacity-30 text-indigo-400" />
+                                    <FileText className="w-12 h-12 mb-4 opacity-30 text-orange-400" />
                                     <h3 className="text-xl font-medium tracking-tight">Text Based Lesson</h3>
                                     <p className="text-slate-400 text-sm font-medium">Scroll down to read the notes and complete tasks</p>
                                 </div>
                             )
                         ) : (
                             <div className="w-full aspect-video flex flex-col items-center justify-center text-white p-12 bg-slate-900">
-                                <Trophy className="w-16 h-16 mb-6 text-indigo-400 opacity-50" />
+                                <Trophy className="w-16 h-16 mb-6 text-orange-400 opacity-50" />
                                 <h2 className="text-2xl font-medium">Ready to start?</h2>
                                 <p className="text-slate-400 mt-3 max-w-sm text-center">Select a lesson from the curriculum sidebar to begin your journey.</p>
                             </div>
@@ -436,14 +436,14 @@ export default function CourseDetailPage() {
                         {activeLesson && (
                             <Tabs defaultValue="overview" className="p-4 w-full">
                                 <TabsList className="bg-white border-b border-slate-100 w-full justify-start rounded h-12 gap-4 md:gap-8 px-0 mb-8 sticky top-0 bg-white/95 backdrop-blur z-20 overflow-x-auto overflow-y-hidden no-scrollbar">
-                                    <TabsTrigger value="overview" className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-indigo-600 rounded-none px-2 h-12 text-sm font-medium transition-all whitespace-nowrap">
+                                    <TabsTrigger value="overview" className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-orange-600 rounded-none px-2 h-12 text-sm font-medium transition-all whitespace-nowrap">
                                         Overview
                                     </TabsTrigger>
-                                    <TabsTrigger value="tasks" className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-indigo-600 rounded-none px-0 h-12 text-sm font-medium transition-all flex gap-2 whitespace-nowrap">
+                                    <TabsTrigger value="tasks" className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-orange-600 rounded-none px-0 h-12 text-sm font-medium transition-all flex gap-2 whitespace-nowrap">
                                         Tasks & Assignments
                                         {activeLesson.assignment?.title && <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />}
                                     </TabsTrigger>
-                                    <TabsTrigger value="qanda" className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-indigo-600 rounded-none px-0 h-12 text-sm font-medium transition-all whitespace-nowrap">
+                                    <TabsTrigger value="qanda" className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-orange-600 rounded-none px-0 h-12 text-sm font-medium transition-all whitespace-nowrap">
                                         Q&A
                                     </TabsTrigger>
                                 </TabsList>
@@ -468,7 +468,7 @@ export default function CourseDetailPage() {
                                             </div>
                                         </div>
                                         
-                                        <div className="prose prose-slate max-w-none prose-headings:font-medium prose-p:text-slate-600 prose-p:leading-relaxed prose-a:text-indigo-600 prose-img:rounded-2xl md:px-4 break-words overflow-hidden">
+                                        <div className="prose prose-slate max-w-none prose-headings:font-medium prose-p:text-slate-600 prose-p:leading-relaxed prose-a:text-orange-600 prose-img:rounded-2xl md:px-4 break-words overflow-hidden">
                                             {activeLesson.content ? (
                                                 <RichTextRenderer content={activeLesson.content} />
                                             ) : (
@@ -511,8 +511,8 @@ export default function CourseDetailPage() {
                                                             </div>
                                                             {existingSubmission.feedback && (
                                                                 <div className="pt-6 border-t border-slate-100">
-                                                                    <div className="text-xs font-medium text-indigo-600 uppercase tracking-widest mb-3">Instructor Insights</div>
-                                                                    <p className="text-sm text-slate-700 leading-relaxed bg-indigo-50/30 p-4 rounded-xl border border-indigo-50">{existingSubmission.feedback}</p>
+                                                                    <div className="text-xs font-medium text-orange-600 uppercase tracking-widest mb-3">Instructor Insights</div>
+                                                                    <p className="text-sm text-slate-700 leading-relaxed bg-orange-50/30 p-4 rounded-xl border border-orange-50">{existingSubmission.feedback}</p>
                                                                 </div>
                                                             )}
                                                         </div>
@@ -524,7 +524,7 @@ export default function CourseDetailPage() {
                                                 <div className="space-y-8">
                                                     <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8">
                                                         <div className="flex items-center gap-4 mb-6">
-                                                            <div className="p-3 bg-indigo-50 text-indigo-600 rounded-2xl">
+                                                            <div className="p-3 bg-orange-50 text-orange-600 rounded-2xl">
                                                                 <Library className="w-6 h-6" />
                                                             </div>
                                                             <div>
@@ -573,7 +573,7 @@ export default function CourseDetailPage() {
                                                                     <AlertDialogTrigger asChild>
                                                                         <Button
                                                                             disabled={isSubmitting || !submissionLink.trim()}
-                                                                            className="w-full h-14 bg-indigo-600 hover:bg-indigo-700 shadow-xl shadow-indigo-100 font-medium uppercase tracking-widest rounded-2xl text-sm"
+                                                                            className="w-full h-14 bg-orange-600 hover:bg-orange-700 shadow-xl shadow-orange-100 font-medium uppercase tracking-widest rounded-2xl text-sm"
                                                                         >
                                                                             {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin mr-2" /> : 'Confirm Submission'}
                                                                         </Button>
@@ -587,7 +587,7 @@ export default function CourseDetailPage() {
                                                                         </AlertDialogHeader>
                                                                         <AlertDialogFooter className="mt-4">
                                                                             <AlertDialogCancel className="rounded-xl border-slate-200 font-medium">Review Work</AlertDialogCancel>
-                                                                            <AlertDialogAction onClick={handleSubmitTask} className="bg-indigo-600 hover:bg-indigo-700 rounded-xl font-medium">Submit Now</AlertDialogAction>
+                                                                            <AlertDialogAction onClick={handleSubmitTask} className="bg-orange-600 hover:bg-orange-700 rounded-xl font-medium">Submit Now</AlertDialogAction>
                                                                         </AlertDialogFooter>
                                                                     </AlertDialogContent>
                                                                 </AlertDialog>
@@ -607,7 +607,7 @@ export default function CourseDetailPage() {
 
                                 <TabsContent value="qanda" className="mt-0 pb-20 focus-visible:ring-0">
                                     <div className="flex flex-col items-center justify-center py-32 text-center">
-                                        <div className="w-20 h-20 bg-indigo-50 text-indigo-600 rounded-3xl flex items-center justify-center mb-8">
+                                        <div className="w-20 h-20 bg-orange-50 text-orange-600 rounded-3xl flex items-center justify-center mb-8">
                                             <MessageSquare className="w-10 h-10" />
                                         </div>
                                         <h3 className="text-2xl font-medium text-slate-900 tracking-tight">Student Discussion Board</h3>

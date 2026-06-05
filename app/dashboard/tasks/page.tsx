@@ -122,7 +122,7 @@ export default function TasksPage() {
                         <input
                             type="text"
                             placeholder="Search tasks by title or subject..."
-                            className="w-full pl-9 pr-4 py-3 text-sm rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 bg-white shadow-sm transition-all"
+                            className="w-full pl-9 pr-4 py-3 text-sm rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-orange-500/20 bg-white shadow-sm transition-all"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />

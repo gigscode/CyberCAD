@@ -137,7 +137,7 @@ export default function SubmissionsPage() {
                     <div className="flex items-center gap-3">
                       <Avatar className="w-9 h-9 rounded-xl">
                         <AvatarImage src={s.profiles?.avatar} />
-                        <AvatarFallback className="bg-indigo-50 text-indigo-600 font-semibold text-xs">
+                        <AvatarFallback className="bg-orange-50 text-orange-600 font-semibold text-xs">
                           {s.profiles?.first_name?.[0]}{s.profiles?.last_name?.[0]}
                         </AvatarFallback>
                       </Avatar>
@@ -168,7 +168,7 @@ export default function SubmissionsPage() {
                   <td className="px-5 py-4">
                     <Button size="sm" variant="outline"
                       onClick={() => openGrade(s)}
-                      className="h-8 rounded-lg text-xs font-semibold border-slate-200 hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-600">
+                      className="h-8 rounded-lg text-xs font-semibold border-slate-200 hover:bg-orange-50 hover:border-orange-200 hover:text-orange-600">
                       {s.grade != null ? 'Edit Grade' : 'Grade'}
                     </Button>
                   </td>
@@ -188,10 +188,10 @@ export default function SubmissionsPage() {
       {/* Grading dialog */}
       <Dialog open={!!selected} onOpenChange={open => !open && setSelected(null)}>
         <DialogContent className="max-w-lg rounded-[32px] border-none shadow-2xl p-0 overflow-hidden">
-          <div className="bg-indigo-600 p-8 text-white">
+          <div className="bg-orange-600 p-8 text-white">
             <DialogHeader>
               <DialogTitle className="text-2xl font-semibold">Grade Submission</DialogTitle>
-              <p className="text-indigo-100 text-sm mt-1">
+              <p className="text-orange-100 text-sm mt-1">
                 {selected?.profiles?.first_name} {selected?.profiles?.last_name} · {selected?.lessons?.name}
               </p>
             </DialogHeader>
@@ -229,7 +229,7 @@ export default function SubmissionsPage() {
               Cancel
             </Button>
             <Button onClick={handleGrade} disabled={isSaving || !grade}
-              className="flex-1 h-12 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-lg shadow-indigo-100">
+              className="flex-1 h-12 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-semibold shadow-lg shadow-orange-100">
               {isSaving ? 'Saving…' : 'Save Grade'}
             </Button>
           </DialogFooter>

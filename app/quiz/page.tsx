@@ -9,7 +9,7 @@ import { ArrowRight, ArrowLeft, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 
 const Q_COLORS = [
-  { gradient: 'from-indigo-500 to-violet-600', light: 'bg-indigo-50', border: 'border-indigo-200', selectedBg: 'bg-indigo-50', selectedBorder: 'border-indigo-500', selectedText: 'text-indigo-900', radioBg: 'bg-indigo-600', dot: 'bg-indigo-500', pill: 'bg-indigo-600' },
+  { gradient: 'from-orange-500 to-red-700', light: 'bg-orange-50', border: 'border-orange-200', selectedBg: 'bg-orange-50', selectedBorder: 'border-orange-500', selectedText: 'text-orange-900', radioBg: 'bg-orange-600', dot: 'bg-orange-500', pill: 'bg-orange-600' },
   { gradient: 'from-rose-500 to-pink-600',     light: 'bg-rose-50',   border: 'border-rose-200',   selectedBg: 'bg-rose-50',   selectedBorder: 'border-rose-500',   selectedText: 'text-rose-900',   radioBg: 'bg-rose-600',   dot: 'bg-rose-500',   pill: 'bg-rose-600'   },
   { gradient: 'from-amber-500 to-orange-500',  light: 'bg-amber-50',  border: 'border-amber-200',  selectedBg: 'bg-amber-50',  selectedBorder: 'border-amber-500',  selectedText: 'text-amber-900',  radioBg: 'bg-amber-500',  dot: 'bg-amber-500',  pill: 'bg-amber-500'  },
   { gradient: 'from-emerald-500 to-teal-600',  light: 'bg-emerald-50',border: 'border-emerald-200',selectedBg: 'bg-emerald-50',selectedBorder: 'border-emerald-500',selectedText: 'text-emerald-900',radioBg: 'bg-emerald-600',dot: 'bg-emerald-500',pill: 'bg-emerald-600'},
@@ -56,10 +56,10 @@ export default function QuizPage() {
       {/* Nav */}
       <nav className="h-16 bg-white border-b border-slate-100 flex items-center justify-between px-6 md:px-10 shrink-0 shadow-sm">
         <Link href="/" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-md shadow-indigo-200">
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-orange-500 to-red-700 flex items-center justify-center shadow-md shadow-orange-200">
             <ShieldCheck className="w-4 h-4 text-white" />
           </div>
-          <span className="font-bold text-slate-900 text-lg">Sec<span className="text-indigo-600">quiz</span></span>
+          <span className="font-bold text-slate-900 text-lg">Sec<span className="text-orange-600">quiz</span></span>
         </Link>
         {/* Step dots */}
         <div className="flex items-center gap-2">

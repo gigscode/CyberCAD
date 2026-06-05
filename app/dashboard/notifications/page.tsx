@@ -76,7 +76,7 @@ export default function NotificationsPage() {
             case 'error':
                 return { icon: XCircle, color: 'text-rose-600', bg: 'bg-rose-50', border: 'border-rose-100' };
             default:
-                return { icon: Info, color: 'text-indigo-600', bg: 'bg-indigo-50', border: 'border-indigo-100' };
+                return { icon: Info, color: 'text-orange-600', bg: 'bg-orange-50', border: 'border-orange-100' };
         }
     };
 
@@ -88,8 +88,8 @@ export default function NotificationsPage() {
             <div
                 onClick={() => handleNotificationClick(notification)}
                 className={cn(
-                    "group flex items-start gap-4 p-5 bg-white rounded-md border border-slate-100 hover:shadow-md hover:border-indigo-100 transition-all cursor-pointer relative overflow-hidden",
-                    !notification.read && "border-l-4 border-l-indigo-500 shadow-sm"
+                    "group flex items-start gap-4 p-5 bg-white rounded-md border border-slate-100 hover:shadow-md hover:border-orange-100 transition-all cursor-pointer relative overflow-hidden",
+                    !notification.read && "border-l-4 border-l-orange-500 shadow-sm"
                 )}
             >
                 <div className={cn("w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0", style.bg, style.color)}>
@@ -109,13 +109,13 @@ export default function NotificationsPage() {
                         {notification.message}
                     </p>
                     {notification.link && (
-                        <div className="flex items-center gap-1.5 text-[10px] font-black text-indigo-600 capitalize tracking-widest group-hover:translate-x-1 transition-transform">
+                        <div className="flex items-center gap-1.5 text-[10px] font-black text-orange-600 capitalize tracking-widest group-hover:translate-x-1 transition-transform">
                             View Details <ArrowRight className="w-3 h-3" />
                         </div>
                     )}
                 </div>
                 {!notification.read && (
-                    <div className="absolute top-4 right-4 w-2 h-2 bg-indigo-500 rounded-full animate-pulse" />
+                    <div className="absolute top-4 right-4 w-2 h-2 bg-orange-500 rounded-full animate-pulse" />
                 )}
             </div>
         );
@@ -173,7 +173,7 @@ export default function NotificationsPage() {
 
                     {isLoading ? (
                         <div className="py-20 flex flex-col items-center gap-4">
-                            <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+                            <div className="w-8 h-8 border-4 border-orange-600 border-t-transparent rounded-full animate-spin"></div>
                             <p className="text-slate-400 text-xs font-bold capitalize tracking-widest">Syncing feeds...</p>
                         </div>
                     ) : (

@@ -37,7 +37,7 @@ export default function NewCoursePage() {
           <ChevronLeft className="w-5 h-5" />
         </Button>
         <div>
-          <Badge className="bg-indigo-50 text-indigo-700 border-indigo-100 px-2.5 py-0.5 text-[9px] font-medium uppercase tracking-wider mb-1">
+          <Badge className="bg-orange-50 text-orange-700 border-orange-100 px-2.5 py-0.5 text-[9px] font-medium uppercase tracking-wider mb-1">
             {step === 'details' ? 'Step 1 of 2' : 'Step 2 of 2'}
           </Badge>
           <h1 className="text-2xl font-medium tracking-tight text-slate-900">

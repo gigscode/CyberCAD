@@ -69,10 +69,10 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white relative overflow-hidden selection:bg-indigo-100 selection:text-indigo-900">
+    <div className="min-h-screen flex flex-col bg-white relative overflow-hidden selection:bg-orange-100 selection:text-orange-900">
       {/* Soft Background Decor */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-[-5%] right-[-5%] w-[40%] h-[40%] rounded-full bg-indigo-500/5 blur-[120px]" />
+        <div className="absolute top-[-5%] right-[-5%] w-[40%] h-[40%] rounded-full bg-orange-500/5 blur-[120px]" />
         <div className="absolute bottom-[-5%] left-[-5%] w-[40%] h-[40%] rounded-full bg-emerald-500/5 blur-[120px]" />
       </div>
 
@@ -80,11 +80,11 @@ export default function RegisterPage() {
       <nav className="sticky top-0 z-50 w-full bg-white/85 backdrop-blur-xl border-b border-slate-200/60 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 md:h-20 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-200">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-orange-500 to-red-700 flex items-center justify-center shadow-lg shadow-orange-200">
               <ShieldCheck className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-bold tracking-tight text-slate-900">
-              Sec<span className="text-indigo-600">quiz</span>
+              Sec<span className="text-orange-600">quiz</span>
             </span>
           </Link>
 
@@ -100,12 +100,12 @@ export default function RegisterPage() {
 
           <div className="hidden lg:flex items-center gap-3">
             <Link href="/login">
-              <Button variant="outline" className="rounded-full px-5 h-10 border-slate-200 text-slate-700 font-semibold hover:border-indigo-300 hover:text-indigo-600 hover:bg-white transition-colors">
+              <Button variant="outline" className="rounded-full px-5 h-10 border-slate-200 text-slate-700 font-semibold hover:border-orange-300 hover:text-orange-600 hover:bg-white transition-colors">
                 Login
               </Button>
             </Link>
             <Link href="/quiz">
-              <Button className="rounded-full px-5 h-10 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-semibold shadow-md shadow-indigo-200/70">
+              <Button className="rounded-full px-5 h-10 bg-gradient-to-r from-orange-600 to-red-700 hover:from-orange-700 hover:to-red-800 text-white font-semibold shadow-md shadow-orange-200/70">
                 Start Free Quiz
               </Button>
             </Link>
@@ -138,7 +138,7 @@ export default function RegisterPage() {
                   <Button variant="outline" className="w-full rounded-full h-12">Login</Button>
                 </Link>
                 <Link href="/quiz" className="flex-1" onClick={() => setIsMenuOpen(false)}>
-                  <Button className="w-full rounded-full h-12 bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-bold">Start Quiz</Button>
+                  <Button className="w-full rounded-full h-12 bg-gradient-to-r from-orange-600 to-red-700 text-white font-bold">Start Quiz</Button>
                 </Link>
               </div>
             </div>
@@ -164,14 +164,14 @@ export default function RegisterPage() {
                     First Name
                   </label>
                   <div className="relative group">
-                    <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-indigo-600 transition-colors" />
+                    <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-orange-600 transition-colors" />
                     <Input
                       id="firstName"
                       placeholder="John"
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
                       disabled={isLoading}
-                      className="bg-slate-50 border-slate-100 h-12 pl-11 text-slate-900 placeholder:text-slate-400 focus:ring-indigo-500/10 focus:border-indigo-500/50 rounded-2xl transition-all"
+                      className="bg-slate-50 border-slate-100 h-12 pl-11 text-slate-900 placeholder:text-slate-400 focus:ring-orange-500/10 focus:border-orange-500/50 rounded-2xl transition-all"
                     />
                   </div>
                 </div>
@@ -180,14 +180,14 @@ export default function RegisterPage() {
                     Last Name
                   </label>
                   <div className="relative group">
-                    <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-indigo-600 transition-colors" />
+                    <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-orange-600 transition-colors" />
                     <Input
                       id="lastName"
                       placeholder="Doe"
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
                       disabled={isLoading}
-                      className="bg-slate-50 border-slate-100 h-12 pl-11 text-slate-900 placeholder:text-slate-400 focus:ring-indigo-500/10 focus:border-indigo-500/50 rounded-2xl transition-all"
+                      className="bg-slate-50 border-slate-100 h-12 pl-11 text-slate-900 placeholder:text-slate-400 focus:ring-orange-500/10 focus:border-orange-500/50 rounded-2xl transition-all"
                     />
                   </div>
                 </div>
@@ -198,7 +198,7 @@ export default function RegisterPage() {
                   Email Address
                 </label>
                 <div className="relative group">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-indigo-600 transition-colors" />
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-orange-600 transition-colors" />
                   <Input
                     id="email"
                     type="email"
@@ -206,7 +206,7 @@ export default function RegisterPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     disabled={isLoading}
-                    className="bg-slate-50 border-slate-100 h-12 pl-11 text-slate-900 placeholder:text-slate-400 focus:ring-indigo-500/10 focus:border-indigo-500/50 rounded-2xl transition-all"
+                    className="bg-slate-50 border-slate-100 h-12 pl-11 text-slate-900 placeholder:text-slate-400 focus:ring-orange-500/10 focus:border-orange-500/50 rounded-2xl transition-all"
                   />
                 </div>
               </div>
@@ -216,7 +216,7 @@ export default function RegisterPage() {
                   Password
                 </label>
                 <div className="relative group">
-                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-indigo-600 transition-colors" />
+                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-orange-600 transition-colors" />
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
@@ -224,12 +224,12 @@ export default function RegisterPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     disabled={isLoading}
-                    className="bg-slate-50 border-slate-100 h-12 pl-11 pr-11 text-slate-900 placeholder:text-slate-400 focus:ring-indigo-500/10 focus:border-indigo-500/50 rounded-2xl transition-all"
+                    className="bg-slate-50 border-slate-100 h-12 pl-11 pr-11 text-slate-900 placeholder:text-slate-400 focus:ring-orange-500/10 focus:border-orange-500/50 rounded-2xl transition-all"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-indigo-600 transition-colors"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-orange-600 transition-colors"
                   >
                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
@@ -254,18 +254,18 @@ export default function RegisterPage() {
                     className={cn(
                       "cursor-pointer p-4 rounded-2xl border-2 transition-all space-y-2 group",
                       role === 'learner'
-                        ? "bg-indigo-50/50 border-indigo-600 shadow-lg shadow-indigo-100/50"
-                        : "bg-slate-50 border-slate-100 hover:border-indigo-200"
+                        ? "bg-orange-50/50 border-orange-600 shadow-lg shadow-orange-100/50"
+                        : "bg-slate-50 border-slate-100 hover:border-orange-200"
                     )}
                   >
                     <div className={cn(
                       "w-10 h-10 rounded-xl flex items-center justify-center transition-colors",
-                      role === 'learner' ? "bg-indigo-600 text-white" : "bg-white text-slate-400 group-hover:text-indigo-600"
+                      role === 'learner' ? "bg-orange-600 text-white" : "bg-white text-slate-400 group-hover:text-orange-600"
                     )}>
                       <User className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className={cn("text-xs font-bold uppercase tracking-widest", role === 'learner' ? "text-indigo-900" : "text-slate-400")}>Learner</p>
+                      <p className={cn("text-xs font-bold uppercase tracking-widest", role === 'learner' ? "text-orange-900" : "text-slate-400")}>Learner</p>
                       <p className="text-[10px] text-slate-400 font-medium">Access as Student</p>
                     </div>
                   </div>
@@ -275,18 +275,18 @@ export default function RegisterPage() {
                     className={cn(
                       "cursor-pointer p-4 rounded-2xl border-2 transition-all space-y-2 group",
                       role === 'instructor'
-                        ? "bg-indigo-50/50 border-indigo-600 shadow-lg shadow-indigo-100/50"
-                        : "bg-slate-50 border-slate-100 hover:border-indigo-200"
+                        ? "bg-orange-50/50 border-orange-600 shadow-lg shadow-orange-100/50"
+                        : "bg-slate-50 border-slate-100 hover:border-orange-200"
                     )}
                   >
                     <div className={cn(
                       "w-10 h-10 rounded-xl flex items-center justify-center transition-colors",
-                      role === 'instructor' ? "bg-indigo-600 text-white" : "bg-white text-slate-400 group-hover:text-indigo-600"
+                      role === 'instructor' ? "bg-orange-600 text-white" : "bg-white text-slate-400 group-hover:text-orange-600"
                     )}>
                       <ShieldCheck className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className={cn("text-xs font-bold uppercase tracking-widest", role === 'instructor' ? "text-indigo-900" : "text-slate-400")}>Instructor</p>
+                      <p className={cn("text-xs font-bold uppercase tracking-widest", role === 'instructor' ? "text-orange-900" : "text-slate-400")}>Instructor</p>
                       <p className="text-[10px] text-slate-400 font-medium">Access as Faculty</p>
                     </div>
                   </div>
@@ -296,7 +296,7 @@ export default function RegisterPage() {
               <Button
                 type="submit"
                 disabled={isLoading}
-                className="w-full h-14 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl shadow-xl shadow-indigo-100 transition-all active:scale-95 group mt-4 overflow-hidden relative"
+                className="w-full h-14 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-2xl shadow-xl shadow-orange-100 transition-all active:scale-95 group mt-4 overflow-hidden relative"
               >
                 {isLoading ? (
                   <div className="flex items-center gap-2">
@@ -315,7 +315,7 @@ export default function RegisterPage() {
             {/* Login link */}
             <div className="mt-8 text-center text-sm">
               <span className="text-slate-500 font-medium">Already registered? </span>
-              <Link href="/login" className="text-indigo-600 font-bold hover:text-indigo-700 transition-colors">
+              <Link href="/login" className="text-orange-600 font-bold hover:text-orange-700 transition-colors">
                 Sign In
               </Link>
             </div>

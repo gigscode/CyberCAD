@@ -67,7 +67,7 @@ export default function GradesPage() {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-12 h-12 border-4 border-orange-600 border-t-transparent rounded-full animate-spin"></div>
           <p className="text-slate-400 text-sm font-medium uppercase tracking-widest animate-pulse">Loading Academic Records...</p>
         </div>
       </div>
@@ -122,7 +122,7 @@ export default function GradesPage() {
         {/* Title and Cohort Details */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-slate-200/60">
           <div>
-            <div className="flex items-center gap-2 text-indigo-600 font-semibold text-xs uppercase tracking-wider mb-1.5">
+            <div className="flex items-center gap-2 text-orange-600 font-semibold text-xs uppercase tracking-wider mb-1.5">
               <Bookmark className="w-4 h-4" />
               <span>{data.courseName}</span>
             </div>
@@ -138,7 +138,7 @@ export default function GradesPage() {
                 "mt-1 text-xs font-bold px-3 py-1 rounded-full uppercase border-none shadow-none",
                 data.status === 'on-track' ? "bg-emerald-50 text-emerald-700" :
                 data.status === 'at-risk' ? "bg-amber-50 text-amber-700" :
-                data.status === 'under-review' ? "bg-indigo-50 text-indigo-700" :
+                data.status === 'under-review' ? "bg-orange-50 text-orange-700" :
                 "bg-red-50 text-red-700"
               )}>
                 {data.status}
@@ -151,7 +151,7 @@ export default function GradesPage() {
         <div className={cn(
           "relative overflow-hidden rounded-[24px] border p-6 md:p-8 shadow-sm transition-all duration-300",
           isWarning ? "bg-gradient-to-r from-red-500/10 via-orange-500/5 to-transparent border-red-500/20 text-red-950" :
-          isSuccess ? "bg-gradient-to-r from-indigo-500/10 via-purple-500/5 to-transparent border-indigo-500/20 text-indigo-950" :
+          isSuccess ? "bg-gradient-to-r from-orange-500/10 via-purple-500/5 to-transparent border-orange-500/20 text-indigo-950" :
           "bg-gradient-to-r from-slate-500/10 via-blue-500/5 to-transparent border-slate-500/20 text-slate-950"
         )}>
           <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full opacity-10 blur-2xl bg-current" />
@@ -159,7 +159,7 @@ export default function GradesPage() {
             <div className={cn(
               "w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 shadow-sm",
               isWarning ? "bg-red-100 text-red-600" :
-              isSuccess ? "bg-indigo-100 text-indigo-600" :
+              isSuccess ? "bg-orange-100 text-orange-600" :
               "bg-slate-100 text-slate-600"
             )}>
               {isWarning ? <AlertTriangle className="w-7 h-7" /> : isSuccess ? <Award className="w-7 h-7" /> : <Zap className="w-7 h-7" />}
@@ -173,7 +173,7 @@ export default function GradesPage() {
               </p>
             </div>
             <div className="bg-white/80 backdrop-blur-md px-6 py-4 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-3 shrink-0 self-stretch md:self-auto justify-center">
-              <Percent className="w-5 h-5 text-indigo-600" />
+              <Percent className="w-5 h-5 text-orange-600" />
               <div>
                 <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none">Grade Score</p>
                 <p className="text-2xl font-black text-slate-800 leading-tight mt-0.5">{data.currentScore}%</p>
@@ -222,7 +222,7 @@ export default function GradesPage() {
             <Card className="rounded-[24px] border border-slate-200 shadow-sm bg-white overflow-hidden">
               <CardHeader className="p-6 pb-4">
                 <CardTitle className="text-lg font-bold text-slate-900 flex items-center gap-2">
-                  <TrendingUp className="w-5 h-5 text-indigo-600" />
+                  <TrendingUp className="w-5 h-5 text-orange-600" />
                   Grade Analytics
                 </CardTitle>
                 <CardDescription className="text-xs">Visual breakdown of your academic stats</CardDescription>
@@ -281,7 +281,7 @@ export default function GradesPage() {
                 {/* Legend list */}
                 <div className="pt-2 border-t border-slate-100 grid grid-cols-2 gap-2 text-xs">
                   <div className="flex items-center gap-1.5 text-slate-500 font-medium">
-                    <div className="w-2.5 h-2.5 rounded bg-indigo-500" />
+                    <div className="w-2.5 h-2.5 rounded bg-orange-500" />
                     <span>A Grade: {data.analytics.gradeDistribution.A}</span>
                   </div>
                   <div className="flex items-center gap-1.5 text-slate-500 font-medium">
@@ -321,7 +321,7 @@ export default function GradesPage() {
                       className={cn(
                         "flex items-center justify-between p-3 rounded-2xl border transition-all duration-200",
                         learner.isCurrentUser
-                          ? "bg-indigo-50/50 border-indigo-200 shadow-sm"
+                          ? "bg-orange-50/50 border-orange-200 shadow-sm"
                           : "bg-neutral-50/40 border-transparent hover:bg-neutral-50 hover:border-slate-100"
                       )}
                     >
@@ -339,7 +339,7 @@ export default function GradesPage() {
                         </div>
                         <div className={cn(
                           "w-8 h-8 rounded-xl font-bold flex items-center justify-center text-xs shrink-0 shadow-sm border border-white",
-                          learner.isCurrentUser ? "bg-indigo-600 text-white" : "bg-white text-slate-700"
+                          learner.isCurrentUser ? "bg-orange-600 text-white" : "bg-white text-slate-700"
                         )}>
                           {learner.name[0]}
                         </div>
@@ -348,7 +348,7 @@ export default function GradesPage() {
                             "text-xs font-semibold truncate",
                             learner.isCurrentUser ? "text-indigo-950 font-bold" : "text-slate-800"
                           )}>
-                            {learner.name} {learner.isCurrentUser && <span className="text-[10px] text-indigo-500 font-medium">(You)</span>}
+                            {learner.name} {learner.isCurrentUser && <span className="text-[10px] text-orange-500 font-medium">(You)</span>}
                           </p>
                           <p className="text-[9px] text-slate-400 truncate">{learner.email}</p>
                         </div>
@@ -356,7 +356,7 @@ export default function GradesPage() {
                       <div className="text-right">
                         <span className={cn(
                           "text-sm font-extrabold",
-                          learner.isCurrentUser ? "text-indigo-600" : "text-slate-700"
+                          learner.isCurrentUser ? "text-orange-600" : "text-slate-700"
                         )}>
                           {learner.currentScore}%
                         </span>
@@ -386,7 +386,7 @@ export default function GradesPage() {
                       className={cn(
                         "px-3 py-1.5 rounded-lg text-xs font-bold transition-all",
                         activeTab === 'all'
-                          ? "bg-white text-indigo-600 shadow-sm"
+                          ? "bg-white text-orange-600 shadow-sm"
                           : "text-slate-500 hover:text-slate-800"
                       )}
                     >
@@ -397,7 +397,7 @@ export default function GradesPage() {
                       className={cn(
                         "px-3 py-1.5 rounded-lg text-xs font-bold transition-all",
                         activeTab === 'graded'
-                          ? "bg-white text-indigo-600 shadow-sm"
+                          ? "bg-white text-orange-600 shadow-sm"
                           : "text-slate-500 hover:text-slate-800"
                       )}
                     >
@@ -408,7 +408,7 @@ export default function GradesPage() {
                       className={cn(
                         "px-3 py-1.5 rounded-lg text-xs font-bold transition-all",
                         activeTab === 'pending'
-                          ? "bg-white text-indigo-600 shadow-sm"
+                          ? "bg-white text-orange-600 shadow-sm"
                           : "text-slate-500 hover:text-slate-800"
                       )}
                     >
@@ -445,7 +445,7 @@ export default function GradesPage() {
                                 <GraduationCap className="w-5 h-5" />
                               </div>
                               <div>
-                                <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest leading-none block mb-1">
+                                <span className="text-[10px] font-bold text-orange-600 uppercase tracking-widest leading-none block mb-1">
                                   {task.moduleName}
                                 </span>
                                 <h3 className="font-bold text-slate-900 text-sm md:text-base leading-tight">
@@ -498,7 +498,7 @@ export default function GradesPage() {
                             <div className="bg-slate-50 border border-slate-100 rounded-xl p-4 flex flex-col gap-3">
                               <div className="flex items-center justify-between text-xs text-slate-400 font-semibold border-b border-slate-200/50 pb-2">
                                 <div className="flex items-center gap-1.5">
-                                  <MessageSquare className="w-3.5 h-3.5 text-indigo-500" />
+                                  <MessageSquare className="w-3.5 h-3.5 text-orange-500" />
                                   <span>Instructor Evaluation</span>
                                 </div>
                                 <div className="flex items-center gap-3">
@@ -550,9 +550,9 @@ export default function GradesPage() {
 // Sub-component for Stat card
 function StatCard({ title, value, description, icon: Icon, gradient }: { title: string, value: string | number, description: string, icon: any, gradient: 'indigo' | 'emerald' | 'violet' | 'amber' }) {
   const gradientMap = {
-    indigo: 'from-indigo-600 to-indigo-700 bg-indigo-50 text-indigo-600',
+    indigo: 'from-orange-600 to-orange-700 bg-orange-50 text-orange-600',
     emerald: 'from-emerald-600 to-emerald-700 bg-emerald-50 text-emerald-600',
-    violet: 'from-violet-600 to-violet-700 bg-violet-50 text-violet-600',
+    violet: 'from-red-700 to-red-800 bg-red-50 text-red-700',
     amber: 'from-amber-50 to-amber-100 bg-amber-50 text-amber-600',
   };
 

@@ -64,7 +64,7 @@ export default function ProgressPage() {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-8 h-8 border-4 border-orange-600 border-t-transparent rounded-full animate-spin"></div>
           <p className="text-slate-400 text-sm font-medium uppercase tracking-widest">Loading stats...</p>
         </div>
       </div>
@@ -89,7 +89,7 @@ export default function ProgressPage() {
             </p>
           </div>
           <div className="flex items-center gap-2 text-sm font-medium text-slate-500 bg-white px-4 py-2 rounded-xl border border-slate-100 shadow-sm">
-            <Target className="w-4 h-4 text-indigo-600" />
+            <Target className="w-4 h-4 text-orange-600" />
             <span>{stats.velocity}% to Target</span>
           </div>
         </div>
@@ -133,7 +133,7 @@ export default function ProgressPage() {
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-1.5">
-                    <div className="w-2 h-2 rounded-full bg-indigo-600"></div>
+                    <div className="w-2 h-2 rounded-full bg-orange-600"></div>
                     <span className="text-[10px] font-bold text-slate-500 uppercase">Score</span>
                   </div>
                 </div>
@@ -180,14 +180,14 @@ export default function ProgressPage() {
               </div>
             </Card>
 
-            <div className="bg-indigo-600 rounded-2xl p-8 text-white relative overflow-hidden shadow-sm">
+            <div className="bg-orange-600 rounded-2xl p-8 text-white relative overflow-hidden shadow-sm">
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
               <div className="relative z-10 space-y-4">
                 <h3 className="text-xl font-semibold tracking-tight">Level Up Your Journey</h3>
-                <p className="text-indigo-100/80 text-sm font-medium leading-relaxed max-w-md">
+                <p className="text-orange-100/80 text-sm font-medium leading-relaxed max-w-md">
                   Your consistent learning velocity is impressive. Maintaining a {stats.streak} day streak puts you ahead of 80% of your cohort.
                 </p>
-                <button className="flex items-center gap-2 bg-white text-indigo-600 px-6 py-2.5 rounded-xl font-semibold text-sm hover:bg-neutral-50 transition-colors mt-2 w-fit">
+                <button className="flex items-center gap-2 bg-white text-orange-600 px-6 py-2.5 rounded-xl font-semibold text-sm hover:bg-neutral-50 transition-colors mt-2 w-fit">
                   View Roadmap <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
@@ -213,7 +213,7 @@ export default function ProgressPage() {
                         className="group flex items-center justify-between p-4 rounded-2xl bg-neutral-50/50 hover:bg-white border border-transparent hover:border-slate-100 hover:shadow-sm transition-all"
                       >
                         <div className="flex flex-col">
-                          <span className="text-[11px] font-semibold text-indigo-600 tracking-wide mb-1 uppercase">{assessment.type}</span>
+                          <span className="text-[11px] font-semibold text-orange-600 tracking-wide mb-1 uppercase">{assessment.type}</span>
                           <h4 className="font-semibold text-slate-900 text-sm leading-tight">{assessment.name}</h4>
                           <span className="text-xs font-medium text-slate-500 mt-1.5">{new Date(assessment.date).toLocaleDateString()}</span>
                         </div>
@@ -241,8 +241,8 @@ export default function ProgressPage() {
 
 function StatMiniCard({ icon: Icon, label, value, color }: { icon: any, label: string, value: string, color: 'indigo' | 'violet' | 'amber' | 'emerald' }) {
   const colorMap = {
-    indigo: 'text-indigo-600 bg-indigo-50',
-    violet: 'text-violet-600 bg-violet-50',
+    indigo: 'text-orange-600 bg-orange-50',
+    violet: 'text-red-700 bg-red-50',
     amber: 'text-amber-600 bg-amber-50',
     emerald: 'text-emerald-600 bg-emerald-50',
   };

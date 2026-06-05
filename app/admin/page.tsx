@@ -127,7 +127,7 @@ export default function AdminDashboardPage() {
 
       {/* Header */}
       <div className="pb-6 border-b border-slate-200/60">
-        <Badge className="bg-indigo-50 text-indigo-700 border-indigo-100 px-2.5 py-0.5 text-[9px] font-medium tracking-wider uppercase mb-2">
+        <Badge className="bg-orange-50 text-orange-700 border-orange-100 px-2.5 py-0.5 text-[9px] font-medium tracking-wider uppercase mb-2">
           Super Admin
         </Badge>
         <h1 className="text-3xl md:text-4xl font-medium tracking-tight text-slate-900">Platform Overview</h1>
@@ -139,7 +139,7 @@ export default function AdminDashboardPage() {
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
         <StatCard icon={Users} label="Total Learners" value={stats.totalLearners}
-          iconColor="text-indigo-600" iconBgColor="bg-indigo-50" />
+          iconColor="text-orange-600" iconBgColor="bg-orange-50" />
         <StatCard icon={BookOpen} label="Live Courses" value={stats.activeCourses}
           iconColor="text-emerald-600" iconBgColor="bg-emerald-50" />
         <StatCard icon={DollarSign} label="Total Revenue" value={formatNaira(stats.totalRevenue)}
@@ -147,7 +147,7 @@ export default function AdminDashboardPage() {
         <StatCard icon={AlertCircle} label="Ungraded Work" value={stats.pendingSubmissions}
           iconColor="text-amber-600" iconBgColor="bg-amber-50" />
         <StatCard icon={MessageSquare} label="Mentorship Clicks" value={stats.mentorshipRequests}
-          iconColor="text-violet-600" iconBgColor="bg-violet-50" />
+          iconColor="text-red-700" iconBgColor="bg-red-50" />
       </div>
 
       {/* Two-column area */}
@@ -161,7 +161,7 @@ export default function AdminDashboardPage() {
               <CardTitle className="text-base font-semibold">Recent Payments</CardTitle>
             </div>
             <Button variant="ghost" size="sm" onClick={() => router.push('/admin/payments')}
-              className="text-indigo-600 text-xs font-medium hover:bg-indigo-50 h-7 px-3 rounded-lg">
+              className="text-orange-600 text-xs font-medium hover:bg-orange-50 h-7 px-3 rounded-lg">
               View All
             </Button>
           </CardHeader>
@@ -202,11 +202,11 @@ export default function AdminDashboardPage() {
         <Card className="rounded-[32px] border-slate-100 shadow-sm bg-white overflow-hidden">
           <CardHeader className="p-6 border-b border-slate-50 flex flex-row items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <GraduationCap className="w-4 h-4 text-indigo-600" />
+              <GraduationCap className="w-4 h-4 text-orange-600" />
               <CardTitle className="text-base font-semibold">Recent Enrolments</CardTitle>
             </div>
             <Button variant="ghost" size="sm" onClick={() => router.push('/admin/learners')}
-              className="text-indigo-600 text-xs font-medium hover:bg-indigo-50 h-7 px-3 rounded-lg">
+              className="text-orange-600 text-xs font-medium hover:bg-orange-50 h-7 px-3 rounded-lg">
               View All
             </Button>
           </CardHeader>
@@ -251,14 +251,14 @@ export default function AdminDashboardPage() {
           >
             <div className={cn(
               'w-10 h-10 rounded-xl flex items-center justify-center mb-3',
-              action.color === 'indigo' ? 'bg-indigo-50 text-indigo-600' :
+              action.color === 'indigo' ? 'bg-orange-50 text-orange-600' :
               action.color === 'emerald' ? 'bg-emerald-50 text-emerald-600' :
               action.color === 'amber' ? 'bg-amber-50 text-amber-600' :
-              'bg-violet-50 text-violet-600'
+              'bg-red-50 text-red-700'
             )}>
               <action.icon className="w-5 h-5" />
             </div>
-            <p className="text-sm font-semibold text-slate-900 group-hover:text-indigo-600 transition-colors">
+            <p className="text-sm font-semibold text-slate-900 group-hover:text-orange-600 transition-colors">
               {action.label}
             </p>
             <ArrowRight className="w-3.5 h-3.5 text-slate-300 mt-1 group-hover:translate-x-1 transition-transform" />
@@ -267,21 +267,21 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* Platform health */}
-      <Card className="rounded-[32px] border-indigo-200 shadow-lg shadow-indigo-50 overflow-hidden bg-gradient-to-r from-indigo-600 to-violet-600 text-white">
+      <Card className="rounded-[32px] border-orange-200 shadow-lg shadow-orange-50 overflow-hidden bg-gradient-to-r from-orange-600 to-red-700 text-white">
         <CardContent className="p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="space-y-1.5">
             <div className="flex items-center gap-2">
               <Activity className="w-5 h-5 text-white/70" />
               <h3 className="text-lg font-semibold">System Health</h3>
             </div>
-            <p className="text-indigo-100/80 text-sm max-w-md">
+            <p className="text-orange-100/80 text-sm max-w-md">
               All services operational. Supabase Auth, PostgREST, and storage are running normally.
               YouTube video delivery is external and not monitored here.
             </p>
           </div>
           <div className="shrink-0 text-right">
             <p className="text-3xl font-bold">99.5%</p>
-            <p className="text-indigo-200 text-xs uppercase tracking-widest font-medium">Uptime</p>
+            <p className="text-orange-200 text-xs uppercase tracking-widest font-medium">Uptime</p>
           </div>
         </CardContent>
       </Card>

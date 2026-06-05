@@ -88,8 +88,8 @@ export function LearnerDashboard() {
                 <TopHeader user={user ? { name: `${user.firstName} ${user.lastName}`, email: user.email } : undefined} />
                 <div className="max-w-7xl mx-auto p-4 md:p-8 flex items-center justify-center min-h-[70vh]">
                     <div className="text-center space-y-8 max-w-lg">
-                        <div className="w-20 h-20 bg-indigo-100 rounded-3xl flex items-center justify-center mx-auto">
-                            <Sparkles className="w-10 h-10 text-indigo-600" />
+                        <div className="w-20 h-20 bg-orange-100 rounded-3xl flex items-center justify-center mx-auto">
+                            <Sparkles className="w-10 h-10 text-orange-600" />
                         </div>
                         <div className="space-y-3">
                             <h1 className="text-3xl md:text-4xl font-medium tracking-tight text-slate-900">
@@ -101,7 +101,7 @@ export function LearnerDashboard() {
                         </div>
                         <Button
                             onClick={() => router.push('/dashboard/courses')}
-                            className="h-14 px-10 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-base shadow-xl shadow-indigo-200 active:scale-95 transition-all"
+                            className="h-14 px-10 rounded-2xl bg-orange-600 hover:bg-orange-700 text-white font-medium text-base shadow-xl shadow-orange-200 active:scale-95 transition-all"
                         >
                             <BookOpen className="w-5 h-5 mr-2" />
                             Browse Courses
@@ -118,7 +118,7 @@ export function LearnerDashboard() {
 
             <div className="max-w-7xl mx-auto p-4 md:p-8 space-y-10">
                 {/* Hero Section */}
-                <div className="relative overflow-hidden rounded-[32px] bg-indigo-600 p-8 md:p-14 text-white shadow-2xl shadow-indigo-200">
+                <div className="relative overflow-hidden rounded-[32px] bg-orange-600 p-8 md:p-14 text-white shadow-2xl shadow-orange-200">
                     <div className="relative z-10 max-w-2xl space-y-6">
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-xs font-medium uppercase tracking-wider">
                              Learning Session Active
@@ -126,7 +126,7 @@ export function LearnerDashboard() {
                         <h1 className="text-4xl md:text-5xl font-medium tracking-tight">
                             Welcome back, {user?.firstName}! 👋
                         </h1>
-                        <p className="text-lg md:text-xl text-indigo-50/90 leading-relaxed font-medium">
+                        <p className="text-lg md:text-xl text-orange-50/90 leading-relaxed font-medium">
                             {tasks.length > 0 ? `You have ${tasks.length} assignments awaiting your focus today.` : "You're all caught up on your assignments!"}
                         </p>
 
@@ -138,14 +138,14 @@ export function LearnerDashboard() {
                         )}
 
                         <div className="flex gap-4 pt-2">
-                            <Button onClick={() => router.push('/dashboard/courses')} className="rounded-xl h-12 px-8 bg-white text-indigo-600 hover:bg-slate-50 font-medium shadow-lg shadow-indigo-900/20 active:scale-95 transition-all">
+                            <Button onClick={() => router.push('/dashboard/courses')} className="rounded-xl h-12 px-8 bg-white text-orange-600 hover:bg-slate-50 font-medium shadow-lg shadow-orange-900/20 active:scale-95 transition-all">
                                 Continue Lessons
                             </Button>
                         </div>
                     </div>
                     {/* Decorative Background Elements */}
-                    <div className="absolute right-0 top-0 h-full w-1/2 bg-gradient-to-l from-indigo-500/20 to-transparent pointer-events-none" />
-                    <div className="absolute -bottom-20 -right-20 h-80 w-80 rounded-full bg-indigo-400 blur-3xl opacity-30 animate-pulse" />
+                    <div className="absolute right-0 top-0 h-full w-1/2 bg-gradient-to-l from-orange-500/20 to-transparent pointer-events-none" />
+                    <div className="absolute -bottom-20 -right-20 h-80 w-80 rounded-full bg-orange-400 blur-3xl opacity-30 animate-pulse" />
                     <div className="absolute top-10 right-10 flex h-32 w-32 items-center justify-center rounded-full bg-white/5 border border-white/10 blur-xl" />
                 </div>
 
@@ -161,8 +161,8 @@ export function LearnerDashboard() {
                             icon={BookOpen}
                             label="Active Courses"
                             value={progress?.courseId ? 1 : 0}
-                            iconColor="text-violet-600"
-                            iconBgColor="bg-violet-50"
+                            iconColor="text-red-700"
+                            iconBgColor="bg-red-50"
                         />
                         <StatCard
                             icon={GraduationCap}
@@ -197,7 +197,7 @@ export function LearnerDashboard() {
                                 <h2 className="text-md md:text-xl font-medium tracking-tight text-slate-900 flex items-center gap-3">
                                     My Curriculum
                                 </h2>
-                                <Button variant="ghost" onClick={() => router.push('/dashboard/courses')} className="text-indigo-600 font-medium hover:bg-indigo-50 rounded-xl">Explore All</Button>
+                                <Button variant="ghost" onClick={() => router.push('/dashboard/courses')} className="text-orange-600 font-medium hover:bg-orange-50 rounded-xl">Explore All</Button>
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -244,14 +244,14 @@ export function LearnerDashboard() {
                                     tasks.map((task: any) => (
                                         <div key={task.id} className={cn(
                                             "group relative overflow-hidden rounded-[24px] border transition-all hover:shadow-xl hover:-translate-y-1",
-                                            task.status !== 'pending' ? "bg-slate-50/50 border-slate-100" : "bg-white border-slate-100 hover:border-indigo-100"
+                                            task.status !== 'pending' ? "bg-slate-50/50 border-slate-100" : "bg-white border-slate-100 hover:border-orange-100"
                                         )}>
                                             <div className="flex items-center gap-6 p-6">
                                                 <div className={cn(
                                                     "flex h-14 w-14 items-center justify-center rounded-2xl transition-all duration-300",
                                                     task.status === 'completed' ? "bg-emerald-100 text-emerald-600" :
                                                         task.status === 'submitted' ? "bg-amber-100 text-amber-600" :
-                                                            "bg-slate-50 text-slate-400 group-hover:bg-indigo-600 group-hover:text-white"
+                                                            "bg-slate-50 text-slate-400 group-hover:bg-orange-600 group-hover:text-white"
                                                 )}>
                                                     <FileText className="h-7 w-7" />
                                                 </div>
@@ -264,7 +264,7 @@ export function LearnerDashboard() {
                                                     </div>
                                                     <h4 className={cn(
                                                         "font-medium text-lg truncate transition-colors uppercase tracking-tight",
-                                                        task.status !== 'pending' ? "text-slate-500" : "text-slate-900 group-hover:text-indigo-600"
+                                                        task.status !== 'pending' ? "text-slate-500" : "text-slate-900 group-hover:text-orange-600"
                                                     )}>{task.title}</h4>
                                                     <p className="text-sm text-slate-500 font-medium">Domain: {task.subject || 'LMS Core'}</p>
                                                 </div>
@@ -331,11 +331,11 @@ export function LearnerDashboard() {
                         </div>
 
                         {/* Motivation Card */}
-                        <div className="rounded-[32px] bg-gradient-to-br from-indigo-500 to-indigo-700 p-8 text-white relative overflow-hidden group shadow-lg shadow-indigo-100">
+                        <div className="rounded-[32px] bg-gradient-to-br from-orange-500 to-orange-700 p-8 text-white relative overflow-hidden group shadow-lg shadow-orange-100">
                             <div className="relative z-10 space-y-4">
                                 <h4 className="text-lg font-medium leading-tight italic">"The beautiful thing about learning is that nobody can take it away from you."</h4>
                                 <div className="h-1 w-12 bg-white/30 rounded-full" />
-                                <p className="text-indigo-100 text-xs font-medium uppercase tracking-widest">— B.B. King</p>
+                                <p className="text-orange-100 text-xs font-medium uppercase tracking-widest">— B.B. King</p>
                             </div>
                             <Award className="absolute -bottom-4 -right-4 w-24 h-24 text-white/10 group-hover:scale-110 transition-transform duration-500" />
                         </div>

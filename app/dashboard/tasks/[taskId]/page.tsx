@@ -144,14 +144,14 @@ export default function TaskDetailPage() {
                                                     className={`
                                                         flex items-center gap-3 p-4 rounded-xl border cursor-pointer transition-all
                                                         ${quizAnswers[qIdx] === oIdx
-                                                            ? 'border-indigo-600 bg-indigo-50 ring-1 ring-indigo-600'
-                                                            : 'border-slate-200 hover:border-indigo-300 hover:bg-slate-50'}
+                                                            ? 'border-orange-600 bg-orange-50 ring-1 ring-orange-600'
+                                                            : 'border-slate-200 hover:border-orange-300 hover:bg-slate-50'}
                                                     `}
                                                     onClick={() => handleQuizOptionSelect(qIdx, oIdx)}
                                                 >
                                                     <div className={`
                                                         w-5 h-5 rounded-full border flex items-center justify-center
-                                                        ${quizAnswers[qIdx] === oIdx ? 'border-indigo-600 bg-indigo-600' : 'border-slate-400'}
+                                                        ${quizAnswers[qIdx] === oIdx ? 'border-orange-600 bg-orange-600' : 'border-slate-400'}
                                                     `}>
                                                         {quizAnswers[qIdx] === oIdx && <div className="w-2 h-2 rounded-full bg-white" />}
                                                     </div>
@@ -168,7 +168,7 @@ export default function TaskDetailPage() {
                         {task.type === 'task' && (
                             <div className="flex flex-col items-center justify-center py-12 border-2 border-dashed border-slate-200 rounded-2xl bg-slate-50/50 hover:bg-slate-50 transition-colors">
                                 <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm mb-4">
-                                    <Upload className="w-8 h-8 text-indigo-600" />
+                                    <Upload className="w-8 h-8 text-orange-600" />
                                 </div>
                                 <h3 className="text-lg font-medium text-slate-900">Upload Project File</h3>
                                 <p className="text-slate-500 mt-1 mb-6">Drag and drop or browse to upload (ZIP, PDF, DOCX)</p>

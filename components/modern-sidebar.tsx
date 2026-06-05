@@ -57,12 +57,12 @@ function SidebarContent({
       {/* Logo */}
       <div className="px-7 pt-7 pb-5">
         <Link href={isSuperAdmin ? '/admin' : '/dashboard'} className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-200/60">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-orange-500 to-red-700 flex items-center justify-center shadow-lg shadow-orange-200/60">
             <ShieldCheck className="w-5 h-5 text-white" />
           </div>
           <div>
             <h1 className="text-lg font-bold tracking-tight text-slate-900">
-              Sec<span className="text-indigo-600">quiz</span>
+              Sec<span className="text-orange-600">quiz</span>
             </h1>
             <p className="text-[9px] uppercase tracking-[0.18em] font-semibold text-slate-400 leading-none">
               {isSuperAdmin ? 'Super Admin' : 'Academy'}
@@ -93,7 +93,7 @@ function SidebarContent({
               className={cn(
                 'flex items-center gap-3.5 px-4 py-3 rounded-2xl transition-all duration-200 group relative',
                 isActive
-                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200/60'
+                  ? 'bg-orange-600 text-white shadow-md shadow-orange-200/60'
                   : 'text-slate-500 hover:bg-slate-100/80 hover:text-slate-900'
               )}
             >
@@ -116,7 +116,7 @@ function SidebarContent({
           <Link href={profileHref} onClick={onLinkClick} className="flex items-center gap-3 min-w-0">
             <Avatar className="w-9 h-9 shrink-0 border-2 border-white shadow-sm">
               <AvatarImage src={user?.avatar} />
-              <AvatarFallback className="bg-indigo-50 text-indigo-600 font-semibold text-xs">
+              <AvatarFallback className="bg-orange-50 text-orange-600 font-semibold text-xs">
                 {user?.firstName?.[0] ?? 'U'}{user?.lastName?.[0] ?? ''}
               </AvatarFallback>
             </Avatar>

@@ -85,7 +85,7 @@ export default function PaymentsPage() {
         <StatCard icon={CreditCard} label="Successful Payments" value={successful.length}
           iconColor="text-emerald-600" iconBgColor="bg-emerald-50" />
         <StatCard icon={TrendingUp} label="Total Transactions" value={payments.length}
-          iconColor="text-indigo-600" iconBgColor="bg-indigo-50" />
+          iconColor="text-orange-600" iconBgColor="bg-orange-50" />
       </div>
 
       {/* Table */}

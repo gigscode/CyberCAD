@@ -156,7 +156,7 @@ export default function ProfilePage() {
     if (isLoading || !user) {
         return (
             <div className="min-h-screen bg-neutral-50/50 flex items-center justify-center">
-                <Loader2 className="w-8 h-8 animate-spin text-indigo-600" />
+                <Loader2 className="w-8 h-8 animate-spin text-orange-600" />
             </div>
         );
     }
@@ -167,7 +167,7 @@ export default function ProfilePage() {
             
             <div className="max-w-6xl mx-auto px-4 md:px-8 mt-12">
                 <div className="flex items-center gap-2 mb-10">
-                    <div className="w-6 h-1.5 bg-indigo-600 rounded-full" />
+                    <div className="w-6 h-1.5 bg-orange-600 rounded-full" />
                     <h1 className="text-xl font-bold text-slate-800">Profile</h1>
                 </div>
 
@@ -177,7 +177,7 @@ export default function ProfilePage() {
                         {/* Left Column: Image & Actions */}
                         <div className="lg:col-span-4 space-y-8">
                             <div className="relative group">
-                                <div className="aspect-square rounded-[32px] bg-indigo-50/50 flex items-center justify-center overflow-hidden border-2 border-slate-50 relative">
+                                <div className="aspect-square rounded-[32px] bg-orange-50/50 flex items-center justify-center overflow-hidden border-2 border-slate-50 relative">
                                     {formData.avatar ? (
                                         <img src={formData.avatar} alt="Avatar" className="w-full h-full object-cover" />
                                     ) : (
@@ -208,12 +208,12 @@ export default function ProfilePage() {
                             </div>
 
                             <div className="grid grid-cols-2 gap-4">
-                                <div className="border-2 border-dashed border-slate-100 rounded-2xl p-4 flex flex-col items-center justify-center gap-2 group hover:border-indigo-200 transition-colors cursor-pointer">
-                                    <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest group-hover:text-indigo-400">Logo</p>
+                                <div className="border-2 border-dashed border-slate-100 rounded-2xl p-4 flex flex-col items-center justify-center gap-2 group hover:border-orange-200 transition-colors cursor-pointer">
+                                    <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest group-hover:text-orange-400">Logo</p>
                                 </div>
-                                <div className="border-2 border-dashed border-slate-100 rounded-2xl p-4 flex flex-col items-center justify-center gap-2 group hover:border-indigo-200 transition-colors cursor-pointer text-center">
-                                    <Upload className="w-5 h-5 text-slate-300 group-hover:text-indigo-400" />
-                                    <p className="text-[9px] font-black text-slate-300 uppercase tracking-widest leading-tight group-hover:text-indigo-400">Learner Documents</p>
+                                <div className="border-2 border-dashed border-slate-100 rounded-2xl p-4 flex flex-col items-center justify-center gap-2 group hover:border-orange-200 transition-colors cursor-pointer text-center">
+                                    <Upload className="w-5 h-5 text-slate-300 group-hover:text-orange-400" />
+                                    <p className="text-[9px] font-black text-slate-300 uppercase tracking-widest leading-tight group-hover:text-orange-400">Learner Documents</p>
                                 </div>
                             </div>
                         </div>
@@ -275,7 +275,7 @@ export default function ProfilePage() {
                                                 <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Learning Goals</p>
                                                 <div className="flex flex-wrap gap-2">
                                                     {(formData.learnerDetails?.learningGoals || []).map(goal => (
-                                                        <Badge key={goal} className="bg-indigo-50 text-indigo-600 border-none rounded-lg px-3 py-1">
+                                                        <Badge key={goal} className="bg-orange-50 text-orange-600 border-none rounded-lg px-3 py-1">
                                                             {goal}
                                                             {isEditing && <X className="w-3 h-3 ml-2 cursor-pointer" onClick={() => removeTag('learningGoals', goal)} />}
                                                         </Badge>
@@ -304,7 +304,7 @@ export default function ProfilePage() {
                                                 <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Expertise</p>
                                                 <div className="flex flex-wrap gap-2">
                                                     {(formData.instructorDetails?.expertise || []).map(skill => (
-                                                        <Badge key={skill} className="bg-indigo-50 text-indigo-600 border-none rounded-lg px-3 py-1">
+                                                        <Badge key={skill} className="bg-orange-50 text-orange-600 border-none rounded-lg px-3 py-1">
                                                             {skill}
                                                             {isEditing && <X className="w-3 h-3 ml-2 cursor-pointer" onClick={() => removeTag('expertise', skill)} />}
                                                         </Badge>
@@ -324,7 +324,7 @@ export default function ProfilePage() {
                                 {isEditing ? (
                                     <div className="flex gap-3">
                                         <Button variant="ghost" onClick={() => setIsEditing(false)} className="rounded-xl h-12 px-8 font-bold text-slate-400">Cancel</Button>
-                                        <Button onClick={handleSave} disabled={isSaving} className="bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl h-12 px-8 font-bold shadow-lg shadow-indigo-100">
+                                        <Button onClick={handleSave} disabled={isSaving} className="bg-orange-600 hover:bg-orange-700 text-white rounded-xl h-12 px-8 font-bold shadow-lg shadow-orange-100">
                                             {isSaving ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Save className="w-4 h-4 mr-2" />}
                                             Save Changes
                                         </Button>
@@ -333,7 +333,7 @@ export default function ProfilePage() {
                                     <Button 
                                         variant="outline" 
                                         onClick={() => setIsEditing(true)}
-                                        className="rounded-2xl h-14 px-10 border-indigo-200 text-indigo-600 font-bold hover:bg-indigo-50 transition-all gap-3"
+                                        className="rounded-2xl h-14 px-10 border-orange-200 text-orange-600 font-bold hover:bg-orange-50 transition-all gap-3"
                                     >
                                         <Edit2 className="w-4 h-4" />
                                         EDIT PROFILE

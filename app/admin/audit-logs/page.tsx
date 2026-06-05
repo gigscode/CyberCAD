@@ -121,7 +121,7 @@ export default function AuditLogsPage() {
             <div key={log.id} className="flex gap-4 items-start">
               {/* Timeline dot */}
               <div className="flex flex-col items-center mt-2 gap-1">
-                <div className="w-2.5 h-2.5 rounded-full bg-indigo-400 shrink-0" />
+                <div className="w-2.5 h-2.5 rounded-full bg-orange-400 shrink-0" />
                 {i < filtered.length - 1 && <div className="w-px h-8 bg-slate-100" />}
               </div>
 

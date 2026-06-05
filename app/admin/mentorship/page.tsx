@@ -66,7 +66,7 @@ export default function MentorshipPage() {
     <div className="max-w-7xl mx-auto p-4 md:p-8 space-y-8 pb-20">
       {/* Header */}
       <div className="pb-6 border-b border-slate-200/60">
-        <Badge className="bg-violet-50 text-violet-700 border-violet-100 px-2.5 py-0.5 text-[9px] font-medium uppercase tracking-wider mb-2">
+        <Badge className="bg-red-50 text-red-800 border-red-100 px-2.5 py-0.5 text-[9px] font-medium uppercase tracking-wider mb-2">
           Mentorship
         </Badge>
         <h1 className="text-3xl font-medium tracking-tight text-slate-900">Mentorship Requests</h1>
@@ -78,16 +78,16 @@ export default function MentorshipPage() {
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <StatCard icon={MessageSquare} label="Total Clicks" value={requests.length}
-          iconColor="text-violet-600" iconBgColor="bg-violet-50" />
+          iconColor="text-red-700" iconBgColor="bg-red-50" />
         <StatCard icon={TrendingUp} label="Unique Learners" value={uniqueLearners}
-          iconColor="text-indigo-600" iconBgColor="bg-indigo-50" />
+          iconColor="text-orange-600" iconBgColor="bg-orange-50" />
         <StatCard icon={BookOpen} label="Top Course" value={topCourse}
           iconColor="text-blue-600" iconBgColor="bg-blue-50" />
       </div>
 
       {/* Insight banner */}
-      <div className="bg-violet-50 border border-violet-100 rounded-2xl p-4 flex items-start gap-3">
-        <MessageSquare className="w-4 h-4 text-violet-500 mt-0.5 shrink-0" />
+      <div className="bg-red-50 border border-red-100 rounded-2xl p-4 flex items-start gap-3">
+        <MessageSquare className="w-4 h-4 text-red-600 mt-0.5 shrink-0" />
         <p className="text-sm text-violet-800 font-medium">
           High mentorship demand on a specific course is a signal to add more content, a FAQ section,
           or a dedicated Q&amp;A lesson. Use this data to prioritise content updates.
@@ -120,7 +120,7 @@ export default function MentorshipPage() {
                     <div className="flex items-center gap-3">
                       <Avatar className="w-9 h-9 rounded-xl">
                         <AvatarImage src={r.profiles?.avatar} />
-                        <AvatarFallback className="bg-violet-50 text-violet-600 font-semibold text-xs">
+                        <AvatarFallback className="bg-red-50 text-red-700 font-semibold text-xs">
                           {r.profiles?.first_name?.[0]}{r.profiles?.last_name?.[0]}
                         </AvatarFallback>
                       </Avatar>

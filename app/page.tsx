@@ -35,9 +35,9 @@ const FEATURED_TRACKS = [
 
 const TRACK_PALETTE: Record<string, { gradient: string; lightBg: string; border: string; badge: string; price: string; iconBg: string }> = {
   'ethical-hacking':   { gradient: 'from-rose-500 to-orange-500',      lightBg: 'bg-rose-50',    border: 'border-rose-100',    badge: 'bg-rose-100 text-rose-700',    price: 'text-rose-600',    iconBg: 'bg-rose-100'    },
-  'soc-blue-team':     { gradient: 'from-indigo-500 to-cyan-500',       lightBg: 'bg-indigo-50',  border: 'border-indigo-100',  badge: 'bg-indigo-100 text-indigo-700',price: 'text-indigo-600',  iconBg: 'bg-indigo-100'  },
+  'soc-blue-team':     { gradient: 'from-blue-500 to-cyan-500',       lightBg: 'bg-blue-50',  border: 'border-blue-100',  badge: 'bg-blue-100 text-blue-700', price: 'text-blue-600',  iconBg: 'bg-blue-100'  },
   'grc':               { gradient: 'from-emerald-500 to-teal-500',      lightBg: 'bg-emerald-50', border: 'border-emerald-100', badge: 'bg-emerald-100 text-emerald-700',price:'text-emerald-600',iconBg: 'bg-emerald-100' },
-  'digital-forensics': { gradient: 'from-violet-500 to-fuchsia-500',   lightBg: 'bg-violet-50',  border: 'border-violet-100',  badge: 'bg-violet-100 text-violet-700',price: 'text-violet-600',  iconBg: 'bg-violet-100'  },
+  'digital-forensics': { gradient: 'from-red-600 to-fuchsia-500',   lightBg: 'bg-red-50',  border: 'border-red-100',  badge: 'bg-red-100 text-red-800',price: 'text-red-700',  iconBg: 'bg-red-100'  },
   'cloud-security':    { gradient: 'from-cyan-500 to-blue-500',         lightBg: 'bg-cyan-50',    border: 'border-cyan-100',    badge: 'bg-cyan-100 text-cyan-700',    price: 'text-cyan-600',    iconBg: 'bg-cyan-100'    },
   'foundations':       { gradient: 'from-slate-600 to-slate-800',       lightBg: 'bg-slate-50',   border: 'border-slate-200',   badge: 'bg-slate-100 text-slate-700',  price: 'text-slate-700',   iconBg: 'bg-slate-100'   },
 };
@@ -45,23 +45,23 @@ const TRACK_PALETTE: Record<string, { gradient: string; lightBg: string; border:
 type TierLabel = 'Starter' | 'Pro' | 'Elite';
 const TIER_MAP: Record<TierLabel, { dot: string; chip: string; ring: string; featured: boolean }> = {
   Starter: { dot: 'bg-slate-400',  chip: 'bg-slate-50 text-slate-600 border-slate-200',                            ring: '',                          featured: false },
-  Pro:     { dot: 'bg-indigo-500', chip: 'bg-indigo-50 text-indigo-700 border-indigo-200',                          ring: '',                          featured: false },
+  Pro:     { dot: 'bg-amber-500', chip: 'bg-amber-50 text-amber-700 border-amber-200', ring: '', featured: false },
   Elite:   { dot: 'bg-amber-500',  chip: 'bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 border-amber-200', ring: 'ring-1 ring-amber-200/80', featured: true  },
 };
 const getTier = (priceKobo: number): TierLabel =>
   priceKobo <= 4_000_000 ? 'Starter' : priceKobo <= 8_000_000 ? 'Pro' : 'Elite';
 
 const TESTIMONIALS = [
-  { name: 'Adaeze Okonkwo', role: 'SOC Analyst, Stanbic IBTC', location: 'Lagos', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Adaeze', quote: 'I was a bank teller with zero IT background. Six months after completing the SOC Analyst track, I landed a role at a top bank. Secquiz taught me real skills, not just theory.', accent: 'from-indigo-500 to-cyan-500' },
+  { name: 'Adaeze Okonkwo', role: 'SOC Analyst, Stanbic IBTC', location: 'Lagos', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Adaeze', quote: 'I was a bank teller with zero IT background. Six months after completing the SOC Analyst track, I landed a role at a top bank. Secquiz taught me real skills, not just theory.', accent: 'from-blue-500 to-cyan-500' },
   { name: 'Emeka Nwosu', role: 'Penetration Tester, Freelance', location: 'Abuja', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Emeka', quote: 'The Ethical Hacking track is the real deal. The pentest report I submitted as my capstone project got me my first paying client before I even finished the course.', accent: 'from-rose-500 to-orange-500' },
   { name: 'Fatima Bello', role: 'GRC Analyst, MTN Nigeria', location: 'Kano', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima', quote: 'Coming from a compliance background, the GRC track was perfectly aligned to my experience. I got a 40% salary increase after completing it.', accent: 'from-emerald-500 to-teal-500' },
 ];
 
 const HOW_IT_WORKS = [
-  { step: '01', title: 'Take the 2-minute quiz', desc: 'Answer 5 questions about your background and goals. We match you to the right track.', icon: Target, gradient: 'from-indigo-500 to-violet-600', light: 'bg-indigo-50' },
+  { step: '01', title: 'Take the 2-minute quiz', desc: 'Answer 5 questions about your background and goals. We match you to the right track.', icon: Target, gradient: 'from-orange-500 to-red-700', light: 'bg-orange-50' },
   { step: '02', title: 'Pay once, access forever', desc: 'Pay via Paystack in seconds. Your access is activated automatically — no approval, no waiting.', icon: Zap, gradient: 'from-emerald-500 to-teal-600', light: 'bg-emerald-50' },
   { step: '03', title: 'Learn at your pace', desc: 'Study when you want, as fast or slow as you need. No deadlines, no group schedules.', icon: Clock, gradient: 'from-amber-500 to-orange-500', light: 'bg-amber-50' },
-  { step: '04', title: 'Graduate with a portfolio', desc: 'Every track ends with a graded capstone project — a real document to show any employer.', icon: Award, gradient: 'from-violet-500 to-purple-600', light: 'bg-violet-50' },
+  { step: '04', title: 'Graduate with a portfolio', desc: 'Every track ends with a graded capstone project — a real document to show any employer.', icon: Award, gradient: 'from-red-600 to-purple-600', light: 'bg-red-50' },
 ];
 
 export default function Home() {
@@ -79,7 +79,7 @@ export default function Home() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-white">
-        <div className="w-10 h-10 border-2 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+        <div className="w-10 h-10 border-2 border-orange-600 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -93,11 +93,11 @@ export default function Home() {
       <nav className="sticky top-0 z-50 w-full bg-white/85 backdrop-blur-xl border-b border-slate-200/60 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 md:h-20 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-200">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-orange-500 to-red-700 flex items-center justify-center shadow-lg shadow-orange-200">
               <ShieldCheck className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-bold tracking-tight text-slate-900">
-              Sec<span className="text-indigo-600">quiz</span>
+              Sec<span className="text-orange-600">quiz</span>
             </span>
           </Link>
 
@@ -113,12 +113,12 @@ export default function Home() {
 
           <div className="hidden lg:flex items-center gap-3">
             <Link href="/login">
-              <Button variant="outline" className="rounded-full px-5 h-10 border-slate-200 text-slate-700 font-semibold hover:border-indigo-300 hover:text-indigo-600 hover:bg-white transition-colors">
+              <Button variant="outline" className="rounded-full px-5 h-10 border-slate-200 text-slate-700 font-semibold hover:border-orange-300 hover:text-orange-600 hover:bg-white transition-colors">
                 Login
               </Button>
             </Link>
             <Link href="/quiz">
-              <Button className="rounded-full px-5 h-10 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-semibold shadow-md shadow-indigo-200/70">
+              <Button className="rounded-full px-5 h-10 bg-gradient-to-r from-orange-600 to-red-700 hover:from-orange-700 hover:to-red-800 text-white font-semibold shadow-md shadow-orange-200/70">
                 Start Free Quiz
               </Button>
             </Link>
@@ -151,7 +151,7 @@ export default function Home() {
                   <Button variant="outline" className="w-full rounded-full h-12">Login</Button>
                 </Link>
                 <Link href="/quiz" className="flex-1" onClick={() => setIsMenuOpen(false)}>
-                  <Button className="w-full rounded-full h-12 bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-bold">Start Quiz</Button>
+                  <Button className="w-full rounded-full h-12 bg-gradient-to-r from-orange-600 to-red-700 text-white font-bold">Start Quiz</Button>
                 </Link>
               </div>
             </div>
@@ -164,21 +164,21 @@ export default function Home() {
         <section id="home" className="relative overflow-hidden pt-14 pb-24 sm:pt-16 sm:pb-28 lg:pt-24 lg:pb-36 bg-white">
           {/* Ambient backdrop — contained inside the section */}
           <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-            <div className="absolute -top-32 -right-24 w-[32rem] h-[32rem] bg-indigo-100/50 rounded-full blur-[120px]" />
-            <div className="absolute -bottom-32 -left-24 w-[28rem] h-[28rem] bg-violet-100/50 rounded-full blur-[120px]" />
+            <div className="absolute -top-32 -right-24 w-[32rem] h-[32rem] bg-orange-100/50 rounded-full blur-[120px]" />
+            <div className="absolute -bottom-32 -left-24 w-[28rem] h-[28rem] bg-red-100/50 rounded-full blur-[120px]" />
             <div className="absolute top-1/2 left-1/3 w-[18rem] h-[18rem] bg-cyan-100/40 rounded-full blur-[80px]" />
           </div>
 
           <div className="relative max-w-7xl mx-auto px-4 md:px-8 grid lg:grid-cols-2 gap-12 lg:gap-14 items-center">
             <div className="space-y-7 lg:space-y-8 max-w-2xl">
-              <div className="inline-flex items-center gap-2.5 bg-white/70 backdrop-blur-sm border border-indigo-100 rounded-full px-4 py-2 shadow-sm">
-                <Sparkles className="w-3.5 h-3.5 text-indigo-500" />
-                <span className="text-[11px] sm:text-xs font-bold text-indigo-700 uppercase tracking-widest">Nigeria's #1 Cybersecurity Academy</span>
+              <div className="inline-flex items-center gap-2.5 bg-white/70 backdrop-blur-sm border border-orange-100 rounded-full px-4 py-2 shadow-sm">
+                <Sparkles className="w-3.5 h-3.5 text-orange-500" />
+                <span className="text-[11px] sm:text-xs font-bold text-orange-700 uppercase tracking-widest">Nigeria's #1 Cybersecurity Academy</span>
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08] text-slate-900 text-balance">
                 Break into{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-red-700">
                   Cybersecurity
                 </span>{' '}
                 without quitting your day job.
@@ -192,7 +192,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/quiz">
                   <Button size="lg"
-                    className="rounded-full px-8 h-14 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-bold text-base shadow-xl shadow-indigo-200/70 gap-2 active:scale-95 transition-all">
+                    className="rounded-full px-8 h-14 bg-gradient-to-r from-orange-600 to-red-700 hover:from-orange-700 hover:to-red-800 text-white font-bold text-base shadow-xl shadow-orange-200/70 gap-2 active:scale-95 transition-all">
                     Find Your Track <ArrowRight className="w-5 h-5" />
                   </Button>
                 </Link>
@@ -211,7 +211,7 @@ export default function Home() {
 
               <div className="flex flex-wrap gap-2.5 pt-2">
                 {[
-                  { icon: <ShieldCheck className="w-4 h-4 text-indigo-500" />, text: 'Nigerian-context curriculum' },
+                  { icon: <ShieldCheck className="w-4 h-4 text-orange-500" />, text: 'Nigerian-context curriculum' },
                   { icon: <Zap className="w-4 h-4 text-amber-500" />, text: 'Instant access on payment' },
                   { icon: <MessageSquare className="w-4 h-4 text-green-500" />, text: 'WhatsApp mentorship' },
                 ].map(b => (
@@ -241,18 +241,18 @@ export default function Home() {
                   <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Tunde" alt="Tunde" className="w-10 h-10 rounded-full bg-slate-100" />
                   <div>
                     <p className="font-bold text-sm text-slate-900">Tunde A.</p>
-                    <p className="text-xs text-indigo-600 font-semibold">SOC Analyst · Lagos</p>
+                    <p className="text-xs text-orange-600 font-semibold">SOC Analyst · Lagos</p>
                   </div>
                 </div>
               </div>
 
               {/* Floating card 2 */}
-              <div className="absolute -right-8 bottom-1/3 p-4 rounded-2xl shadow-2xl w-48 bg-gradient-to-br from-indigo-600 to-violet-600 text-white border border-indigo-500">
+              <div className="absolute -right-8 bottom-1/3 p-4 rounded-2xl shadow-2xl w-48 bg-gradient-to-br from-orange-600 to-red-700 text-white border border-orange-500">
                 <div className="flex items-center gap-2 mb-1">
-                  <TrendingUp className="w-4 h-4 text-indigo-200" />
+                  <TrendingUp className="w-4 h-4 text-orange-200" />
                   <span className="text-3xl font-black">1,000+</span>
                 </div>
-                <p className="text-xs text-indigo-200 font-medium">Nigerians transitioning<br />into cybersecurity</p>
+                <p className="text-xs text-orange-200 font-medium">Nigerians transitioning<br />into cybersecurity</p>
               </div>
 
               {/* Floating card 3 */}
@@ -267,7 +267,7 @@ export default function Home() {
         </section>
 
         {/* ── Stats strip ──────────────────────────────────────────── */}
-        <div className="bg-gradient-to-r from-indigo-600 to-violet-600 text-white">
+        <div className="bg-gradient-to-r from-orange-600 to-red-700 text-white">
           <div className="max-w-7xl mx-auto px-4 md:px-8 py-5 flex flex-wrap justify-center md:justify-between items-center gap-x-6 gap-y-3 text-sm md:text-base font-semibold">
             {[
               { icon: '🎯', text: '6 Cybersecurity Tracks' },
@@ -287,18 +287,18 @@ export default function Home() {
         <section id="tracks" className="relative py-20 lg:py-28 bg-slate-50 overflow-hidden">
           {/* Ambient background ornaments */}
           <div aria-hidden className="pointer-events-none absolute inset-0 -z-0">
-            <div className="absolute top-24 -left-24 w-[28rem] h-[28rem] bg-indigo-100/40 rounded-full blur-[120px]" />
-            <div className="absolute bottom-24 -right-24 w-[28rem] h-[28rem] bg-violet-100/40 rounded-full blur-[120px]" />
+            <div className="absolute top-24 -left-24 w-[28rem] h-[28rem] bg-orange-100/40 rounded-full blur-[120px]" />
+            <div className="absolute bottom-24 -right-24 w-[28rem] h-[28rem] bg-red-100/40 rounded-full blur-[120px]" />
           </div>
 
           <div className="relative max-w-7xl mx-auto px-4 md:px-8 space-y-14">
             <div className="text-center space-y-4">
-              <span className="inline-flex items-center gap-2 text-indigo-600 text-xs font-bold tracking-widest uppercase">
-                <span className="w-2 h-2 bg-indigo-600 rounded-full" /> Cybersecurity Tracks
+              <span className="inline-flex items-center gap-2 text-orange-600 text-xs font-bold tracking-widest uppercase">
+                <span className="w-2 h-2 bg-orange-600 rounded-full" /> Cybersecurity Tracks
               </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight text-balance">
                 Six paths. One goal:{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600 italic font-serif font-normal">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-red-700 italic font-serif font-normal">
                   getting you hired.
                 </span>
               </h2>
@@ -328,7 +328,7 @@ export default function Home() {
                     key={track.key}
                     href={`/quiz/result?track=${track.key}`}
                     aria-label={`Explore the ${track.title} track`}
-                    className="group block rounded-[28px] focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-50"
+                    className="group block rounded-[28px] focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-50"
                   >
                     <Card className={cn(
                       'relative h-full overflow-hidden rounded-[28px] border border-slate-200/70 bg-white/80 backdrop-blur-xl',
@@ -415,7 +415,7 @@ export default function Home() {
             <div className="text-center pt-6">
               <Link href="/quiz">
                 <Button size="lg"
-                  className="rounded-full px-10 h-14 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-bold gap-2 shadow-xl shadow-indigo-200/60 active:scale-95 transition-all">
+                  className="rounded-full px-10 h-14 bg-gradient-to-r from-orange-600 to-red-700 hover:from-orange-700 hover:to-red-800 text-white font-bold gap-2 shadow-xl shadow-orange-200/60 active:scale-95 transition-all">
                   Not sure which track? Take the quiz <ArrowRight className="w-5 h-5" />
                 </Button>
               </Link>
@@ -427,17 +427,17 @@ export default function Home() {
         {/* ── How it works ─────────────────────────────────────────── */}
         <section id="how-it-works" className="relative py-20 lg:py-28 bg-white overflow-hidden">
           <div aria-hidden className="pointer-events-none absolute inset-0 -z-0">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[36rem] h-[36rem] bg-indigo-50/60 rounded-full blur-[120px]" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[36rem] h-[36rem] bg-orange-50/60 rounded-full blur-[120px]" />
           </div>
 
           <div className="relative max-w-7xl mx-auto px-4 md:px-8 space-y-12 lg:space-y-16">
             <div className="text-center space-y-4">
-              <span className="inline-flex items-center gap-2 text-indigo-600 text-xs font-bold tracking-widest uppercase">
-                <span className="w-2 h-2 bg-indigo-600 rounded-full" /> How It Works
+              <span className="inline-flex items-center gap-2 text-orange-600 text-xs font-bold tracking-widest uppercase">
+                <span className="w-2 h-2 bg-orange-600 rounded-full" /> How It Works
               </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight text-balance">
                 From zero to job-ready{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600 italic font-serif font-normal">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-red-700 italic font-serif font-normal">
                   in four steps.
                 </span>
               </h2>
@@ -472,17 +472,17 @@ export default function Home() {
         <section id="testimonials" className="relative py-20 lg:py-28 bg-slate-50 overflow-hidden">
           <div aria-hidden className="pointer-events-none absolute inset-0 -z-0">
             <div className="absolute top-24 -right-24 w-[28rem] h-[28rem] bg-rose-100/30 rounded-full blur-[120px]" />
-            <div className="absolute bottom-24 -left-24 w-[28rem] h-[28rem] bg-indigo-100/40 rounded-full blur-[120px]" />
+            <div className="absolute bottom-24 -left-24 w-[28rem] h-[28rem] bg-orange-100/40 rounded-full blur-[120px]" />
           </div>
 
           <div className="relative max-w-7xl mx-auto px-4 md:px-8 space-y-12 lg:space-y-14">
             <div className="text-center space-y-4">
-              <span className="inline-flex items-center gap-2 text-indigo-600 text-xs font-bold tracking-widest uppercase">
-                <span className="w-2 h-2 bg-indigo-600 rounded-full" /> Testimonials
+              <span className="inline-flex items-center gap-2 text-orange-600 text-xs font-bold tracking-widest uppercase">
+                <span className="w-2 h-2 bg-orange-600 rounded-full" /> Testimonials
               </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight text-balance">
                 Real Nigerians.{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600 italic font-serif font-normal">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-red-700 italic font-serif font-normal">
                   Real results.
                 </span>
               </h2>
@@ -508,7 +508,7 @@ export default function Home() {
                       <img src={t.avatar} alt={t.name} className="w-11 h-11 rounded-full bg-slate-100 ring-2 ring-white shadow-sm" />
                       <div className="min-w-0">
                         <p className="font-bold text-slate-900 text-sm truncate">{t.name}</p>
-                        <p className="text-xs text-indigo-600 font-semibold truncate">{t.role}</p>
+                        <p className="text-xs text-orange-600 font-semibold truncate">{t.role}</p>
                         <p className="text-xs text-slate-400">{t.location}</p>
                       </div>
                     </div>
@@ -542,12 +542,12 @@ export default function Home() {
 
             <div className="space-y-7 lg:space-y-8">
               <div className="space-y-4">
-                <span className="inline-flex items-center gap-2 text-indigo-600 text-xs font-bold tracking-widest uppercase">
-                  <span className="w-2 h-2 bg-indigo-600 rounded-full" /> About Secquiz
+                <span className="inline-flex items-center gap-2 text-orange-600 text-xs font-bold tracking-widest uppercase">
+                  <span className="w-2 h-2 bg-orange-600 rounded-full" /> About Secquiz
                 </span>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight leading-tight text-balance">
                   Built for Nigeria.{' '}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600 italic font-serif font-normal">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-red-700 italic font-serif font-normal">
                     By Nigerians.
                   </span>
                 </h2>
@@ -559,8 +559,8 @@ export default function Home() {
               </p>
               <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
                 {[
-                  { emoji: '🎯', title: 'Our Mission', desc: 'Make world-class cybersecurity education affordable and accessible to every Nigerian who wants it.', bg: 'bg-indigo-50/80 border-indigo-100' },
-                  { emoji: '👁️', title: 'Our Vision', desc: 'A Nigeria where every cybersecurity role is filled by a Nigerian professional trained for that exact job.', bg: 'bg-violet-50/80 border-violet-100' },
+                  { emoji: '🎯', title: 'Our Mission', desc: 'Make world-class cybersecurity education affordable and accessible to every Nigerian who wants it.', bg: 'bg-orange-50/80 border-orange-100' },
+                  { emoji: '👁️', title: 'Our Vision', desc: 'A Nigeria where every cybersecurity role is filled by a Nigerian professional trained for that exact job.', bg: 'bg-red-50/80 border-red-100' },
                 ].map(item => (
                   <div key={item.title} className={cn('rounded-2xl p-5 border backdrop-blur-sm space-y-3', item.bg)}>
                     <div className="flex items-center gap-3">
@@ -572,7 +572,7 @@ export default function Home() {
                 ))}
               </div>
               <Link href="/quiz">
-                <Button className="rounded-full px-8 h-12 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-semibold gap-2 shadow-lg shadow-indigo-200/60 active:scale-95 transition-all">
+                <Button className="rounded-full px-8 h-12 bg-gradient-to-r from-orange-600 to-red-700 hover:from-orange-700 hover:to-red-800 text-white font-semibold gap-2 shadow-lg shadow-orange-200/60 active:scale-95 transition-all">
                   Find My Track <ArrowRight className="w-4 h-4" />
                 </Button>
               </Link>
@@ -581,7 +581,7 @@ export default function Home() {
         </section>
 
         {/* ── CTA Banner ───────────────────────────────────────────── */}
-        <section className="relative py-20 lg:py-24 bg-gradient-to-br from-indigo-600 via-violet-600 to-purple-700 overflow-hidden">
+        <section className="relative py-20 lg:py-24 bg-gradient-to-br from-orange-600 via-red-700 to-purple-700 overflow-hidden">
           <div aria-hidden className="absolute inset-0 opacity-10"
             style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
           <div aria-hidden className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4" />
@@ -590,14 +590,14 @@ export default function Home() {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight text-balance">
               Your cybersecurity career starts with 5 questions.
             </h2>
-            <p className="text-indigo-100 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
+            <p className="text-orange-100 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
               Take the free quiz, get matched to your track, and pay once for lifetime access.
               No deadlines. No group pressure. Just progress.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
               <Link href="/quiz" className="w-full sm:w-auto">
                 <Button size="lg"
-                  className="w-full sm:w-auto rounded-full px-10 h-14 bg-white text-indigo-600 hover:bg-indigo-50 font-bold text-base gap-2 shadow-2xl active:scale-95 transition-all">
+                  className="w-full sm:w-auto rounded-full px-10 h-14 bg-white text-orange-600 hover:bg-orange-50 font-bold text-base gap-2 shadow-2xl active:scale-95 transition-all">
                   Take the Free Quiz <ArrowRight className="w-5 h-5" />
                 </Button>
               </Link>
@@ -633,10 +633,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-start md:justify-between gap-10">
           <div className="space-y-3 text-center md:text-left max-w-sm md:max-w-xs mx-auto md:mx-0">
             <div className="flex items-center gap-2.5 justify-center md:justify-start">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-md shadow-indigo-500/30">
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-orange-500 to-red-700 flex items-center justify-center shadow-md shadow-orange-500/30">
                 <ShieldCheck className="w-4 h-4 text-white" />
               </div>
-              <span className="text-lg font-bold tracking-tight">Sec<span className="text-indigo-400">quiz</span></span>
+              <span className="text-lg font-bold tracking-tight">Sec<span className="text-orange-400">quiz</span></span>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed">
               Nigeria's cybersecurity learning academy. Self-paced, affordable, portfolio-driven.
@@ -646,7 +646,7 @@ export default function Home() {
             {NAV_LINKS.map(l => (
               <a key={l.href} href={l.href} className="hover:text-white transition-colors">{l.label}</a>
             ))}
-            <Link href="/quiz" className="text-indigo-400 hover:text-indigo-300 font-semibold">Find Your Track</Link>
+            <Link href="/quiz" className="text-orange-400 hover:text-orange-300 font-semibold">Find Your Track</Link>
             <Link href="/login" className="hover:text-white transition-colors">Login</Link>
             <Link href="/register" className="hover:text-white transition-colors">Register</Link>
           </nav>

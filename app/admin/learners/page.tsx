@@ -81,7 +81,7 @@ export default function LearnersPage() {
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <StatCard icon={Users} label="Total Learners" value={learners.length}
-          iconColor="text-indigo-600" iconBgColor="bg-indigo-50" />
+          iconColor="text-orange-600" iconBgColor="bg-orange-50" />
         <StatCard icon={TrendingUp} label="Active Accounts" value={active}
           iconColor="text-emerald-600" iconBgColor="bg-emerald-50" />
         <StatCard icon={BookOpen} label="Enrolled in Course" value={enrolled}
@@ -120,7 +120,7 @@ export default function LearnersPage() {
                       <div className="flex items-center gap-3">
                         <Avatar className="w-10 h-10 rounded-xl border border-slate-100">
                           <AvatarImage src={l.avatar} />
-                          <AvatarFallback className="bg-indigo-50 text-indigo-600 font-semibold text-sm">
+                          <AvatarFallback className="bg-orange-50 text-orange-600 font-semibold text-sm">
                             {l.first_name?.[0]}{l.last_name?.[0]}
                           </AvatarFallback>
                         </Avatar>

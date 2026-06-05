@@ -99,7 +99,7 @@ export default function AdminCoursesPage() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-slate-200/60">
         <div>
-          <Badge className="bg-indigo-50 text-indigo-700 border-indigo-100 px-2.5 py-0.5 text-[9px] font-medium uppercase tracking-wider mb-2">
+          <Badge className="bg-orange-50 text-orange-700 border-orange-100 px-2.5 py-0.5 text-[9px] font-medium uppercase tracking-wider mb-2">
             Content Management
           </Badge>
           <h1 className="text-3xl font-medium tracking-tight text-slate-900">Courses</h1>
@@ -107,7 +107,7 @@ export default function AdminCoursesPage() {
         </div>
         <Button
           onClick={() => router.push('/admin/courses/new')}
-          className="bg-indigo-600 hover:bg-indigo-700 text-white h-11 rounded-xl px-6 font-semibold text-sm shadow-lg shadow-indigo-100"
+          className="bg-orange-600 hover:bg-orange-700 text-white h-11 rounded-xl px-6 font-semibold text-sm shadow-lg shadow-orange-100"
         >
           <Plus className="w-4 h-4 mr-2" /> New Course
         </Button>
@@ -116,7 +116,7 @@ export default function AdminCoursesPage() {
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <StatCard icon={BookOpen} label="Total Courses" value={courses.length}
-          iconColor="text-indigo-600" iconBgColor="bg-indigo-50" />
+          iconColor="text-orange-600" iconBgColor="bg-orange-50" />
         <StatCard icon={Eye} label="Published" value={published}
           iconColor="text-emerald-600" iconBgColor="bg-emerald-50" />
         <StatCard icon={Users} label="Total Enrolments" value={courses.reduce((s, c) => s + (c.enrolments?.length ?? 0), 0)}
@@ -145,7 +145,7 @@ export default function AdminCoursesPage() {
             <div key={c.id} className="bg-white rounded-[28px] p-5 border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 flex flex-col group">
               {/* Top row */}
               <div className="flex items-start justify-between mb-4">
-                <div className="w-12 h-12 rounded-2xl bg-indigo-50 flex items-center justify-center text-2xl">
+                <div className="w-12 h-12 rounded-2xl bg-orange-50 flex items-center justify-center text-2xl">
                   {c.thumbnail ? (
                     <img src={c.thumbnail} alt="" className="w-full h-full object-cover rounded-2xl" />
                   ) : '📚'}
@@ -183,7 +183,7 @@ export default function AdminCoursesPage() {
 
               {/* Info */}
               <div className="flex-1 space-y-1.5">
-                <h3 className="font-semibold text-slate-900 leading-tight group-hover:text-indigo-600 transition-colors">
+                <h3 className="font-semibold text-slate-900 leading-tight group-hover:text-orange-600 transition-colors">
                   {c.name}
                 </h3>
                 {c.description && (

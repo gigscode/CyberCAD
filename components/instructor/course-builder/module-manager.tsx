@@ -314,7 +314,7 @@ export function ModuleManager({ courseId, initialModules, onComplete }: ModuleMa
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div className="space-y-1">
                     <h2 className="text-xl md:text-2xl font-medium text-slate-900 tracking-tight flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 shrink-0">
+                        <div className="w-10 h-10 rounded-2xl bg-orange-50 flex items-center justify-center text-orange-600 shrink-0">
                             <Layers className="w-5 h-5" />
                         </div>
                         Curriculum Architecture
@@ -324,7 +324,7 @@ export function ModuleManager({ courseId, initialModules, onComplete }: ModuleMa
                 <Button
                     onClick={() => setIsAddingModule(true)}
                     disabled={isAddingModule}
-                    className="h-12 px-6 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium shadow-lg shadow-indigo-100 transition-all active:scale-95 flex items-center gap-2 w-full md:w-auto"
+                    className="h-12 px-6 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-medium shadow-lg shadow-orange-100 transition-all active:scale-95 flex items-center gap-2 w-full md:w-auto"
                 >
                     <Plus className="w-4 h-4" /> Add Module
                 </Button>
@@ -333,22 +333,22 @@ export function ModuleManager({ courseId, initialModules, onComplete }: ModuleMa
             {/* In-line Add Module Form */}
             {isAddingModule && (
                 <div className="animate-in fade-in slide-in-from-top-4 duration-300">
-                    <Card className="border-2 border-dashed border-indigo-200 bg-indigo-50/30 rounded-[28px] overflow-hidden">
+                    <Card className="border-2 border-dashed border-orange-200 bg-orange-50/30 rounded-[28px] overflow-hidden">
                         <CardContent className="p-6 md:p-8 space-y-4">
-                            <Label className="text-[10px] md:text-xs font-medium uppercase tracking-widest text-indigo-600 ml-1">New Module Title</Label>
+                            <Label className="text-[10px] md:text-xs font-medium uppercase tracking-widest text-orange-600 ml-1">New Module Title</Label>
                             <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
                                 <Input
                                     value={newModuleName}
                                     onChange={(e) => setNewModuleName(e.target.value)}
                                     placeholder="e.g. Fundamental Logic and Structures"
-                                    className="h-12 md:h-14 bg-white border-white/50 rounded-2xl focus:ring-indigo-500/20 focus:border-indigo-500/50 transition-all font-medium text-slate-900 flex-1 shadow-sm text-sm md:text-base"
+                                    className="h-12 md:h-14 bg-white border-white/50 rounded-2xl focus:ring-orange-500/20 focus:border-orange-500/50 transition-all font-medium text-slate-900 flex-1 shadow-sm text-sm md:text-base"
                                     autoFocus
                                 />
                                 <div className="flex gap-2">
                                     <Button
                                         onClick={handleAddModule}
                                         disabled={isSaving || !newModuleName.trim()}
-                                        className="h-12 md:h-14 px-6 md:px-8 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-2xl shadow-lg shadow-indigo-900/10 transition-all flex-1 sm:flex-none text-sm md:text-base"
+                                        className="h-12 md:h-14 px-6 md:px-8 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-2xl shadow-lg shadow-orange-900/10 transition-all flex-1 sm:flex-none text-sm md:text-base"
                                     >
                                         {isSaving ? <Loader2 className="w-5 h-5 animate-spin" /> : "Save Module"}
                                     </Button>
@@ -382,7 +382,7 @@ export function ModuleManager({ courseId, initialModules, onComplete }: ModuleMa
                             <Card className="rounded-[28px] md:border-slate-100 overflow-hidden md:shadow-sm hover:shadow-md transition-all duration-300 group">
                                 <AccordionTrigger className="p-0 hover:no-underline">
                                     <div className="flex items-center gap-4 md:gap-6 p-5 md:p-8 w-full text-left">
-                                        <div className="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-600 font-medium group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 md:shadow-sm md:border md:border-slate-100/50 shrink-0 text-sm md:text-base">
+                                        <div className="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-600 font-medium group-hover:bg-orange-600 group-hover:text-white transition-all duration-300 md:shadow-sm md:border md:border-slate-100/50 shrink-0 text-sm md:text-base">
                                             {idx + 1}
                                         </div>
                                         <div className="flex-1 min-w-0">
@@ -391,12 +391,12 @@ export function ModuleManager({ courseId, initialModules, onComplete }: ModuleMa
                                                     <Input
                                                         value={editingModuleName}
                                                         onChange={(e) => setEditingModuleName(e.target.value)}
-                                                        className="h-9 bg-white border-indigo-200 rounded-lg text-sm font-medium"
+                                                        className="h-9 bg-white border-orange-200 rounded-lg text-sm font-medium"
                                                         autoFocus
                                                     />
                                                     <Button
                                                         size="sm"
-                                                        className="h-9 px-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg"
+                                                        className="h-9 px-3 bg-orange-600 hover:bg-orange-700 rounded-lg"
                                                         onClick={() => handleUpdateModule(module._id)}
                                                         disabled={isSaving || !editingModuleName.trim()}
                                                     >
@@ -416,14 +416,14 @@ export function ModuleManager({ courseId, initialModules, onComplete }: ModuleMa
                                                 </div>
                                             ) : (
                                                 <div className="flex items-center justify-between group/title gap-4 flex-1 min-w-0">
-                                                    <h3 className="text-lg md:text-xl font-medium text-slate-900 group-hover:text-indigo-600 transition-colors uppercase tracking-tight truncate flex-1 text-left min-w-0">
+                                                    <h3 className="text-lg md:text-xl font-medium text-slate-900 group-hover:text-orange-600 transition-colors uppercase tracking-tight truncate flex-1 text-left min-w-0">
                                                         {module.name}
                                                     </h3>
                                                     <div className="flex items-center gap-1 shrink-0">
                                                         <Button
                                                             variant="ghost"
                                                             size="icon"
-                                                            className="h-8 w-8 text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all"
+                                                            className="h-8 w-8 text-slate-500 hover:text-orange-600 hover:bg-orange-50 rounded-lg transition-all"
                                                             onClick={(e) => {
                                                                 e.stopPropagation();
                                                                 setEditingModuleId(module._id);
@@ -453,7 +453,7 @@ export function ModuleManager({ courseId, initialModules, onComplete }: ModuleMa
                                                     {module.lessons?.length || 0} SESSIONS
                                                 </div>
                                                 <div className="hidden md:block w-1 h-1 rounded-full bg-slate-300" />
-                                                <div className="flex items-center gap-1.5 text-[10px] md:text-xs font-medium text-indigo-500">
+                                                <div className="flex items-center gap-1.5 text-[10px] md:text-xs font-medium text-orange-500">
                                                     <Layers className="w-3 md:w-3.5 h-3 md:h-3.5" />
                                                     PROVISIONED
                                                 </div>
@@ -467,9 +467,9 @@ export function ModuleManager({ courseId, initialModules, onComplete }: ModuleMa
                                     {/* Existing Lessons List */}
                                     <div className="grid gap-3">
                                         {module.lessons?.map((lesson: any, sIdx: number) => (
-                                            <div key={lesson._id} className="group/session flex flex-col justify-start gap-4 p-4 md:p-5 rounded-2xl hover:bg-white hover:shadow-lg hover:shadow-slate-200/50 hover:border-indigo-100 transition-all duration-300 w-full overflow-hidden">
+                                            <div key={lesson._id} className="group/session flex flex-col justify-start gap-4 p-4 md:p-5 rounded-2xl hover:bg-white hover:shadow-lg hover:shadow-slate-200/50 hover:border-orange-100 transition-all duration-300 w-full overflow-hidden">
                                                 <div className="flex items-center gap-4 flex-1 min-w-0 max-w-full">
-                                                    <div className="w-10 h-10 rounded-xl bg-white border border-slate-100 flex items-center justify-center text-slate-400 group-hover/session:text-indigo-600 transition-colors shadow-sm shrink-0">
+                                                    <div className="w-10 h-10 rounded-xl bg-white border border-slate-100 flex items-center justify-center text-slate-400 group-hover/session:text-orange-600 transition-colors shadow-sm shrink-0">
                                                         {lesson.videoUrl ? <Video className="w-4 h-4" /> : <FileText className="w-4 h-4" />}
                                                     </div>
                                                     <div className="flex-1 min-w-0">
@@ -488,7 +488,7 @@ export function ModuleManager({ courseId, initialModules, onComplete }: ModuleMa
                                                         <Button
                                                             variant="ghost"
                                                             size="icon"
-                                                            className="text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl h-9 w-9 transition-all"
+                                                            className="text-slate-500 hover:text-orange-600 hover:bg-orange-50 rounded-xl h-9 w-9 transition-all"
                                                             onClick={() => {
                                                                 setNewLesson({
                                                                     name: lesson.name,
@@ -519,33 +519,33 @@ export function ModuleManager({ courseId, initialModules, onComplete }: ModuleMa
 
                                     {/* Add Session Area */}
                                     {activeModuleId === module._id ? (
-                                        <Card className="border-0 shadow-0 p-0 md:bg-indigo-50/20 md:border-indigo-100 rounded-[24px] overflow-hidden animate-in fade-in zoom-in-95 duration-300">
-                                            <CardHeader className="md:bg-white/50 md:border-b md:border-indigo-50 p-2 md:p-6 flex flex-row items-center justify-between">
+                                        <Card className="border-0 shadow-0 p-0 md:bg-orange-50/20 md:border-orange-100 rounded-[24px] overflow-hidden animate-in fade-in zoom-in-95 duration-300">
+                                            <CardHeader className="md:bg-white/50 md:border-b md:border-orange-50 p-2 md:p-6 flex flex-row items-center justify-between">
                                                 <div>
-                                                    <CardTitle className="text-lg font-medium text-indigo-900">{editingLessonId ? 'Modify Learning Session' : 'Add Learning Session'}</CardTitle>
-                                                    <CardDescription className="text-xs font-medium text-indigo-600/70">{editingLessonId ? 'Update session details and graduation task.' : 'Define a lesson and its corresponding task.'}</CardDescription>
+                                                    <CardTitle className="text-lg font-medium text-orange-900">{editingLessonId ? 'Modify Learning Session' : 'Add Learning Session'}</CardTitle>
+                                                    <CardDescription className="text-xs font-medium text-orange-600/70">{editingLessonId ? 'Update session details and graduation task.' : 'Define a lesson and its corresponding task.'}</CardDescription>
                                                 </div>
                                                 <div className="flex items-center gap-2">
-                                                    <div className="w-8 h-8 rounded-lg bg-indigo-100 flex items-center justify-center text-indigo-600 font-medium text-xs">{module.lessons?.length + 1}</div>
+                                                    <div className="w-8 h-8 rounded-lg bg-orange-100 flex items-center justify-center text-orange-600 font-medium text-xs">{module.lessons?.length + 1}</div>
                                                 </div>
                                             </CardHeader>
                                             <CardContent className="p-2 md:p-8 space-y-6">
                                                 <div className="grid grid-cols-1 lg:grid-cols-1 gap-6">
                                                     <div className="space-y-4">
                                                         <div className="space-y-2">
-                                                            <Label className="text-[10px] font-medium uppercase tracking-widest text-indigo-400 ml-1">Session Title</Label>
-                                                            <Input value={newLesson.name} onChange={e => setNewLesson({ ...newLesson, name: e.target.value })} placeholder="e.g. Logic Gates & Signal Flow" className="bg-white border-indigo-100 h-11 md:h-12 rounded-xl text-sm md:text-base" />
+                                                            <Label className="text-[10px] font-medium uppercase tracking-widest text-orange-400 ml-1">Session Title</Label>
+                                                            <Input value={newLesson.name} onChange={e => setNewLesson({ ...newLesson, name: e.target.value })} placeholder="e.g. Logic Gates & Signal Flow" className="bg-white border-orange-100 h-11 md:h-12 rounded-xl text-sm md:text-base" />
                                                         </div>
                                                         <div className="space-y-2">
-                                                            <Label className="text-[10px] font-medium uppercase tracking-widest text-indigo-400 ml-1">Video Source URL (Optional)</Label>
+                                                            <Label className="text-[10px] font-medium uppercase tracking-widest text-orange-400 ml-1">Video Source URL (Optional)</Label>
                                                             <div className="relative">
-                                                                <Video className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-indigo-300" />
-                                                                <Input value={newLesson.videoUrl} onChange={e => setNewLesson({ ...newLesson, videoUrl: e.target.value })} placeholder="https://vimeo.com/..." className="pl-10 bg-white border-indigo-100 h-11 md:h-12 rounded-xl text-sm md:text-base" />
+                                                                <Video className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-orange-300" />
+                                                                <Input value={newLesson.videoUrl} onChange={e => setNewLesson({ ...newLesson, videoUrl: e.target.value })} placeholder="https://vimeo.com/..." className="pl-10 bg-white border-orange-100 h-11 md:h-12 rounded-xl text-sm md:text-base" />
                                                             </div>
                                                         </div>
                                                         <div className="space-y-2">
-                                                            <Label className="text-[10px] font-medium uppercase tracking-widest text-indigo-400 ml-1">Session Notes / Resources</Label>
-                                                            <div className="bg-white rounded-xl border border-indigo-100 overflow-hidden min-h-[180px] md:min-h-[400px]">
+                                                            <Label className="text-[10px] font-medium uppercase tracking-widest text-orange-400 ml-1">Session Notes / Resources</Label>
+                                                            <div className="bg-white rounded-xl border border-orange-100 overflow-hidden min-h-[180px] md:min-h-[400px]">
                                                                 <ReactQuill
                                                                     theme="snow"
                                                                     value={newLesson.content}
@@ -557,17 +557,17 @@ export function ModuleManager({ courseId, initialModules, onComplete }: ModuleMa
                                                         </div>
                                                     </div>
 
-                                                    <div className="space-y-4 bg-white/60 p-5 md:p-6 rounded-2xl border border-indigo-50 shadow-inner">
+                                                    <div className="space-y-4 bg-white/60 p-5 md:p-6 rounded-2xl border border-orange-50 shadow-inner">
                                                         <div className="flex items-center gap-2 mb-1">
                                                             <Award className="w-4 h-4 text-amber-500" />
-                                                            <h4 className="text-xs md:text-sm font-medium text-indigo-900 uppercase tracking-tight">Graduation Task</h4>
+                                                            <h4 className="text-xs md:text-sm font-medium text-orange-900 uppercase tracking-tight">Graduation Task</h4>
                                                         </div>
 
                                                         <div className="space-y-3">
                                                             <div className="space-y-1.5">
                                                                 <Label className="text-[10px] font-medium text-slate-500">Submission Mode</Label>
                                                                 <select
-                                                                    className="w-full h-10 md:h-11 px-3 rounded-xl border-indigo-100 border text-xs md:text-sm bg-white focus:ring-1 focus:ring-indigo-500 transition-all outline-none"
+                                                                    className="w-full h-10 md:h-11 px-3 rounded-xl border-orange-100 border text-xs md:text-sm bg-white focus:ring-1 focus:ring-orange-500 transition-all outline-none"
                                                                     value={newLesson.assignment.type || 'task'}
                                                                     onChange={(e) => setNewLesson({
                                                                         ...newLesson,
@@ -586,7 +586,7 @@ export function ModuleManager({ courseId, initialModules, onComplete }: ModuleMa
                                                                     placeholder="e.g. System Diagram Output"
                                                                     value={newLesson.assignment.title}
                                                                     onChange={e => setNewLesson({ ...newLesson, assignment: { ...newLesson.assignment, title: e.target.value } })}
-                                                                    className="bg-white border-indigo-100 h-10 md:h-11 rounded-xl text-xs md:text-sm"
+                                                                    className="bg-white border-orange-100 h-10 md:h-11 rounded-xl text-xs md:text-sm"
                                                                 />
                                                             </div>
 
@@ -596,7 +596,7 @@ export function ModuleManager({ courseId, initialModules, onComplete }: ModuleMa
                                                                     placeholder="Describe the expected output..."
                                                                     value={newLesson.assignment.description}
                                                                     onChange={e => setNewLesson({ ...newLesson, assignment: { ...newLesson.assignment, description: e.target.value } })}
-                                                                    className="bg-white border-indigo-100 h-10 md:h-11 rounded-xl text-xs md:text-sm"
+                                                                    className="bg-white border-orange-100 h-10 md:h-11 rounded-xl text-xs md:text-sm"
                                                                 />
                                                             </div>
                                                         </div>
@@ -605,22 +605,22 @@ export function ModuleManager({ courseId, initialModules, onComplete }: ModuleMa
 
                                                 {/* QUIZ BUILDER UI */}
                                                 {(newLesson.assignment.type === 'quiz' as any) && (
-                                                    <div className="bg-white/80 p-8 rounded-[24px] border border-indigo-100 shadow-xl shadow-indigo-100/30 space-y-6 animate-in slide-in-from-top-2 duration-300">
+                                                    <div className="bg-white/80 p-8 rounded-[24px] border border-orange-100 shadow-xl shadow-orange-100/30 space-y-6 animate-in slide-in-from-top-2 duration-300">
                                                         <div className="md:flex items-center justify-between border-b border-slate-50 pb-4">
                                                             <div className="space-y-1">
-                                                                <h5 className="text-sm font-medium text-indigo-900 uppercase tracking-widest flex items-center gap-2">
+                                                                <h5 className="text-sm font-medium text-orange-900 uppercase tracking-widest flex items-center gap-2">
                                                                     {/* <Sparkles className="w-4 h-4" />  */}
                                                                     Quiz Architect
                                                                 </h5>
                                                                 <p className="text-[10px] font-medium text-slate-400">{(newLesson.assignment.questions || []).length} CHALLENGES ADDED</p>
                                                             </div>
-                                                            <div className="flex mt-4 md:mt-0 items-center gap-4 bg-indigo-50/50 p-2 rounded-2xl border border-indigo-100/50">
+                                                            <div className="flex mt-4 md:mt-0 items-center gap-4 bg-orange-50/50 p-2 rounded-2xl border border-orange-100/50">
                                                                 <div className="flex items-center gap-2 px-2">
-                                                                    <Label className="text-[10px] font-medium text-indigo-400 uppercase tracking-tight">Level:</Label>
+                                                                    <Label className="text-[10px] font-medium text-orange-400 uppercase tracking-tight">Level:</Label>
                                                                     <select
                                                                         value={aiDifficulty}
                                                                         onChange={(e) => setAiDifficulty(e.target.value as any)}
-                                                                        className="bg-transparent text-[10px] font-medium text-indigo-600 outline-none cursor-pointer"
+                                                                        className="bg-transparent text-[10px] font-medium text-orange-600 outline-none cursor-pointer"
                                                                     >
                                                                         <option value="easy">Easy</option>
                                                                         <option value="hard">Hard</option>
@@ -631,7 +631,7 @@ export function ModuleManager({ courseId, initialModules, onComplete }: ModuleMa
                                                                     variant="ghost"
                                                                     disabled={isGeneratingAI || !newLesson.name}
                                                                     onClick={handleGenerateAIQuiz}
-                                                                    className="h-9 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-xl shadow-lg shadow-indigo-900/10 gap-2 transition-all active:scale-95 text-xs"
+                                                                    className="h-9 px-4 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-xl shadow-lg shadow-orange-900/10 gap-2 transition-all active:scale-95 text-xs"
                                                                 >
                                                                     {isGeneratingAI ? (
                                                                         <>
@@ -646,7 +646,7 @@ export function ModuleManager({ courseId, initialModules, onComplete }: ModuleMa
                                                                     )}
                                                                 </Button>
                                                                 
-                                                                <div className="w-px h-6 bg-indigo-100 mx-1 hidden md:block" />
+                                                                <div className="w-px h-6 bg-orange-100 mx-1 hidden md:block" />
                                                                 
                                                                 <div className="flex items-center gap-2">
                                                                     <input 
@@ -659,7 +659,7 @@ export function ModuleManager({ courseId, initialModules, onComplete }: ModuleMa
                                                                     <Button
                                                                         size="sm"
                                                                         variant="outline"
-                                                                        className="h-9 px-4 border-indigo-200 text-indigo-600 hover:bg-indigo-50 font-medium rounded-xl gap-2 transition-all text-xs"
+                                                                        className="h-9 px-4 border-orange-200 text-orange-600 hover:bg-orange-50 font-medium rounded-xl gap-2 transition-all text-xs"
                                                                         onClick={() => document.getElementById('csv-upload')?.click()}
                                                                     >
                                                                         <Upload className="w-3.5 h-3.5" />
@@ -668,7 +668,7 @@ export function ModuleManager({ courseId, initialModules, onComplete }: ModuleMa
                                                                     <Button
                                                                         size="sm"
                                                                         variant="ghost"
-                                                                        className="h-9 w-9 p-0 text-slate-400 hover:text-indigo-600 rounded-xl"
+                                                                        className="h-9 w-9 p-0 text-slate-400 hover:text-orange-600 rounded-xl"
                                                                         title="Download Sample CSV Template"
                                                                         onClick={downloadSampleCSV}
                                                                     >
@@ -682,7 +682,7 @@ export function ModuleManager({ courseId, initialModules, onComplete }: ModuleMa
                                                             {(newLesson.assignment.questions || []).map((q: any, qIdx: number) => (
                                                                 <div key={qIdx} className="bg-slate-50/50 p-6 rounded-2xl border border-slate-100 space-y-4 relative group/quiz">
                                                                     <div className="flex items-center gap-3 mb-2">
-                                                                        <div className="w-7 h-7 rounded-lg bg-indigo-600 text-white text-[10px] font-medium flex items-center justify-center">Q{qIdx + 1}</div>
+                                                                        <div className="w-7 h-7 rounded-lg bg-orange-600 text-white text-[10px] font-medium flex items-center justify-center">Q{qIdx + 1}</div>
                                                                         <Input
                                                                             placeholder="Define your question challenge..."
                                                                             value={q.question}
@@ -706,8 +706,8 @@ export function ModuleManager({ courseId, initialModules, onComplete }: ModuleMa
                                                                                     }}
                                                                                     placeholder={`Option ${oIdx + 1}`}
                                                                                     className={cn(
-                                                                                        "h-10 md:h-11 pl-4 pr-10 bg-white border-slate-100 rounded-xl text-xs transition-all focus:border-indigo-300",
-                                                                                        q.correctAnswer === oIdx && "border-indigo-500 bg-indigo-50/30 ring-1 ring-indigo-500/20"
+                                                                                        "h-10 md:h-11 pl-4 pr-10 bg-white border-slate-100 rounded-xl text-xs transition-all focus:border-orange-300",
+                                                                                        q.correctAnswer === oIdx && "border-orange-500 bg-orange-50/30 ring-1 ring-orange-500/20"
                                                                                     )}
                                                                                 />
                                                                                 <button
@@ -720,7 +720,7 @@ export function ModuleManager({ courseId, initialModules, onComplete }: ModuleMa
                                                                                     className={cn(
                                                                                         "absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-lg flex items-center justify-center transition-all",
                                                                                         q.correctAnswer === oIdx
-                                                                                            ? "bg-indigo-600 text-white shadow-md"
+                                                                                            ? "bg-orange-600 text-white shadow-md"
                                                                                             : "bg-slate-50 text-slate-300 hover:bg-slate-100 hover:text-slate-400"
                                                                                     )}
                                                                                 >
@@ -737,7 +737,7 @@ export function ModuleManager({ courseId, initialModules, onComplete }: ModuleMa
                                                             variant="outline"
                                                             size="sm"
                                                             disabled={(newLesson.assignment.questions || []).length >= 10}
-                                                            className="w-full border-dashed border-2 border-indigo-100 hover:border-indigo-300 hover:bg-indigo-50/50 rounded-xl h-11 md:h-12 text-indigo-600 font-medium gap-2 text-xs md:text-sm"
+                                                            className="w-full border-dashed border-2 border-orange-100 hover:border-orange-300 hover:bg-orange-50/50 rounded-xl h-11 md:h-12 text-orange-600 font-medium gap-2 text-xs md:text-sm"
                                                             onClick={() => {
                                                                 const currentQuestions = newLesson.assignment.questions || [];
                                                                 if (currentQuestions.length >= 10) return;
@@ -761,7 +761,7 @@ export function ModuleManager({ courseId, initialModules, onComplete }: ModuleMa
                                                     </div>
                                                 )}
                                             </CardContent>
-                                            <CardFooter className="md:bg-slate-50/50 md:p-6 flex justify-end gap-3 border-t border-indigo-50">
+                                            <CardFooter className="md:bg-slate-50/50 md:p-6 flex justify-end gap-3 border-t border-orange-50">
                                                 <Button
                                                     variant="ghost"
                                                     onClick={() => {
@@ -782,7 +782,7 @@ export function ModuleManager({ courseId, initialModules, onComplete }: ModuleMa
                                                 <Button
                                                     onClick={() => handleAddLesson(module._id)}
                                                     disabled={isSaving || !newLesson.name}
-                                                    className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-xl h-11 px-8 shadow-md"
+                                                    className="bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-xl h-11 px-8 shadow-md"
                                                 >
                                                     {isSaving ? <Loader2 className="w-5 h-5 animate-spin" /> : (editingLessonId ? "Save Changes" : "Establish Session")}
                                                 </Button>
@@ -791,7 +791,7 @@ export function ModuleManager({ courseId, initialModules, onComplete }: ModuleMa
                                     ) : (
                                         <Button
                                             variant="outline"
-                                            className="w-full h-14 border-dashed border-2 border-slate-200 rounded-2xl text-slate-400 font-medium hover:bg-slate-50 hover:border-indigo-200 hover:text-indigo-500 transition-all duration-300"
+                                            className="w-full h-14 border-dashed border-2 border-slate-200 rounded-2xl text-slate-400 font-medium hover:bg-slate-50 hover:border-orange-200 hover:text-orange-500 transition-all duration-300"
                                             onClick={() => {
                                                 setEditingLessonId(null);
                                                 setActiveModuleId(module._id);
@@ -810,17 +810,17 @@ export function ModuleManager({ courseId, initialModules, onComplete }: ModuleMa
             {/* Completion Section */}
             <div className="pt-10 md:pt-12 border-t border-slate-100 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
                 <div className="flex items-center gap-4 text-slate-500 bg-slate-50/50 px-5 md:px-6 py-3 rounded-2xl border border-slate-100 w-full md:w-auto">
-                    {/* <div className="w-8 md:w-10 h-8 md:h-10 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600 shrink-0">
+                    {/* <div className="w-8 md:w-10 h-8 md:h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-600 shrink-0">
                         <Sparkles className="w-4 md:w-5 h-4 md:h-5" />
                     </div> */}
                     <p className="text-[10px] md:text-sm font-medium leading-tight">
-                        You can always return to <span className="text-indigo-600 font-medium">The Architect</span> to refine your curriculum later.
+                        You can always return to <span className="text-orange-600 font-medium">The Architect</span> to refine your curriculum later.
                     </p>
                 </div>
                 <div className="flex items-center gap-3 w-full md:w-auto">
                     <Button
                         onClick={onComplete}
-                        className="h-12 md:h-14 px-8 md:px-10 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-2xl shadow-lg shadow-indigo-100 transition-all active:scale-95 group text-sm md:text-base flex-1 md:flex-none"
+                        className="h-12 md:h-14 px-8 md:px-10 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-2xl shadow-lg shadow-orange-100 transition-all active:scale-95 group text-sm md:text-base flex-1 md:flex-none"
                     >
                         Publish Curriculum
                         <ArrowRight className="w-4 md:w-5 h-4 md:h-5 ml-2 group-hover:translate-x-1 transition-transform" />

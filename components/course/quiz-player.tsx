@@ -75,7 +75,7 @@ export function QuizPlayer({ quiz, onComplete }: QuizPlayerProps) {
     if (isSubmitted) {
         const percentage = (score / quiz.maxScore) * 100;
         return (
-            <Card className="border-indigo-100 shadow-xl overflow-hidden animate-in zoom-in-95 duration-500">
+            <Card className="border-orange-100 shadow-xl overflow-hidden animate-in zoom-in-95 duration-500">
                 <div className={cn(
                     "p-8 text-center text-white",
                     percentage >= 70 ? "bg-emerald-600" : "bg-amber-600"
@@ -127,16 +127,16 @@ export function QuizPlayer({ quiz, onComplete }: QuizPlayerProps) {
     }
 
     return (
-        <Card className="border-indigo-100 shadow-xl overflow-hidden">
-            <CardHeader className="bg-indigo-50/50 p-4 md:p-6 flex flex-row items-center justify-between border-b border-indigo-100/50">
+        <Card className="border-orange-100 shadow-xl overflow-hidden">
+            <CardHeader className="bg-orange-50/50 p-4 md:p-6 flex flex-row items-center justify-between border-b border-orange-100/50">
                 <div className="space-y-1">
-                    <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-indigo-100 text-indigo-700 text-[10px] font-medium uppercase tracking-wider mb-1">
+                    <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-orange-100 text-orange-700 text-[10px] font-medium uppercase tracking-wider mb-1">
                         <HelpCircle className="w-3 h-3" /> Question {currentQuestionIdx + 1} of {quiz.questions.length}
                     </div>
                     <CardTitle className="text-base md:text-lg font-medium text-slate-900">{quiz.title}</CardTitle>
                 </div>
                 <div className="hidden md:block">
-                    <div className="w-12 h-12 rounded-xl bg-white border border-indigo-100 flex items-center justify-center text-indigo-600 font-medium text-lg shadow-sm">
+                    <div className="w-12 h-12 rounded-xl bg-white border border-orange-100 flex items-center justify-center text-orange-600 font-medium text-lg shadow-sm">
                         {Math.round(((currentQuestionIdx + 1) / quiz.questions.length) * 100)}%
                     </div>
                 </div>
@@ -156,21 +156,21 @@ export function QuizPlayer({ quiz, onComplete }: QuizPlayerProps) {
                             className={cn(
                                 "flex items-start gap-3 p-3 md:p-4 rounded-xl border-2 text-left transition-all duration-200",
                                 selectedAnswers[currentQuestionIdx] === idx
-                                    ? "bg-indigo-50 border-indigo-500 shadow-sm"
-                                    : "bg-white border-slate-100 hover:border-indigo-200 hover:bg-slate-50"
+                                    ? "bg-orange-50 border-orange-500 shadow-sm"
+                                    : "bg-white border-slate-100 hover:border-orange-200 hover:bg-slate-50"
                             )}
                         >
                             <div className={cn(
                                 "w-6 h-6 md:w-8 md:h-8 rounded-lg flex-shrink-0 flex items-center justify-center font-medium text-xs transition-colors mt-0.5",
                                 selectedAnswers[currentQuestionIdx] === idx
-                                    ? "bg-indigo-600 text-white"
+                                    ? "bg-orange-600 text-white"
                                     : "bg-slate-100 text-slate-500"
                             )}>
                                 {String.fromCharCode(65 + idx)}
                             </div>
                             <span className={cn(
                                 "text-sm md:text-base font-medium flex-1 leading-snug",
-                                selectedAnswers[currentQuestionIdx] === idx ? "text-indigo-900" : "text-slate-700"
+                                selectedAnswers[currentQuestionIdx] === idx ? "text-orange-900" : "text-slate-700"
                             )}>
                                 {option}
                             </span>
@@ -194,7 +194,7 @@ export function QuizPlayer({ quiz, onComplete }: QuizPlayerProps) {
                         onClick={handleSubmit}
                         size="sm"
                         disabled={isSubmitting || selectedAnswers[currentQuestionIdx] === -1}
-                        className="rounded-lg px-6 bg-indigo-600 hover:bg-indigo-700 text-white font-medium shadow-sm ml-auto"
+                        className="rounded-lg px-6 bg-orange-600 hover:bg-orange-700 text-white font-medium shadow-sm ml-auto"
                     >
                         {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Submit Quiz'}
                     </Button>
@@ -203,7 +203,7 @@ export function QuizPlayer({ quiz, onComplete }: QuizPlayerProps) {
                         onClick={() => setCurrentQuestionIdx(prev => prev + 1)}
                         size="sm"
                         disabled={selectedAnswers[currentQuestionIdx] === -1}
-                        className="rounded-lg px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-medium shadow-sm ml-auto group"
+                        className="rounded-lg px-4 bg-orange-600 hover:bg-orange-700 text-white font-medium shadow-sm ml-auto group"
                     >
                         Next <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                     </Button>

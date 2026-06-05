@@ -37,7 +37,7 @@ export function CourseCard({
     const colorClasses: Record<string, string> = {
         mint: 'bg-emerald-50 text-emerald-600 border-emerald-100',
         peach: 'bg-orange-50 text-orange-600 border-orange-100',
-        lavender: 'bg-indigo-50 text-indigo-600 border-indigo-100',
+        lavender: 'bg-orange-50 text-orange-600 border-orange-100',
         yellow: 'bg-amber-50 text-amber-600 border-amber-100',
     };
 
@@ -73,7 +73,7 @@ export function CourseCard({
 
                 {/* Content */}
                 <div>
-                    <h3 className="text-xl font-semibold text-slate-900 group-hover:text-indigo-600 transition-colors leading-tight">
+                    <h3 className="text-xl font-semibold text-slate-900 group-hover:text-orange-600 transition-colors leading-tight">
                         {title}
                     </h3>
                     <p className="text-sm text-slate-500 mt-2 line-clamp-2 leading-relaxed">
@@ -96,13 +96,13 @@ export function CourseCard({
                             <span className="truncate max-w-[80px] md:max-w-none">{instructor}</span>
                         </div>
                         {registrarsCount !== undefined && (
-                            <div className="flex items-center gap-1.5 text-indigo-600">
+                            <div className="flex items-center gap-1.5 text-orange-600">
                                 <TrendingUp className="w-3.5 h-3.5" />
                                 {registrarsCount}
                             </div>
                         )}
                     </div>
-                    <div className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-indigo-600">
+                    <div className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-orange-600">
                         <ArrowRight className="w-4 h-4" />
                     </div>
                 </div>

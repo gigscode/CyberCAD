@@ -54,10 +54,10 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white relative overflow-hidden selection:bg-indigo-100 selection:text-indigo-900">
+    <div className="min-h-screen flex flex-col bg-white relative overflow-hidden selection:bg-orange-100 selection:text-orange-900">
       {/* Soft Background Decor */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-[-5%] left-[-5%] w-[30%] h-[30%] rounded-full bg-indigo-500/5 blur-[100px]" />
+        <div className="absolute top-[-5%] left-[-5%] w-[30%] h-[30%] rounded-full bg-orange-500/5 blur-[100px]" />
         <div className="absolute bottom-[-5%] right-[-5%] w-[40%] h-[40%] rounded-full bg-emerald-500/5 blur-[120px]" />
       </div>
 
@@ -65,11 +65,11 @@ export default function LoginPage() {
       <nav className="sticky top-0 z-50 w-full bg-white/85 backdrop-blur-xl border-b border-slate-200/60 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 md:h-20 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-200">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-orange-500 to-red-700 flex items-center justify-center shadow-lg shadow-orange-200">
               <ShieldCheck className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-bold tracking-tight text-slate-900">
-              Sec<span className="text-indigo-600">quiz</span>
+              Sec<span className="text-orange-600">quiz</span>
             </span>
           </Link>
 
@@ -85,12 +85,12 @@ export default function LoginPage() {
 
           <div className="hidden lg:flex items-center gap-3">
             <Link href="/login">
-              <Button variant="outline" className="rounded-full px-5 h-10 border-slate-200 text-slate-700 font-semibold hover:border-indigo-300 hover:text-indigo-600 hover:bg-white transition-colors">
+              <Button variant="outline" className="rounded-full px-5 h-10 border-slate-200 text-slate-700 font-semibold hover:border-orange-300 hover:text-orange-600 hover:bg-white transition-colors">
                 Login
               </Button>
             </Link>
             <Link href="/quiz">
-              <Button className="rounded-full px-5 h-10 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-semibold shadow-md shadow-indigo-200/70">
+              <Button className="rounded-full px-5 h-10 bg-gradient-to-r from-orange-600 to-red-700 hover:from-orange-700 hover:to-red-800 text-white font-semibold shadow-md shadow-orange-200/70">
                 Start Free Quiz
               </Button>
             </Link>
@@ -123,7 +123,7 @@ export default function LoginPage() {
                   <Button variant="outline" className="w-full rounded-full h-12">Login</Button>
                 </Link>
                 <Link href="/quiz" className="flex-1" onClick={() => setIsMenuOpen(false)}>
-                  <Button className="w-full rounded-full h-12 bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-bold">Start Quiz</Button>
+                  <Button className="w-full rounded-full h-12 bg-gradient-to-r from-orange-600 to-red-700 text-white font-bold">Start Quiz</Button>
                 </Link>
               </div>
             </div>
@@ -148,7 +148,7 @@ export default function LoginPage() {
                   Email Address
                 </label>
                 <div className="relative group">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-indigo-600 transition-colors" />
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-orange-600 transition-colors" />
                   <Input
                     id="email"
                     type="email"
@@ -156,7 +156,7 @@ export default function LoginPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     disabled={isLoading}
-                    className="bg-slate-50 border-slate-100 h-12 pl-11 text-slate-900 placeholder:text-slate-400 focus:ring-indigo-500/10 focus:border-indigo-500/50 rounded-2xl transition-all"
+                    className="bg-slate-50 border-slate-100 h-12 pl-11 text-slate-900 placeholder:text-slate-400 focus:ring-orange-500/10 focus:border-orange-500/50 rounded-2xl transition-all"
                   />
                 </div>
               </div>
@@ -166,12 +166,12 @@ export default function LoginPage() {
                   <label htmlFor="password" className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
                     Password
                   </label>
-                  <button type="button" className="text-[10px] font-bold text-indigo-600 hover:text-indigo-700 uppercase tracking-widest transition-colors">
+                  <button type="button" className="text-[10px] font-bold text-orange-600 hover:text-orange-700 uppercase tracking-widest transition-colors">
                     Forgot password?
                   </button>
                 </div>
                 <div className="relative group">
-                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-indigo-600 transition-colors" />
+                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-orange-600 transition-colors" />
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
@@ -179,12 +179,12 @@ export default function LoginPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     disabled={isLoading}
-                    className="bg-slate-50 border-slate-100 h-12 pl-11 pr-11 text-slate-900 placeholder:text-slate-400 focus:ring-indigo-500/10 focus:border-indigo-500/50 rounded-2xl transition-all"
+                    className="bg-slate-50 border-slate-100 h-12 pl-11 pr-11 text-slate-900 placeholder:text-slate-400 focus:ring-orange-500/10 focus:border-orange-500/50 rounded-2xl transition-all"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-indigo-600 transition-colors"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-orange-600 transition-colors"
                   >
                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
@@ -194,7 +194,7 @@ export default function LoginPage() {
               <Button
                 type="submit"
                 disabled={isLoading}
-                className="w-full h-14 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl shadow-xl shadow-indigo-100 transition-all active:scale-95 group mt-4"
+                className="w-full h-14 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-2xl shadow-xl shadow-orange-100 transition-all active:scale-95 group mt-4"
               >
                 {isLoading ? (
                   <div className="flex items-center gap-2">
@@ -213,7 +213,7 @@ export default function LoginPage() {
             {/* Sign up link */}
             <div className="mt-8 text-center text-sm">
               <span className="text-slate-500 font-medium">New to SecQuiz? </span>
-              <Link href="/register" className="text-indigo-600 font-bold hover:text-indigo-700 transition-colors">
+              <Link href="/register" className="text-orange-600 font-bold hover:text-orange-700 transition-colors">
                 Create Account
               </Link>
             </div>

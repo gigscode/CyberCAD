@@ -58,7 +58,7 @@ export default function LearnersPage() {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           <StatCard icon={Users} label="Total Learners" value={learners.length}
-            iconColor="text-indigo-600" iconBgColor="bg-indigo-50" />
+            iconColor="text-orange-600" iconBgColor="bg-orange-50" />
           <StatCard icon={UserCheck} label="Active Accounts" value={active}
             iconColor="text-emerald-600" iconBgColor="bg-emerald-50" />
           <StatCard icon={AlertCircle} label="Enrolled" value={enrolled}
@@ -97,7 +97,7 @@ export default function LearnersPage() {
               return (
                 <div key={l.id} className="p-6 flex flex-col sm:flex-row sm:items-center gap-4 hover:bg-slate-50/50 transition-colors">
                   <Avatar className="w-12 h-12 rounded-xl border border-slate-100">
-                    <AvatarFallback className="bg-indigo-50 text-indigo-600 font-semibold">
+                    <AvatarFallback className="bg-orange-50 text-orange-600 font-semibold">
                       {l.first_name?.[0]}{l.last_name?.[0]}
                     </AvatarFallback>
                   </Avatar>
@@ -105,7 +105,7 @@ export default function LearnersPage() {
                     <p className="font-semibold text-slate-900">{l.first_name} {l.last_name}</p>
                     <p className="text-xs text-slate-400">{l.email ?? l.id}</p>
                     {activeEnrolment && (
-                      <p className="text-xs text-indigo-600 font-medium mt-0.5">{activeEnrolment.courses?.name}</p>
+                      <p className="text-xs text-orange-600 font-medium mt-0.5">{activeEnrolment.courses?.name}</p>
                     )}
                   </div>
                   <div className="flex items-center gap-4 shrink-0">

@@ -79,12 +79,12 @@ export function CurriculumView({ modules, activeLessonId, onSelectLesson, comple
                     </span>
                 </div>
                 <div className="space-y-2">
-                    <div className="flex items-center justify-between text-xs font-medium text-indigo-600">
+                    <div className="flex items-center justify-between text-xs font-medium text-orange-600">
                         <span>{progressPercentage}% Complete</span>
                     </div>
                     <div className="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden">
                         <div 
-                            className="h-full bg-indigo-600 transition-all duration-500 ease-out" 
+                            className="h-full bg-orange-600 transition-all duration-500 ease-out" 
                             style={{ width: `${progressPercentage}%` }} 
                         />
                     </div>
@@ -173,7 +173,7 @@ export function CurriculumView({ modules, activeLessonId, onSelectLesson, comple
                                                                     : "hover:bg-slate-50/50 text-slate-600"
                                                         )}
                                                     >
-                                                        {isActive && <div className="absolute left-0 top-3 bottom-3 w-1 bg-indigo-600 rounded-r-full" />}
+                                                        {isActive && <div className="absolute left-0 top-3 bottom-3 w-1 bg-orange-600 rounded-r-full" />}
                                                         
                                                         <div className="mt-1 flex-shrink-0">
                                                             {isLessonLocked ? (
@@ -181,11 +181,11 @@ export function CurriculumView({ modules, activeLessonId, onSelectLesson, comple
                                                             ) : isCompleted ? (
                                                                 <CheckCircle className="w-4 h-4 text-emerald-500 fill-emerald-50" />
                                                             ) : isSubmitted ? (
-                                                                <CheckCircle className="w-4 h-4 text-indigo-500 opacity-60" />
+                                                                <CheckCircle className="w-4 h-4 text-orange-500 opacity-60" />
                                                             ) : lesson.videoUrl ? (
-                                                                <PlayCircle className={cn("w-4 h-4", isActive ? "text-indigo-600" : "text-slate-400")} />
+                                                                <PlayCircle className={cn("w-4 h-4", isActive ? "text-orange-600" : "text-slate-400")} />
                                                             ) : (
-                                                                <FileText className={cn("w-4 h-4", isActive ? "text-indigo-600" : "text-slate-400")} />
+                                                                <FileText className={cn("w-4 h-4", isActive ? "text-orange-600" : "text-slate-400")} />
                                                             )}
                                                         </div>
                                                         <div className="flex-1 min-w-0">
@@ -206,7 +206,7 @@ export function CurriculumView({ modules, activeLessonId, onSelectLesson, comple
                                                                         isCompleted
                                                                             ? "text-emerald-600 bg-emerald-50 border-emerald-100"
                                                                             : isSubmitted
-                                                                                ? "text-indigo-600 bg-indigo-50 border-indigo-100"
+                                                                                ? "text-orange-600 bg-orange-50 border-orange-100"
                                                                                 : isLessonLocked 
                                                                                     ? "text-slate-300 bg-slate-50 border-slate-100"
                                                                                     : "text-amber-600 bg-amber-50 border-amber-100"
