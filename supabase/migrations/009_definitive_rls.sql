@@ -329,3 +329,9 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO authentic
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO anon;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO authenticated;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO anon;
+
+-- ── Missing FK: payments → courses ───────────────────────────
+-- Without this, PostgREST rejects courses(name) joins on payments with 400.
+ALTER TABLE public.payments
+  ADD CONSTRAINT payments_course_id_fkey
+  FOREIGN KEY (course_id) REFERENCES public.courses(id) ON DELETE SET NULL;
