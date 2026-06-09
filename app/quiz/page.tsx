@@ -59,7 +59,7 @@ export default function QuizPage() {
           <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-orange-500 to-red-700 flex items-center justify-center shadow-md shadow-orange-200">
             <ShieldCheck className="w-4 h-4 text-white" />
           </div>
-          <span className="font-bold text-slate-900 text-lg">Sec<span className="text-orange-600">quiz</span></span>
+          <span className="font-bold text-slate-900 text-lg">Sec<span className="text-orange-600">Acad</span></span>
         </Link>
         {/* Step dots */}
         <div className="flex items-center gap-2">

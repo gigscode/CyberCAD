@@ -62,7 +62,7 @@ function SidebarContent({
           </div>
           <div>
             <h1 className="text-lg font-bold tracking-tight text-slate-900">
-              Sec<span className="text-orange-600">quiz</span>
+              Sec<span className="text-orange-600">Acad</span>
             </h1>
             <p className="text-[9px] uppercase tracking-[0.18em] font-semibold text-slate-400 leading-none">
               {isSuperAdmin ? 'Super Admin' : 'Academy'}

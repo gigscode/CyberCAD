@@ -213,7 +213,7 @@ export function LearnerDashboard() {
                                             icon={(progress.courseId as any).icon || "📚"}
                                             progress={progress.currentScore || 0}
                                             duration={`${(progress.courseId as any).duration || 0}h Total`}
-                                            instructor="CyberCAD Faculty"
+                                            instructor="SecAcad Faculty"
                                             color={(progress.courseId as any).color || "lavender"}
                                         />
                                     </div>

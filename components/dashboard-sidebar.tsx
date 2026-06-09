@@ -80,7 +80,7 @@ export function DashboardSidebar() {
         {/* Header */}
         <div className="h-20 flex items-center justify-center border-b border-sidebar-border px-4">
           <Link href="/dashboard" className="text-2xl font-semibold text-sidebar-primary">
-            SecQuiz
+            SecAcad
           </Link>
         </div>
 

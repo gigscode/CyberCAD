@@ -83,7 +83,7 @@ function ResultContent() {
           <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-orange-500 to-red-700 flex items-center justify-center shadow-md shadow-orange-200">
             <ShieldCheck className="w-4 h-4 text-white" />
           </div>
-          <span className="font-bold text-slate-900 text-lg">Sec<span className="text-orange-600">quiz</span></span>
+          <span className="font-bold text-slate-900 text-lg">Sec<span className="text-orange-600">Acad</span></span>
         </Link>
         <button
           onClick={() => router.push('/quiz')}
@@ -258,7 +258,7 @@ function ResultContent() {
 
       {/* Footer */}
       <footer className="border-t border-slate-100 py-8 px-6 text-center text-xs text-slate-400 font-medium space-y-1 bg-slate-50">
-        <p>Secquiz · Nigeria's Cybersecurity Learning Academy</p>
+        <p>SecAcad · Nigeria's Cybersecurity Learning Academy</p>
         <p>Built for Nigeria 🇳🇬 · Payments secured by Paystack</p>
       </footer>
     </div>

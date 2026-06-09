@@ -52,7 +52,7 @@ const getTier = (priceKobo: number): TierLabel =>
   priceKobo <= 4_000_000 ? 'Starter' : priceKobo <= 8_000_000 ? 'Pro' : 'Elite';
 
 const TESTIMONIALS = [
-  { name: 'Adaeze Okonkwo', role: 'SOC Analyst, Stanbic IBTC', location: 'Lagos', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Adaeze', quote: 'I was a bank teller with zero IT background. Six months after completing the SOC Analyst track, I landed a role at a top bank. Secquiz taught me real skills, not just theory.', accent: 'from-blue-500 to-cyan-500' },
+  { name: 'Adaeze Okonkwo', role: 'SOC Analyst, Stanbic IBTC', location: 'Lagos', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Adaeze', quote: 'I was a bank teller with zero IT background. Six months after completing the SOC Analyst track, I landed a role at a top bank. SecAcad taught me real skills, not just theory.', accent: 'from-blue-500 to-cyan-500' },
   { name: 'Emeka Nwosu', role: 'Penetration Tester, Freelance', location: 'Abuja', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Emeka', quote: 'The Ethical Hacking track is the real deal. The pentest report I submitted as my capstone project got me my first paying client before I even finished the course.', accent: 'from-rose-500 to-orange-500' },
   { name: 'Fatima Bello', role: 'GRC Analyst, MTN Nigeria', location: 'Kano', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima', quote: 'Coming from a compliance background, the GRC track was perfectly aligned to my experience. I got a 40% salary increase after completing it.', accent: 'from-emerald-500 to-teal-500' },
 ];
@@ -84,7 +84,7 @@ export default function Home() {
     );
   }
 
-  const whatsappUrl = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '2348000000000'}?text=${encodeURIComponent('Hi, I have a question about Secquiz. Can you help?')}`;
+  const whatsappUrl = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '2348000000000'}?text=${encodeURIComponent('Hi, I have a question about SecAcad. Can you help?')}`;
 
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans overflow-x-clip">
@@ -97,7 +97,7 @@ export default function Home() {
               <ShieldCheck className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-bold tracking-tight text-slate-900">
-              Sec<span className="text-orange-600">quiz</span>
+              Sec<span className="text-orange-600">Acad</span>
             </span>
           </Link>
 
@@ -543,7 +543,7 @@ export default function Home() {
             <div className="space-y-7 lg:space-y-8">
               <div className="space-y-4">
                 <span className="inline-flex items-center gap-2 text-orange-600 text-xs font-bold tracking-widest uppercase">
-                  <span className="w-2 h-2 bg-orange-600 rounded-full" /> About Secquiz
+                  <span className="w-2 h-2 bg-orange-600 rounded-full" /> About SecAcad
                 </span>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight leading-tight text-balance">
                   Built for Nigeria.{' '}
@@ -553,7 +553,7 @@ export default function Home() {
                 </h2>
               </div>
               <p className="text-base sm:text-lg text-slate-500 leading-relaxed">
-                Secquiz was built because we were tired of seeing talented Nigerians pay USD prices for
+                SecAcad was built because we were tired of seeing talented Nigerians pay USD prices for
                 international courses that had nothing to do with our market, our regulations (NDPR, CBN),
                 or our employers. Every track is designed with the Nigerian job market in mind.
               </p>
@@ -636,7 +636,7 @@ export default function Home() {
               <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-orange-500 to-red-700 flex items-center justify-center shadow-md shadow-orange-500/30">
                 <ShieldCheck className="w-4 h-4 text-white" />
               </div>
-              <span className="text-lg font-bold tracking-tight">Sec<span className="text-orange-400">quiz</span></span>
+              <span className="text-lg font-bold tracking-tight">Sec<span className="text-orange-400">Acad</span></span>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed">
               Nigeria's cybersecurity learning academy. Self-paced, affordable, portfolio-driven.
@@ -651,9 +651,14 @@ export default function Home() {
             <Link href="/register" className="hover:text-white transition-colors">Register</Link>
           </nav>
         </div>
-        <div className="max-w-7xl mx-auto mt-10 pt-6 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-slate-500 text-center md:text-left">
-          <p>© {new Date().getFullYear()} Secquiz. All rights reserved.</p>
-          <p>Built for Nigeria 🇳🇬 · Powered by Supabase · Payments by Paystack · Deployed on Vercel</p>
+        <div className="max-w-7xl mx-auto mt-10 pt-6 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500 text-center md:text-left">
+          <p>© {new Date().getFullYear()} SecAcad. All rights reserved.</p>
+          <div className="flex flex-wrap justify-center md:justify-end gap-x-5 gap-y-2">
+            <Link href="/privacy" className="hover:text-slate-300 transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-slate-300 transition-colors">Terms of Service</Link>
+            <Link href="/refund" className="hover:text-slate-300 transition-colors">Refund Policy</Link>
+            <span>Built for Nigeria 🇳🇬 · Payments by Paystack</span>
+          </div>
         </div>
       </footer>
     </div>

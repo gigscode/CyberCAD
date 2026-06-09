@@ -52,7 +52,7 @@ export default function RegisterPage() {
     setIsLoading(true);
     try {
       await register(firstName, lastName, email, password, role);
-      toast.success('Account created! Welcome to Secquiz.');
+      toast.success('Account created! Welcome to SecAcad.');
       router.push('/dashboard');
     } catch (error: any) {
       if (error.message === 'CHECK_EMAIL') {
@@ -84,7 +84,7 @@ export default function RegisterPage() {
               <ShieldCheck className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-bold tracking-tight text-slate-900">
-              Sec<span className="text-orange-600">quiz</span>
+              Sec<span className="text-orange-600">Acad</span>
             </span>
           </Link>
 
@@ -319,6 +319,14 @@ export default function RegisterPage() {
                 Sign In
               </Link>
             </div>
+
+            {/* Legal consent */}
+            <p className="mt-4 text-center text-[11px] text-slate-400 leading-relaxed">
+              By creating an account, you agree to our{' '}
+              <Link href="/terms" className="text-orange-600 hover:underline font-semibold">Terms of Service</Link>
+              {' '}and{' '}
+              <Link href="/privacy" className="text-orange-600 hover:underline font-semibold">Privacy Policy</Link>.
+            </p>
           </CardContent>
         </Card>
         </div>

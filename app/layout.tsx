@@ -9,7 +9,7 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swap' });
 
 export const metadata: Metadata = {
-  title: 'SecQuiz - Nigeria\'s Cybersecurity Learning Academy',
+  title: 'SecAcad - Nigeria\'s Cybersecurity Learning Academy',
   description: 'Self-paced cybersecurity training built for the Nigerian market. Pay once, learn forever.',
   generator: 'Next.js',
   icons: {

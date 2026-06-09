@@ -62,7 +62,7 @@ export default function CoursesPage() {
           icon: c.icon || ['💻', '⚛️', '🎨', '🗄️'][i % 4],
           progress: progressVal,
           learnerStatus: status,
-          instructor: 'CyberCAD Faculty',
+          instructor: 'SecAcad Faculty',
         };
       });
 

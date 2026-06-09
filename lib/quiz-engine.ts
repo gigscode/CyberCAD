@@ -328,6 +328,6 @@ export function buildWhatsAppUrl(
   firstName?: string
 ): string {
   const name = firstName ? `Hi, I'm ${firstName}.` : 'Hi,';
-  const message = `${name} I just completed the Secquiz career quiz and got matched to "${trackTitle}". I'd like to learn more before enrolling. Can you help?`;
+  const message = `${name} I just completed the SecAcad career quiz and got matched to "${trackTitle}". I'd like to learn more before enrolling. Can you help?`;
   return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 }

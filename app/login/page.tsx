@@ -69,7 +69,7 @@ export default function LoginPage() {
               <ShieldCheck className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-bold tracking-tight text-slate-900">
-              Sec<span className="text-orange-600">quiz</span>
+              Sec<span className="text-orange-600">Acad</span>
             </span>
           </Link>
 
@@ -212,7 +212,7 @@ export default function LoginPage() {
 
             {/* Sign up link */}
             <div className="mt-8 text-center text-sm">
-              <span className="text-slate-500 font-medium">New to SecQuiz? </span>
+              <span className="text-slate-500 font-medium">New to SecAcad? </span>
               <Link href="/register" className="text-orange-600 font-bold hover:text-orange-700 transition-colors">
                 Create Account
               </Link>
