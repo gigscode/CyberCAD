@@ -132,7 +132,7 @@ export default function AdminDashboardPage() {
         </Badge>
         <h1 className="text-3xl md:text-4xl font-medium tracking-tight text-slate-900">Platform Overview</h1>
         <p className="text-slate-500 mt-1 max-w-xl text-base font-light">
-          Secacad academy — revenue, learners, content, and mentorship at a glance.
+          SecAcad academy — revenue, learners, content, and mentorship at a glance.
         </p>
       </div>
 
