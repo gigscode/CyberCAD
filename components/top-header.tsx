@@ -34,7 +34,7 @@ export function TopHeader({ user, onSearch }: TopHeaderProps) {
                     <div className="">
                         <div>
                             <h1 className="text-xl font-medium text-slate-900 tracking-tight">
-                                Dexter<span className="text-orange-600">Hub</span>
+                                Sec<span className="text-orange-600">Acad</span>
                             </h1>
                             {/* <p className="text-[10px] uppercase tracking-widest font-medium text-slate-400">Education Hub</p> */}
                         </div>

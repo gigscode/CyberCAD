@@ -652,7 +652,7 @@ export default function Home() {
           </nav>
         </div>
         <div className="max-w-7xl mx-auto mt-10 pt-6 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-slate-500 text-center md:text-left">
-          <p>© {new Date().getFullYear()} Secquiz. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} SecAcad. All rights reserved.</p>
           <p>Built for Nigeria 🇳🇬 · Powered by Supabase · Payments by Paystack · Deployed on Vercel</p>
         </div>
       </footer>
