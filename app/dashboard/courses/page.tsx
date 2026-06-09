@@ -8,12 +8,9 @@ import { cn } from '@/lib/utils';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { api } from '@/lib/api';
 import { Button } from '@/components/ui/button';
-import { Lock, X, Search, BookOpen, Clock, CreditCard, Loader2 } from 'lucide-react';
+import { X, Search, BookOpen, Clock, CreditCard, Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import { Badge } from '@/components/ui/badge';
-
-export default function CoursesPage() {
   const { user } = useAuth();
   const [courses, setCourses] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -143,63 +140,25 @@ export default function CoursesPage() {
   const availableCourses = filteredCourses.filter(c => c.learnerStatus === 'available');
 
   const renderCourseCard = (course: any) => (
-    <div
+    <CourseCard
       key={course.id}
-      className={cn(
-        "relative group h-full",
-        course.learnerStatus === 'enrolled' || course.learnerStatus === 'completed' ? "cursor-pointer" : "cursor-default"
-      )}
-    >
-      <CourseCard
-        title={course.name}
-        subtitle={course.description}
-        icon={course.icon}
-        progress={course.progress}
-        duration={course.duration || 'N/A'}
-        instructor={course.instructor}
-        registrarsCount={undefined}
-        color={course.color}
-        onClick={() => {
-          if (course.learnerStatus === 'enrolled' || course.learnerStatus === 'completed') {
-            router.push(`/dashboard/courses/${course.id || course._id}`);
-          } else {
-            setLockedCourse(course);
-          }
-        }}
-      />
-
-      {/* Status badges */}
-      <div className="absolute top-4 right-4 z-20">
-        {course.learnerStatus === 'enrolled' ? (
-          <Badge className="bg-emerald-100 text-emerald-700 border-emerald-200 shadow-sm font-bold px-3">Enrolled</Badge>
-        ) : course.learnerStatus === 'completed' ? (
-          <Badge className="bg-orange-100 text-orange-700 border-orange-200 shadow-sm font-bold px-3">Completed</Badge>
-        ) : (
-          <Badge className="bg-slate-100 text-slate-700 border-slate-200 shadow-sm flex items-center gap-1 font-bold px-3"><Lock className="w-3 h-3" />Locked</Badge>
-        )}
-      </div>
-
-      {/* Locked overlay for unenrolled courses */}
-      {course.learnerStatus === 'available' && (
-        <div
-          className="absolute inset-0 z-30 flex flex-col items-center justify-center p-6 bg-slate-900/60 backdrop-blur-[2px] rounded-[32px] cursor-pointer"
-          onClick={(e) => { e.stopPropagation(); setLockedCourse(course); }}
-        >
-          <div className="bg-white/95 p-5 rounded-2xl shadow-xl w-full max-w-[220px] text-center space-y-3">
-            <Lock className="w-6 h-6 mx-auto text-slate-600" />
-            <h3 className="text-sm font-semibold text-slate-800">{course.name}</h3>
-            <Button
-              size="sm"
-              className="w-full bg-orange-600 hover:bg-orange-700 text-[11px] h-8 rounded-xl"
-              onClick={(e) => { e.stopPropagation(); setLockedCourse(course); }}
-            >
-              <CreditCard className="w-3 h-3 mr-1" />
-              Unlock Course
-            </Button>
-          </div>
-        </div>
-      )}
-    </div>
+      title={course.name}
+      subtitle={course.description}
+      icon={course.icon}
+      progress={course.progress}
+      duration={course.duration || 'N/A'}
+      instructor={course.instructor}
+      registrarsCount={undefined}
+      color={course.color}
+      learnerStatus={course.learnerStatus}
+      priceKobo={course.price_kobo}
+      onClick={() => {
+        if (course.learnerStatus === 'enrolled' || course.learnerStatus === 'completed') {
+          router.push(`/dashboard/courses/${course.id || course._id}`);
+        }
+      }}
+      onEnroll={() => setLockedCourse(course)}
+    />
   );
 
   return (
