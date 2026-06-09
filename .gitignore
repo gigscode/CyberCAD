@@ -1,59 +1,120 @@
 # ─── Dependencies ────────────────────────────────────────────
-/node_modules
+node_modules/
 /.pnp
 .pnp.js
+.yarn/install-state.gz
 
 # ─── Next.js build output ────────────────────────────────────
 /.next/
 /out/
 /build
+.next/
 
-# ─── Environment variables (NEVER commit these) ──────────────
+# ─── Environment variables — NEVER commit these ──────────────
 .env
 .env.local
+.env.*.local
 .env.development
 .env.development.local
 .env.test
 .env.test.local
 .env.production
 .env.production.local
-.env*.local
+.env.staging
+*.env
 
-# ─── Vercel ──────────────────────────────────────────────────
-.vercel
+# ─── Secrets & credentials ───────────────────────────────────
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+secrets.json
+credentials.json
+service-account*.json
+*serviceAccountKey*.json
 
 # ─── Supabase local dev ──────────────────────────────────────
 /supabase/.temp/
 /supabase/.branches/
+/supabase/.env
 
-# ─── Debug logs ──────────────────────────────────────────────
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-*.log
+# ─── Database schema dumps / exports (contain table structures
+#     and potentially sensitive metadata — keep migrations only)
+*.sql
+# Re-allow intentional migration files
+!/supabase/migrations/*.sql
 
-# ─── TypeScript ──────────────────────────────────────────────
-*.tsbuildinfo
-next-env.d.ts
+# ─── Vercel ──────────────────────────────────────────────────
+.vercel
 
 # ─── OS files ────────────────────────────────────────────────
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 desktop.ini
 
 # ─── Editor / IDE ────────────────────────────────────────────
 .vscode/settings.json
 .vscode/launch.json
+.vscode/*.code-snippets
 .idea/
+*.iml
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 *.swp
 *.swo
 
-# ─── Test / scratch files ────────────────────────────────────
-test-cloudinary.js
-test-image.js
-nul
+# ─── Logs ────────────────────────────────────────────────────
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-debug.log*
+lerna-debug.log*
 
-# ─── Misc ────────────────────────────────────────────────────
-*.pem
-/backend/.env
+# ─── TypeScript ──────────────────────────────────────────────
+*.tsbuildinfo
+next-env.d.ts
+
+# ─── Test / coverage ─────────────────────────────────────────
+/coverage/
+/.nyc_output
+/test-results/
+/playwright-report/
+/playwright/.cache/
+
+# ─── Temporary / scratch files ───────────────────────────────
+*.tmp
+*.temp
+*.bak
+*.orig
+*.rej
+test-*.js
+test-*.ts
+scratch.*
+nul
+/tmp/
+
+# ─── Package manager locks (keep one, ignore others) ─────────
+# Uncomment the one you are NOT using:
+# yarn.lock
+# pnpm-lock.yaml
+
+# ─── Misc build artefacts ────────────────────────────────────
+dist/
+.cache/
+.parcel-cache/
+.turbo/
+.swc/
+storybook-static/

@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { api } from '@/lib/api';
 import { Button } from '@/components/ui/button';
-import { Lock, X, Search, BookOpen, Clock, CreditCard } from 'lucide-react';
+import { Lock, X, Search, BookOpen, Clock, CreditCard, Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { Badge } from '@/components/ui/badge';
@@ -22,6 +22,58 @@ export default function CoursesPage() {
 
   // Locked course info modal
   const [lockedCourse, setLockedCourse] = useState<any>(null);
+  const [isInitiatingPayment, setIsInitiatingPayment] = useState(false);
+
+  const handleEnroll = async () => {
+    if (!lockedCourse) return;
+    setIsInitiatingPayment(true);
+    try {
+      const res = await fetch('/api/payments/initialize', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ courseId: lockedCourse.id }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        if (res.status === 409) {
+          toast.info('You are already enrolled in this course.');
+          setLockedCourse(null);
+          fetchData();
+          return;
+        }
+        throw new Error(data.error ?? 'Failed to initialize payment');
+      }
+
+      setLockedCourse(null);
+
+      // Load Paystack inline and open popup
+      const PaystackPop = (await import('@paystack/inline-js')).default;
+      const popup = new PaystackPop();
+      popup.newTransaction({
+        key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY!,
+        email: data.email,
+        amount: data.amount_kobo,
+        currency: 'NGN',
+        reference: data.reference,
+        label: data.course_name,
+        onSuccess: () => {
+          toast.success('Payment successful! Activating your enrolment…');
+          // Poll briefly then refresh — webhook handles the actual enrolment
+          setTimeout(() => {
+            fetchData();
+            toast.success(`You're now enrolled in ${data.course_name}. Start learning!`);
+          }, 3000);
+        },
+        onCancel: () => {
+          toast.info('Payment cancelled.');
+        },
+      });
+    } catch (err: any) {
+      toast.error(err.message ?? 'Something went wrong. Please try again.');
+    } finally {
+      setIsInitiatingPayment(false);
+    }
+  };
 
   const fetchData = async () => {
     if (!user) return;
@@ -277,13 +329,22 @@ export default function CoursesPage() {
                 </Button>
                 <Button
                   className="flex-1 bg-orange-600 hover:bg-orange-700 rounded-xl h-12 font-medium shadow-lg shadow-orange-200 active:scale-95 transition-all"
-                  onClick={() => {
-                    setLockedCourse(null);
-                    router.push(`/dashboard/courses/${lockedCourse.id}/enroll`);
-                  }}
+                  disabled={isInitiatingPayment}
+                  onClick={handleEnroll}
                 >
-                  <CreditCard className="w-4 h-4 mr-2" />
-                  Enroll Now
+                  {isInitiatingPayment ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Preparing…
+                    </>
+                  ) : (
+                    <>
+                      <CreditCard className="w-4 h-4 mr-2" />
+                      {lockedCourse.price_kobo
+                        ? `Pay ₦${(lockedCourse.price_kobo / 100).toLocaleString('en-NG')}`
+                        : 'Enroll Now'}
+                    </>
+                  )}
                 </Button>
               </div>
             </div>
